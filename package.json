@@ -1,0 +1,12 @@
+{
+  "name": "sakura-signal-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Suyash Dash's Sakura Signal robotics and AI portfolio",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
