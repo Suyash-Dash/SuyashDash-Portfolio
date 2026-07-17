@@ -1,0 +1,22 @@
+# Private API keys and environment settings
+.env
+.env.*
+!.env.example
+
+# Node files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Local VS Code settings
+.vscode/
