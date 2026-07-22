@@ -3534,3 +3534,107 @@ body {
     font-size: 7.5px !important;
   }
 }
+
+
+/* ======================================================================
+   SAKURA SIGNAL — FINAL PERFORMANCE + SIDEBAR FIT OVERRIDES
+   No visual redesign. These rules only keep the approved sidebar usable
+   at short desktop heights and reduce avoidable rendering work.
+   ====================================================================== */
+
+/* Prevent the fixed navigation rail from overflowing short laptop windows.
+   The navigation itself becomes the only scrollable region when necessary. */
+@media (min-width: 901px) {
+  .sidebar {
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    padding-top: clamp(12px, 2.5vh, 30px) !important;
+    padding-bottom: clamp(10px, 2vh, 22px) !important;
+  }
+
+  .sidebar .logo {
+    flex: 0 0 auto !important;
+    margin-bottom: clamp(8px, 1.7vh, 22px) !important;
+  }
+
+  .side-nav {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 255, 82, .28) transparent;
+    gap: clamp(2px, .55vh, 8px) !important;
+    padding-right: 2px;
+  }
+
+  .side-nav::-webkit-scrollbar { width: 4px; }
+  .side-nav::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(156, 255, 82, .28);
+  }
+
+  .nav-item {
+    flex: 0 0 auto !important;
+    padding-top: clamp(6px, 1vh, 12px) !important;
+    padding-bottom: clamp(6px, 1vh, 12px) !important;
+  }
+
+  .availability-mini,
+  .sidebar-footer {
+    flex: 0 0 auto !important;
+  }
+
+  .availability-mini {
+    margin-top: clamp(7px, 1.2vh, 18px) !important;
+  }
+
+  .sidebar-footer {
+    margin-top: clamp(7px, 1.1vh, 12px) !important;
+  }
+}
+
+/* Short laptop displays keep the useful opportunity card and links, while
+   the decorative quote yields space before anything overlaps. */
+@media (min-width: 901px) and (max-height: 860px) {
+  .sidebar-footer blockquote { display: none !important; }
+  .social-row { margin-bottom: 0 !important; }
+  .availability-mini { padding: 11px 12px !important; gap: 5px !important; }
+  .availability-mini h3 { font-size: 15px !important; }
+  .availability-focus { gap: 2px !important; }
+  .availability-focus span { font-size: 9px !important; }
+  .availability-mini small { margin-top: 3px !important; font-size: 7.5px !important; }
+}
+
+/* Very short windows still retain every navigation destination through the
+   scrollable nav, with a compact availability card below it. */
+@media (min-width: 901px) and (max-height: 680px) {
+  .sidebar { padding-top: 8px !important; padding-bottom: 8px !important; }
+  .sidebar .logo { margin-bottom: 6px !important; }
+  .logo-orbit { width: 40px !important; height: 40px !important; }
+  .logo strong { font-size: 12px !important; }
+  .logo small { display: none !important; }
+  .nav-item { padding-top: 5px !important; padding-bottom: 5px !important; font-size: 11px !important; }
+  .availability-mini { margin-top: 6px !important; padding: 8px 10px !important; }
+  .availability-mini p { display: none !important; }
+  .availability-mini h3 { font-size: 13px !important; }
+  .availability-focus span { font-size: 8px !important; }
+  .availability-mini small { display: none !important; }
+  .sidebar-footer { margin-top: 5px !important; }
+  .social-row a { width: 27px !important; height: 27px !important; }
+}
+
+/* Browser rendering hints: preserve the appearance but avoid keeping hidden
+   route content and inactive effects in expensive compositing layers. */
+.view:not(.is-active) {
+  content-visibility: hidden;
+  contain: strict;
+}
+
+html[data-performance="eco"] .signal-line,
+html[data-performance="eco"] .world-glow {
+  will-change: auto !important;
+}
