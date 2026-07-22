@@ -53,6 +53,7 @@ const PASTE_MODEL_NAMES_HERE = Object.freeze({
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const zlib = require('zlib');
 const { URL } = require('url');
 const { exec } = require('child_process');
 
@@ -60,6 +61,7 @@ const ROOT = __dirname;
 const ENV_PATH = path.join(ROOT, '.env');
 const MAX_BODY_BYTES = 64_000;
 const DEFAULT_PORT = 3000;
+const COMPRESSIBLE_EXTENSIONS = new Set(['.html', '.css', '.js', '.json', '.svg', '.txt']);
 
 const DEFAULTS = Object.freeze({
   GEMINI_MODEL: 'gemini-2.5-flash-lite',
@@ -632,12 +634,33 @@ function serveStatic(request, response, urlPath) {
       return;
     }
     const extension = path.extname(filePath).toLowerCase();
-    response.writeHead(200, {
+    const lastModified = stats.mtime.toUTCString();
+    if (request.headers['if-modified-since'] === lastModified) {
+      response.writeHead(304);
+      response.end();
+      return;
+    }
+    const cacheControl = path.basename(filePath) === 'three.min.js'
+      ? 'public, max-age=604800, immutable'
+      : extension === '.html'
+        ? 'no-cache'
+        : 'public, max-age=3600';
+    const headers = {
       'Content-Type': MIME_TYPES[extension] || 'application/octet-stream',
-      'Cache-Control': extension === '.html' ? 'no-cache' : 'public, max-age=3600',
+      'Cache-Control': cacheControl,
+      'Last-Modified': lastModified,
       'X-Content-Type-Options': 'nosniff',
-    });
-    fs.createReadStream(filePath).pipe(response);
+    };
+    const acceptsGzip = /\bgzip\b/i.test(String(request.headers['accept-encoding'] || ''));
+    const shouldCompress = acceptsGzip && COMPRESSIBLE_EXTENSIONS.has(extension) && stats.size > 1024;
+    if (shouldCompress) {
+      headers['Content-Encoding'] = 'gzip';
+      headers.Vary = 'Accept-Encoding';
+    }
+    response.writeHead(200, headers);
+    const stream = fs.createReadStream(filePath);
+    if (shouldCompress) stream.pipe(zlib.createGzip({ level: zlib.constants.Z_BEST_SPEED })).pipe(response);
+    else stream.pipe(response);
   });
 }
 
@@ -730,7 +753,7 @@ function openBrowser(url) {
 
 const env = loadEnv();
 const port = Number(env.PORT || DEFAULT_PORT);
-const isCloud = Boolean(process.env.RENDER || process.env.NODE_ENV === 'production');
+const isCloud = Boolean(process.env.RENDER || process.env.KOYEB_SERVICE_ID || process.env.KOYEB_PUBLIC_DOMAIN || process.env.NODE_ENV === 'production');
 const host = process.env.HOST || (isCloud ? '0.0.0.0' : '127.0.0.1');
 const server = http.createServer(async (request, response) => {
   try {
@@ -746,10 +769,14 @@ const server = http.createServer(async (request, response) => {
   }
 });
 
+server.keepAliveTimeout = 65_000;
+server.headersTimeout = 66_000;
+
 server.listen(port, host, () => {
   const localHost = host === '0.0.0.0' ? '127.0.0.1' : host;
   const localUrl = `http://${localHost}:${port}`;
-  const publicUrl = String(env.SITE_URL || '').trim() || localUrl;
+  const koyebUrl = process.env.KOYEB_PUBLIC_DOMAIN ? `https://${process.env.KOYEB_PUBLIC_DOMAIN}` : '';
+  const publicUrl = String(env.SITE_URL || '').trim() || koyebUrl || localUrl;
   console.log('='.repeat(64));
   console.log(isCloud ? 'SAKURA SIGNAL — CLOUD SERVER IS RUNNING' : 'SAKURA SIGNAL — VS CODE VERSION IS RUNNING');
   console.log('='.repeat(64));
