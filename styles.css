@@ -3535,106 +3535,1381 @@ body {
   }
 }
 
+/* =====================================================================
+   SAKURA SIGNAL — TARGETED RESPONSIVE/PERFORMANCE POLISH
+   No visual redesign: prevents proof-card word fragmentation and gives the
+   browser stronger paint/layout containment on expensive fixed layers.
+   ===================================================================== */
+#v17-world-stage{
+  contain:strict!important;
+  isolation:isolate!important;
+  transform:translateZ(0);
+}
+#v17-world-stage canvas{
+  contain:strict!important;
+  backface-visibility:hidden;
+}
+
+.sf-proof-grid strong,
+.sf-proof-grid small{
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+}
+
+/* The hero column becomes too narrow for four proof cards before the old
+   laptop breakpoint. Use the same cards in a 2x2 grid instead of splitting
+   words letter-by-letter. */
+@media (min-width:901px) and (max-width:1499px){
+  .sf-proof-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+@media (max-width:900px){
+  .sf-proof-grid > span{
+    min-width:0!important;
+  }
+  .sf-proof-grid strong,
+  .sf-proof-grid small{
+    white-space:normal!important;
+  }
+}
+
+
+/* =====================================================================
+   SAKURA SIGNAL — PROFESSIONAL REFINEMENT LAYER
+   Preserve the creative identity. Improve hierarchy, scanability, spacing,
+   consistency, accessibility, and rendering cost.
+   ===================================================================== */
+
+:root{
+  --space-2xs:4px;
+  --space-xs:8px;
+  --space-sm:12px;
+  --space-md:16px;
+  --space-lg:24px;
+  --space-xl:32px;
+  --space-2xl:48px;
+  --space-3xl:64px;
+  --card-bg:rgba(5,17,40,.88);
+  --card-bg-soft:rgba(7,22,47,.80);
+  --card-border:rgba(132,178,255,.22);
+  --card-shadow:0 14px 34px rgba(0,0,0,.24);
+}
+
+/* ---------------------------------------------------------------------
+   1. Predictable recruiter-first desktop navigation
+   --------------------------------------------------------------------- */
+.side-nav{gap:6px!important}
+.side-more{
+  margin-top:6px;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:8px;
+}
+.side-more summary{
+  list-style:none;
+  display:grid;
+  grid-template-columns:22px 1fr auto;
+  align-items:center;
+  gap:13px;
+  width:100%;
+  padding:10px 14px;
+  border:1px solid transparent;
+  border-radius:12px;
+  color:#8fa0bf;
+  cursor:pointer;
+  user-select:none;
+}
+.side-more summary::-webkit-details-marker{display:none}
+.side-more summary>span{width:22px;text-align:center;font-size:19px}
+.side-more summary strong{font-size:12px;letter-spacing:.02em}
+.side-more summary small{font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:#667896}
+.side-more summary:hover,
+.side-more[open] summary{
+  color:#e7efff;
+  background:rgba(90,140,255,.07);
+  border-color:rgba(132,178,255,.14);
+}
+.side-more-menu{
+  display:grid;
+  gap:3px;
+  padding:5px 0 0;
+}
+.nav-item-secondary{
+  min-height:36px!important;
+  padding:8px 14px!important;
+  color:#8fa0bc!important;
+  font-size:12px!important;
+}
+.nav-item-secondary span{font-size:15px!important}
+.side-more .nav-item.is-active{
+  color:#fff!important;
+  background:linear-gradient(90deg,rgba(156,255,82,.12),rgba(85,232,255,.055))!important;
+}
+
+/* ---------------------------------------------------------------------
+   2. Hero hierarchy: identify Suyash first, then the memorable statement
+   --------------------------------------------------------------------- */
+.sf-hero{position:relative}
+.sf-hero-identity{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin:0 0 12px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.075);
+}
+.sf-hero-identity strong{
+  color:#fff;
+  font-size:15px;
+  line-height:1.2;
+  letter-spacing:.015em;
+}
+.sf-hero-identity span{
+  color:#8fa1c0;
+  font-size:10px;
+  line-height:1.35;
+  text-align:right;
+}
+.sf-hero-copy{
+  max-width:72ch!important;
+  line-height:1.62!important;
+}
+.sf-hero-actions .primary-button{min-width:165px}
+.sf-hero-actions .secondary-button{
+  min-width:155px;
+  background:rgba(5,17,40,.82);
+  box-shadow:none;
+}
+
+/* ---------------------------------------------------------------------
+   3. Featured work first; optional recruiter tools step back
+   --------------------------------------------------------------------- */
+.sf-signals{margin-top:var(--space-sm)!important}
+.sf-section-title{
+  margin-bottom:10px!important;
+}
+.sf-section-title h2{
+  font-size:17px!important;
+  letter-spacing:-.015em;
+}
+.sf-section-title.compact{
+  margin:0 0 12px!important;
+}
+.sf-section-title.compact h2{font-size:15px!important}
+.sf-signal-grid-primary{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:10px!important;
+  overflow:visible!important;
+}
+.sf-signal-grid-primary .channel-card{
+  min-height:168px!important;
+}
+.sf-more-signals{
+  margin-top:10px;
+  border:1px solid rgba(132,178,255,.14);
+  border-radius:14px;
+  background:rgba(4,15,34,.58);
+  overflow:hidden;
+}
+.sf-more-signals>summary{
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 14px;
+  color:#aab8cf;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+}
+.sf-more-signals>summary::-webkit-details-marker{display:none}
+.sf-more-signals>summary span{
+  color:var(--lime);
+  font-size:15px;
+  transition:transform .2s ease;
+}
+.sf-more-signals[open]>summary span{transform:rotate(45deg)}
+.sf-signal-grid-secondary{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:8px!important;
+  padding:0 10px 10px!important;
+}
+.sf-signal-grid-secondary .channel-card{
+  min-height:132px!important;
+  opacity:.88;
+}
+
+/* ---------------------------------------------------------------------
+   4. Compact "currently building" + selected technologies
+   --------------------------------------------------------------------- */
+.sf-current-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px;
+  margin-top:12px;
+}
+.sf-current-card,
+.sf-stack-card{
+  padding:16px;
+  border-radius:18px!important;
+}
+.sf-current-list{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+}
+.sf-current-list button{
+  position:relative;
+  min-width:0;
+  min-height:88px;
+  padding:12px 30px 12px 12px;
+  border:1px solid rgba(132,178,255,.14);
+  border-radius:12px;
+  background:rgba(5,16,37,.68);
+  text-align:left;
+  color:#fff;
+}
+.sf-current-list button:hover{
+  border-color:rgba(85,232,255,.35);
+  transform:translateY(-1px);
+}
+.sf-current-list strong{display:block;margin-bottom:4px;font-size:12px}
+.sf-current-list span{display:block;color:#8fa0bb;font-size:10px;line-height:1.4}
+.sf-current-list b{
+  position:absolute;
+  right:11px;
+  bottom:10px;
+  color:var(--lime);
+  font-size:15px;
+}
+.sf-stack-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.sf-stack-grid span{
+  min-width:0;
+  padding:10px 11px;
+  border:1px solid rgba(132,178,255,.12);
+  border-radius:11px;
+  background:rgba(5,16,37,.60);
+}
+.sf-stack-grid b{
+  display:block;
+  margin-bottom:3px;
+  color:#dce7fa;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+.sf-stack-grid small{
+  display:block;
+  color:#8fa0bc;
+  font-size:10px;
+  line-height:1.45;
+}
+
+/* ---------------------------------------------------------------------
+   5. Professional card family: less blur/glow, more consistent depth
+   --------------------------------------------------------------------- */
+.project-card,
+.timeline-item,
+.system-card,
+.human-card,
+.award-card,
+.video-card,
+.process-card,
+.contact-card,
+.contact-form-card,
+.role-result,
+.tech-index article,
+.sf-current-card,
+.sf-stack-card,
+.sf-stats{
+  background:var(--card-bg)!important;
+  border-color:var(--card-border)!important;
+  box-shadow:var(--card-shadow),inset 0 1px rgba(255,255,255,.025)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.channel-card{
+  background:rgba(5,17,40,.84)!important;
+  border-color:rgba(132,178,255,.16)!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.18)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.project-card:hover,
+.timeline-item:hover,
+.channel-card:hover,
+.video-card:hover{
+  box-shadow:0 15px 34px rgba(0,0,0,.24)!important;
+}
+.project-card,
+.timeline-item,
+.video-card,
+.award-card,
+.tech-index article{
+  content-visibility:auto;
+  contain-intrinsic-size:420px;
+}
+
+/* ---------------------------------------------------------------------
+   6. Project cards: recruiter scan first, engineering deep dive on click
+   --------------------------------------------------------------------- */
+.project-grid{gap:14px!important}
+.project-card{
+  min-height:310px!important;
+  border-radius:20px!important;
+}
+.project-visual{
+  min-height:300px!important;
+  height:300px!important;
+}
+.project-body{padding:22px!important}
+.project-body>p:first-child{
+  margin:0 0 3px!important;
+  font-size:9px!important;
+}
+.project-body>span{
+  display:block;
+  color:#8090ae;
+  font-size:9px;
+  letter-spacing:.045em;
+  line-height:1.35;
+}
+.project-body h2{
+  margin:6px 0 10px!important;
+  font-size:clamp(20px,1.75vw,24px)!important;
+  line-height:1.14!important;
+}
+.project-body>p:not(:first-child){
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  overflow:hidden;
+  margin:0 0 11px;
+  line-height:1.52;
+}
+.project-body ul{
+  margin:8px 0 12px;
+  padding-left:17px!important;
+}
+.project-body ul li{
+  margin-bottom:4px;
+  line-height:1.4;
+}
+.project-body ul li:nth-child(n+3){display:none}
+.project-tech{
+  margin:8px 0 12px;
+  padding-top:9px;
+  border-top:1px solid rgba(255,255,255,.07);
+  color:#88ddef;
+  font-size:9px;
+  font-weight:750;
+  letter-spacing:.035em;
+  line-height:1.45;
+}
+.project-body button{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  color:var(--lime)!important;
+  font-size:11px;
+}
+
+/* ---------------------------------------------------------------------
+   7. Timeline and page typography
+   --------------------------------------------------------------------- */
+.page-header{
+  background:rgba(5,17,40,.88)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  box-shadow:0 16px 42px rgba(0,0,0,.24)!important;
+}
+.page-header h1{
+  max-width:900px!important;
+  font-size:clamp(2rem,3.5vw,3.45rem)!important;
+  line-height:1.04!important;
+}
+.page-header>p:last-of-type{
+  max-width:74ch!important;
+}
+.timeline{
+  display:grid!important;
+  gap:11px!important;
+}
+.timeline-item{
+  grid-template-columns:minmax(118px,150px) minmax(0,1fr)!important;
+  gap:18px!important;
+  padding:18px 20px!important;
+  border-radius:18px!important;
+}
+.timeline-item time{
+  align-self:start;
+  padding-top:2px;
+  color:var(--lime)!important;
+  font-size:11px!important;
+  font-weight:900;
+  line-height:1.35;
+}
+.timeline-item h2{
+  margin:0 0 7px!important;
+  font-size:clamp(17px,1.5vw,21px)!important;
+}
+.timeline-item p{
+  max-width:88ch;
+  margin:0 0 9px;
+  color:#aab7cd!important;
+  line-height:1.52;
+}
+.timeline-tags{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+}
+.timeline-tags span{
+  padding:3px 8px!important;
+  border-radius:999px!important;
+  background:rgba(85,232,255,.055)!important;
+  border:1px solid rgba(85,232,255,.14)!important;
+  color:#a9cae2!important;
+  font-size:8px!important;
+}
+
+/* ---------------------------------------------------------------------
+   8. Media cards: play control never overlaps the content label
+   --------------------------------------------------------------------- */
+.video-card{
+  position:relative;
+  display:grid!important;
+  grid-template-columns:56px minmax(0,1fr)!important;
+  align-items:start!important;
+  gap:15px!important;
+  min-height:190px!important;
+  padding:22px!important;
+}
+.video-card .play{
+  position:static!important;
+  width:52px!important;
+  height:52px!important;
+  margin:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  align-self:start!important;
+}
+.video-card>div{min-width:0;padding-top:2px}
+.video-card>div>p{
+  margin:0 0 8px!important;
+  color:var(--lime)!important;
+  font-size:9px!important;
+  line-height:1.3!important;
+  letter-spacing:.08em!important;
+}
+.video-card h2{
+  margin:0 0 7px!important;
+  font-size:20px!important;
+}
+.video-card>div>span{
+  color:#91a0bb!important;
+  font-size:11px!important;
+}
+
+/* ---------------------------------------------------------------------
+   9. Simple footer
+   --------------------------------------------------------------------- */
+.site-footer{
+  width:min(100%,1440px);
+  margin:34px auto 0;
+  padding:18px 4px 0;
+  border-top:1px solid rgba(255,255,255,.09);
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:8px 20px;
+  color:#7f8da8;
+}
+.site-footer>div{display:grid;gap:2px}
+.site-footer strong{color:#dce5f6;font-size:12px}
+.site-footer span{font-size:9px;letter-spacing:.04em}
+.site-footer nav{display:flex;gap:14px;font-size:10px}
+.site-footer a:hover{color:var(--lime)}
+.site-footer small{grid-column:1/-1;font-size:8px;color:#65748e}
+
+/* ---------------------------------------------------------------------
+   10. Mobile keeps Sakura Signal personality but uses fewer effects
+   --------------------------------------------------------------------- */
+@media(max-width:1240px){
+  .sf-signal-grid-primary{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .sf-current-grid{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .main .glass-card{
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+  .sf-hero-identity{
+    display:grid;
+    gap:3px;
+  }
+  .sf-hero-identity span{text-align:left}
+  .sf-signal-grid-primary{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .sf-signal-grid-secondary{
+    grid-template-columns:1fr!important;
+  }
+  .sf-current-list{
+    grid-template-columns:1fr!important;
+  }
+  .site-footer{
+    grid-template-columns:1fr;
+    padding-bottom:8px;
+  }
+  .site-footer nav{justify-content:flex-start;flex-wrap:wrap}
+  .site-footer small{grid-column:1}
+  .mobile-sheet nav small{
+    margin:10px 4px 2px;
+    color:#6f819e;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:.14em;
+  }
+  .video-card{
+    grid-template-columns:48px minmax(0,1fr)!important;
+    gap:12px!important;
+    padding:18px!important;
+    min-height:165px!important;
+  }
+  .video-card .play{width:46px!important;height:46px!important}
+  .timeline-item{
+    grid-template-columns:1fr!important;
+    gap:5px!important;
+    padding:16px!important;
+  }
+  .project-card{
+    border-radius:17px!important;
+  }
+  .project-body>p:not(:first-child){-webkit-line-clamp:4}
+}
+@media(max-width:640px){
+  .sf-signal-grid-primary{grid-template-columns:1fr!important}
+  .sf-stack-grid{grid-template-columns:1fr!important}
+  .sf-proof-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .sf-proof-grid>span{
+    padding:9px!important;
+  }
+  .sf-proof-grid strong{
+    font-size:10px!important;
+    line-height:1.25!important;
+  }
+  .sf-proof-grid small{
+    font-size:9px!important;
+    line-height:1.3!important;
+  }
+  .site-footer nav{gap:10px}
+}
+
+/* ---------------------------------------------------------------------
+   11. Reduced-motion and constrained-device refinements
+   --------------------------------------------------------------------- */
+@media(prefers-reduced-motion:reduce){
+  .channel-card:hover,
+  .project-card:hover,
+  .timeline-item:hover,
+  .sf-current-list button:hover{
+    transform:none!important;
+  }
+  .sf-more-signals>summary span{transition:none!important}
+}
+
+html.sakura-constrained .signal-line{display:none!important}
+html.sakura-constrained .channel-card,
+html.sakura-constrained .project-card,
+html.sakura-constrained .timeline-item,
+html.sakura-constrained .sf-current-card,
+html.sakura-constrained .sf-stack-card{
+  box-shadow:0 8px 22px rgba(0,0,0,.18)!important;
+}
+html.sakura-constrained .sf-hero,
+html.sakura-constrained .sf-profile,
+html.sakura-constrained .sf-robot,
+html.sakura-constrained .page-header{
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Content should remain readable at every width; never split headings
+   or proof labels into letter-sized fragments. */
+.sf-proof-grid strong,
+.sf-proof-grid small,
+.channel-card strong,
+.channel-card span,
+.project-body h2,
+.timeline-item h2{
+  word-break:normal!important;
+  overflow-wrap:break-word!important;
+  hyphens:none!important;
+}
 
 /* ======================================================================
-   SAKURA SIGNAL — FINAL PERFORMANCE + SIDEBAR FIT OVERRIDES
-   No visual redesign. These rules only keep the approved sidebar usable
-   at short desktop heights and reduce avoidable rendering work.
+   SAKURA SIGNAL — FINAL RESPONSIVE + PERFORMANCE OVERRIDES
+   Exact visual identity preserved. These rules only prevent overflow,
+   compact the desktop sidebar on short/narrow screens, and remove the
+   most expensive full-screen GPU filters/backdrop blurs.
    ====================================================================== */
 
-/* Prevent the fixed navigation rail from overflowing short laptop windows.
-   The navigation itself becomes the only scrollable region when necessary. */
-@media (min-width: 901px) {
-  .sidebar {
-    height: 100vh !important;
-    height: 100dvh !important;
-    max-height: 100dvh !important;
-    overflow: hidden !important;
-    padding-top: clamp(12px, 2.5vh, 30px) !important;
-    padding-bottom: clamp(10px, 2vh, 22px) !important;
-  }
+/* Never let a grid/card/canvas determine the document width. */
+html,body,.app-shell,#main,.main,.view,.sf-home,.sf-home-top,
+.sf-hero,.sf-profile,.sf-robot,.sf-search,.sf-signals,.sf-stats,
+.project-grid,.timeline,.video-grid,.contact-layout,.lab-layout {
+  min-width:0!important;
+  max-width:100%!important;
+}
+html,body{overflow-x:clip!important}
+img,video,canvas,svg{max-width:100%}
 
-  .sidebar .logo {
-    flex: 0 0 auto !important;
-    margin-bottom: clamp(8px, 1.7vh, 22px) !important;
-  }
+/* Large full-screen filters + glass blur over an animated canvas were the
+   largest compositor cost. The same translucent surfaces/colors remain,
+   but the browser no longer has to re-blur the live world every frame. */
+#v17-world-stage,
+body[data-route="home"] #v17-world-stage,
+body:not([data-route="home"]) #v17-world-stage,
+#v17-world-stage::before,
+#v17-world-stage::after{
+  filter:none!important;
+}
+#v17-world-stage::before,
+#v17-world-stage::after{
+  mix-blend-mode:normal!important;
+}
+.sf-hero,.sf-profile,.sf-robot,.sf-search,.sf-stats,
+.sf-signals .channel-card,
+.mobile-dock,
+.page-header,
+.project-card,
+.timeline-item,
+.video-card,
+.contact-card,
+.contact-form-card{
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
 
-  .side-nav {
-    flex: 1 1 auto !important;
-    min-height: 0 !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(156, 255, 82, .28) transparent;
-    gap: clamp(2px, .55vh, 8px) !important;
-    padding-right: 2px;
-  }
+/* Keep the neon nighttime identity, but freeze the decorative border sweep.
+   This retains the glow while eliminating multiple perpetual paint loops. */
+body.v23-night .hero-card::after,
+body.v23-night .profile-card::after,
+body.v23-night .robot-preview::after,
+body.v23-night .home-search::after,
+body.v23-night .stats-bar::after{
+  animation:none!important;
+  background-position:50% 0!important;
+}
 
-  .side-nav::-webkit-scrollbar { width: 4px; }
-  .side-nav::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    background: rgba(156, 255, 82, .28);
+/* Desktop shell: sidebar scales with available room rather than forcing
+   the content into a too-small column. */
+@media (min-width:901px){
+  :root{--sidebar:clamp(176px,13.2vw,224px)!important}
+  .app-shell{
+    grid-template-columns:var(--sidebar) minmax(0,1fr)!important;
+    width:100%!important;
   }
-
-  .nav-item {
-    flex: 0 0 auto !important;
-    padding-top: clamp(6px, 1vh, 12px) !important;
-    padding-bottom: clamp(6px, 1vh, 12px) !important;
+  .sidebar{
+    width:var(--sidebar)!important;
+    min-width:0!important;
+    height:100dvh!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+    scrollbar-width:thin;
   }
-
-  .availability-mini,
-  .sidebar-footer {
-    flex: 0 0 auto !important;
-  }
-
-  .availability-mini {
-    margin-top: clamp(7px, 1.2vh, 18px) !important;
-  }
-
-  .sidebar-footer {
-    margin-top: clamp(7px, 1.1vh, 12px) !important;
+  #main.main{
+    width:100%!important;
+    min-width:0!important;
+    padding-left:clamp(14px,1.8vw,30px)!important;
+    padding-right:clamp(14px,1.8vw,30px)!important;
   }
 }
 
-/* Short laptop displays keep the useful opportunity card and links, while
-   the decorative quote yields space before anything overlaps. */
-@media (min-width: 901px) and (max-height: 860px) {
-  .sidebar-footer blockquote { display: none !important; }
-  .social-row { margin-bottom: 0 !important; }
-  .availability-mini { padding: 11px 12px !important; gap: 5px !important; }
-  .availability-mini h3 { font-size: 15px !important; }
-  .availability-focus { gap: 2px !important; }
-  .availability-focus span { font-size: 9px !important; }
-  .availability-mini small { margin-top: 3px !important; font-size: 7.5px !important; }
+/* A 1250–1400px laptop does not have enough post-sidebar width for the
+   wide 3-column hero. Use the same approved cards in a professional 2-column
+   composition, with the robot as a contained full-width row. */
+@media (min-width:901px) and (max-width:1420px){
+  .sf-home-top{
+    grid-template-columns:minmax(0,1fr) minmax(190px,230px)!important;
+    gap:12px!important;
+  }
+  .sf-hero{grid-column:1!important;padding:clamp(20px,2vw,26px)!important}
+  .sf-profile{grid-column:2!important}
+  .sf-robot{
+    grid-column:1/-1!important;
+    grid-template-rows:auto clamp(220px,23vw,270px) auto!important;
+  }
+  .sf-robot-frame{
+    height:clamp(220px,23vw,270px)!important;
+    min-height:0!important;
+    max-height:270px!important;
+  }
+  .sf-hero h1{font-size:clamp(2.55rem,4.5vw,4rem)!important}
+  .sf-proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .sf-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
 
-/* Very short windows still retain every navigation destination through the
-   scrollable nav, with a compact availability card below it. */
-@media (min-width: 901px) and (max-height: 680px) {
-  .sidebar { padding-top: 8px !important; padding-bottom: 8px !important; }
-  .sidebar .logo { margin-bottom: 6px !important; }
-  .logo-orbit { width: 40px !important; height: 40px !important; }
-  .logo strong { font-size: 12px !important; }
-  .logo small { display: none !important; }
-  .nav-item { padding-top: 5px !important; padding-bottom: 5px !important; font-size: 11px !important; }
-  .availability-mini { margin-top: 6px !important; padding: 8px 10px !important; }
-  .availability-mini p { display: none !important; }
-  .availability-mini h3 { font-size: 13px !important; }
-  .availability-focus span { font-size: 8px !important; }
-  .availability-mini small { display: none !important; }
-  .sidebar-footer { margin-top: 5px !important; }
-  .social-row a { width: 27px !important; height: 27px !important; }
+@media (min-width:901px) and (max-width:1120px){
+  :root{--sidebar:172px!important}
+  .sidebar{padding:12px 9px 10px!important}
+  .logo{margin-bottom:10px!important}
+  .logo-orbit{width:42px!important;height:42px!important}
+  .logo strong{font-size:12px!important}
+  .side-nav{gap:2px!important}
+  .nav-item{padding:7px 8px!important;font-size:10.5px!important;gap:7px!important}
+  .nav-item span{font-size:14px!important}
+  .availability-mini{padding:10px!important;margin-top:9px!important}
+  .availability-mini h3{font-size:14px!important}
+  .availability-mini p,.availability-focus span{font-size:9px!important}
+  .sidebar-footer blockquote{display:none!important}
+  .sf-signal-grid-primary{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .sf-signal-grid-secondary{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 
-/* Browser rendering hints: preserve the appearance but avoid keeping hidden
-   route content and inactive effects in expensive compositing layers. */
-.view:not(.is-active) {
-  content-visibility: hidden;
-  contain: strict;
+/* Short desktop windows: every menu destination remains reachable without
+   the opportunity/footer area pushing navigation outside the viewport. */
+@media (min-width:901px) and (max-height:820px){
+  .sidebar{padding-top:10px!important;padding-bottom:8px!important}
+  .logo{margin-bottom:7px!important}
+  .logo small{display:none!important}
+  .side-nav{gap:1px!important}
+  .nav-item{padding-top:6px!important;padding-bottom:6px!important}
+  .availability-mini{margin-top:8px!important;padding:9px!important}
+  .availability-mini small{display:none!important}
+  .sidebar-footer{margin-top:7px!important}
+  .sidebar-footer blockquote{display:none!important}
+  .social-row{margin-bottom:0!important}
+}
+@media (min-width:901px) and (max-height:680px){
+  .availability-mini{display:none!important}
+  .sidebar-footer{margin-top:6px!important}
 }
 
-html[data-performance="eco"] .signal-line,
-html[data-performance="eco"] .world-glow {
-  will-change: auto !important;
+/* Tablet/mobile: one deliberate column, bounded typography and zero
+   horizontal expansion. */
+@media (max-width:900px){
+  html,body,.app-shell,#main.main,.view.is-active,.sf-home,.sf-home-top{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:clip!important;
+  }
+  #main.main{padding-inline:clamp(8px,2.7vw,16px)!important}
+  .sf-home-top{grid-template-columns:minmax(0,1fr)!important}
+  .sf-hero,.sf-profile,.sf-robot{grid-column:1!important}
+  .sf-hero h1{
+    max-width:100%!important;
+    font-size:clamp(2.25rem,8.6vw,3.35rem)!important;
+    line-height:1!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+  .sf-hero-copy{max-width:68ch!important}
+  .sf-proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .sf-proof-grid>span{min-width:0!important}
+  .sf-proof-grid strong,.sf-proof-grid small{overflow-wrap:break-word!important;word-break:normal!important}
+  .sf-signal-grid-primary,.sf-signal-grid-secondary{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .channel-card{min-width:0!important}
+  .mobile-dock{left:8px!important;right:8px!important;width:auto!important}
 }
+
+@media (max-width:620px){
+  .sf-hero{padding:18px 15px!important}
+  .sf-hero h1{font-size:clamp(2.05rem,10vw,2.75rem)!important}
+  .sf-profile{grid-template-columns:78px minmax(0,1fr)!important}
+  .sf-robot{display:none!important}
+  .sf-signal-grid-primary,.sf-signal-grid-secondary{grid-template-columns:1fr!important}
+  .sf-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .video-card{grid-template-columns:46px minmax(0,1fr)!important}
+  .timeline-item{grid-template-columns:1fr!important}
+}
+
+@media (max-width:420px){
+  #main.main{padding-left:7px!important;padding-right:7px!important}
+  .sf-hero{padding:16px 13px!important}
+  .sf-hero h1{font-size:clamp(1.9rem,10.8vw,2.4rem)!important}
+  .sf-proof-grid{grid-template-columns:1fr!important}
+  .sf-profile{grid-template-columns:68px minmax(0,1fr)!important}
+  .sf-stats{grid-template-columns:1fr 1fr!important}
+}
+
+/* Containment keeps long pages cheap to paint without hiding content. */
+.project-card,.timeline-item,.video-card,.award-card,.tech-index article,
+.sf-current-card,.sf-stack-card{
+  contain:layout paint style;
+}
+
+
+/* =====================================================================
+   SAKURA SIGNAL — ECO DEFAULT / THEMES / PROFESSIONAL SPACING
+   Final targeted layer. Original components and identity are preserved.
+   ===================================================================== */
+
+/* Lightweight themes: variable swaps only. No new animation/filter loops. */
+html[data-theme="sakura"]{
+  --lime:#9cff52;--lime-2:#d6ff73;--cyan:#55e8ff;--blue:#5a8cff;--purple:#a56cff;--pink:#ff78b8;--gold:#ffd46a;
+}
+html[data-theme="neon-tokyo"]{
+  --lime:#c6ff35;--lime-2:#efff73;--cyan:#00efff;--blue:#4b78ff;--purple:#9a5cff;--pink:#ff3b9d;--gold:#ffd35c;
+  --line:rgba(0,239,255,.28);--line-bright:rgba(255,59,157,.55);
+}
+html[data-theme="midnight-circuit"]{
+  --lime:#72f6ff;--lime-2:#a9fbff;--cyan:#4dc9ff;--blue:#7295ff;--purple:#8a76ff;--pink:#a977ff;--gold:#9fd9ff;
+  --line:rgba(77,201,255,.27);--line-bright:rgba(114,246,255,.52);
+}
+html[data-theme="aurora-grid"]{
+  --lime:#aaff62;--lime-2:#ddff8d;--cyan:#59f5d0;--blue:#5b9cff;--purple:#b06cff;--pink:#e879ff;--gold:#d9ff78;
+  --line:rgba(89,245,208,.25);--line-bright:rgba(176,108,255,.52);
+}
+.settings-select-row{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(210px,1fr)!important;align-items:center!important;gap:14px!important}
+.settings-select-row select{width:100%;min-width:0;border:1px solid rgba(132,178,255,.24);background:rgba(4,14,34,.88);border-radius:11px;padding:10px 12px;outline:none}
+.settings-select-row select:focus{border-color:var(--lime)}
+.theme-help{margin:-4px 0 8px!important;color:#8292ae!important;font-size:10px!important;line-height:1.45!important}
+.meeting-invite-note{margin:0!important;padding:10px 12px;border:1px solid rgba(85,232,255,.16);border-radius:11px;background:rgba(85,232,255,.035);color:#91a4c2!important;font-size:10.5px!important;line-height:1.48!important}
+
+/* Professional content rhythm: fill the available width without creating
+   oversized empty panels. All existing sections/components stay intact. */
+#main.main>.view.is-active{width:min(100%,1480px)!important;margin-inline:auto!important}
+.page-header,.filter-row,.project-grid,.lab-layout,.lab-systems,.human-grid,.process-card,.timeline,.tech-index,.skill-groups,.video-grid,.award-grid,.external-proof,.contact-layout,.role-buttons,.role-result{width:100%!important;margin-left:auto!important;margin-right:auto!important}
+.page-header{max-width:1320px!important;padding:clamp(22px,2.6vw,34px)!important;margin-bottom:clamp(14px,1.8vw,20px)!important}
+.page-header h1{max-width:18ch!important;font-size:clamp(2.15rem,3.6vw,4.05rem)!important;margin-bottom:11px!important}
+.page-header>p:last-of-type{max-width:76ch!important;margin-bottom:0!important;font-size:clamp(13px,1.05vw,15px)!important;line-height:1.55!important}
+.filter-row{max-width:1320px!important;margin-bottom:14px!important}
+.project-grid{max-width:1320px!important;gap:14px!important;align-items:stretch!important}
+.project-card{min-height:0!important;height:100%!important}
+.project-visual{min-height:250px!important;height:clamp(250px,24vw,330px)!important}
+.project-body{display:flex!important;flex-direction:column!important;min-width:0!important;padding:clamp(18px,1.8vw,23px)!important}
+.project-body button{margin-top:auto!important;padding-top:10px!important}
+.lab-layout{max-width:1320px!important;grid-template-columns:minmax(300px,.78fr) minmax(0,1.42fr)!important;gap:14px!important;align-items:stretch!important}
+.robot-stage{min-height:clamp(470px,55vh,620px)!important}
+.robot-stage canvas{min-height:clamp(390px,48vh,520px)!important}
+.lab-systems,.human-grid,.video-grid,.award-grid{max-width:1320px!important;gap:14px!important}
+.lab-systems{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.human-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.process-card{max-width:1320px!important;margin-top:14px!important}
+.timeline{max-width:1220px!important}
+.tech-index,.skill-groups{max-width:1280px!important}
+.video-grid,.award-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.contact-layout{max-width:1120px!important;grid-template-columns:minmax(230px,285px) minmax(0,1fr)!important;gap:14px!important;align-items:start!important}
+.contact-card,.contact-form-card{height:auto!important}
+.role-buttons,.role-result{max-width:1120px!important}
+.role-result-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+.sf-home{gap:12px!important}
+.sf-home-top{gap:12px!important}
+.sf-signals{margin-top:0!important}
+.sf-section-title{margin-bottom:8px!important}
+.sf-signal-grid-primary,.sf-signal-grid-secondary{gap:9px!important}
+.sf-current-grid{gap:12px!important}
+
+@media (min-width:1181px){
+  .project-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media (max-width:1180px){
+  .project-grid{grid-template-columns:1fr!important;max-width:900px!important}
+  .project-card{grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr)!important}
+  .lab-systems{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .human-grid,.video-grid,.award-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .role-result-grid{grid-template-columns:1fr 1fr!important}
+}
+@media (max-width:900px){
+  #main.main>.view.is-active{width:100%!important}
+  .page-header{padding:20px 18px!important}
+  .page-header h1{font-size:clamp(2rem,8vw,3rem)!important}
+  .project-grid,.lab-layout,.contact-layout,.skill-groups{grid-template-columns:1fr!important}
+  .project-card{grid-template-columns:1fr!important}
+  .project-visual{height:clamp(220px,58vw,320px)!important}
+  .robot-stage{min-height:440px!important}
+  .robot-stage canvas{min-height:350px!important}
+  .contact-card{display:grid!important;grid-template-columns:94px minmax(0,1fr)!important;column-gap:14px!important;align-items:start!important}
+  .contact-card .photo-protect{grid-row:1/5!important}
+  .contact-card h2,.contact-card p,.contact-card a{grid-column:2!important}
+  .settings-select-row{grid-template-columns:1fr!important;gap:7px!important}
+  .human-grid,.video-grid,.award-grid,.role-result-grid{grid-template-columns:1fr!important}
+}
+@media (max-width:620px){
+  .lab-systems{grid-template-columns:1fr!important}
+  .process-card>div{grid-template-columns:1fr 1fr!important}
+  .contact-form{grid-template-columns:1fr!important}
+  .contact-form .full{grid-column:1!important}
+  .form-actions{display:grid!important;grid-template-columns:1fr!important}
+  .form-actions button{width:100%!important}
+}
+@media (max-width:420px){
+  .process-card>div{grid-template-columns:1fr!important}
+  .contact-card{grid-template-columns:76px minmax(0,1fr)!important;padding:14px!important}
+  .page-header{padding:17px 14px!important}
+}
+
+/* =====================================================================
+   SUYASH DASH — PERFORMANCE + THEME ACCESSIBILITY FINAL LAYER
+   Targeted only: branding, theme picker, responsive composition, and
+   rendering-cost reductions. Existing routes/content/features are intact.
+   ===================================================================== */
+
+/* Brand lockup requested by Suyash. */
+.logo .brand-copy{display:grid;align-content:center;gap:1px;min-width:0}
+.logo .brand-copy strong{line-height:.98;letter-spacing:.14em}
+.logo .brand-copy small{display:block;line-height:1.15;letter-spacing:.02em;white-space:nowrap;color:#8190ae;font-size:7px}
+.logo .brand-copy small+small{margin-top:1px;color:#98a7c1;font-size:7.5px}
+
+/* ---------- Fully functioning lightweight theme system ---------- */
+html[data-theme="sakura"]{
+  --bg:#050b18;--panel:rgba(5,16,39,.88);--panel-2:rgba(8,23,52,.90);--panel-3:rgba(10,31,65,.80);--line:rgba(132,178,255,.28);--line-bright:rgba(154,255,82,.56);--text:#f4f7ff;--muted:#b4bfd6;--dim:#7c8aa8;--lime:#9cff52;--lime-2:#d6ff73;--cyan:#55e8ff;--blue:#5a8cff;--purple:#a56cff;--pink:#ff78b8;--gold:#ffd46a;--theme-sidebar:rgba(2,8,22,.94);--theme-topbar:rgba(4,12,30,.82);--theme-card:rgba(5,16,39,.84);--theme-card-strong:rgba(7,22,52,.92);--theme-input:rgba(3,13,32,.90)
+}
+html[data-theme="neon-tokyo"]{
+  --bg:#060718;--panel:rgba(10,10,35,.90);--panel-2:rgba(16,15,48,.91);--panel-3:rgba(22,18,58,.84);--line:rgba(0,239,255,.31);--line-bright:rgba(255,59,157,.60);--text:#f9f8ff;--muted:#c0b8d7;--dim:#837ca0;--lime:#c6ff35;--lime-2:#efff73;--cyan:#00efff;--blue:#4b78ff;--purple:#9a5cff;--pink:#ff3b9d;--gold:#ffd35c;--theme-sidebar:rgba(8,7,29,.96);--theme-topbar:rgba(15,10,36,.88);--theme-card:rgba(15,12,42,.87);--theme-card-strong:rgba(20,13,52,.94);--theme-input:rgba(8,7,28,.94)
+}
+html[data-theme="midnight-circuit"]{
+  --bg:#040a17;--panel:rgba(4,18,38,.90);--panel-2:rgba(6,27,54,.92);--panel-3:rgba(9,37,67,.84);--line:rgba(77,201,255,.30);--line-bright:rgba(114,246,255,.54);--text:#f2f8ff;--muted:#abc2d7;--dim:#718aa4;--lime:#72f6ff;--lime-2:#a9fbff;--cyan:#4dc9ff;--blue:#7295ff;--purple:#8a76ff;--pink:#a977ff;--gold:#9fd9ff;--theme-sidebar:rgba(2,12,27,.96);--theme-topbar:rgba(4,18,39,.88);--theme-card:rgba(5,22,45,.88);--theme-card-strong:rgba(6,30,58,.94);--theme-input:rgba(3,14,31,.94)
+}
+html[data-theme="aurora-grid"]{
+  --bg:#051016;--panel:rgba(7,25,35,.90);--panel-2:rgba(8,34,45,.92);--panel-3:rgba(15,44,58,.84);--line:rgba(89,245,208,.28);--line-bright:rgba(176,108,255,.56);--text:#f5fff9;--muted:#b3cbc8;--dim:#789997;--lime:#aaff62;--lime-2:#ddff8d;--cyan:#59f5d0;--blue:#5b9cff;--purple:#b06cff;--pink:#e879ff;--gold:#d9ff78;--theme-sidebar:rgba(3,17,24,.96);--theme-topbar:rgba(5,26,34,.88);--theme-card:rgba(6,28,38,.88);--theme-card-strong:rgba(8,36,48,.94);--theme-input:rgba(3,19,27,.94)
+}
+html[data-theme="tokyo-night"]{
+  --bg:#10131f;--panel:rgba(22,27,45,.92);--panel-2:rgba(27,33,54,.94);--panel-3:rgba(31,39,64,.88);--line:rgba(122,162,247,.30);--line-bright:rgba(125,207,255,.56);--text:#c0caf5;--muted:#a9b1d6;--dim:#737aa2;--lime:#9ece6a;--lime-2:#b9f27c;--cyan:#7dcfff;--blue:#7aa2f7;--purple:#bb9af7;--pink:#f7768e;--gold:#e0af68;--theme-sidebar:rgba(15,18,31,.97);--theme-topbar:rgba(20,24,41,.91);--theme-card:rgba(23,28,48,.91);--theme-card-strong:rgba(27,33,56,.96);--theme-input:rgba(14,18,31,.96)
+}
+html[data-theme="github-dark"]{
+  --bg:#0d1117;--panel:rgba(22,27,34,.94);--panel-2:rgba(28,33,40,.96);--panel-3:rgba(33,38,45,.90);--line:rgba(139,148,158,.31);--line-bright:rgba(63,185,80,.58);--text:#f0f6fc;--muted:#b1bac4;--dim:#8b949e;--lime:#3fb950;--lime-2:#56d364;--cyan:#58a6ff;--blue:#388bfd;--purple:#d2a8ff;--pink:#f778ba;--gold:#e3b341;--theme-sidebar:rgba(13,17,23,.98);--theme-topbar:rgba(22,27,34,.95);--theme-card:rgba(22,27,34,.94);--theme-card-strong:rgba(28,33,40,.98);--theme-input:rgba(13,17,23,.98)
+}
+html[data-theme="one-dark"]{
+  --bg:#21252b;--panel:rgba(40,44,52,.94);--panel-2:rgba(45,50,59,.96);--panel-3:rgba(50,56,66,.90);--line:rgba(171,178,191,.28);--line-bright:rgba(152,195,121,.58);--text:#e6e9ef;--muted:#abb2bf;--dim:#7f848e;--lime:#98c379;--lime-2:#b4d99a;--cyan:#56b6c2;--blue:#61afef;--purple:#c678dd;--pink:#e06c75;--gold:#e5c07b;--theme-sidebar:rgba(33,37,43,.98);--theme-topbar:rgba(40,44,52,.95);--theme-card:rgba(40,44,52,.94);--theme-card-strong:rgba(45,50,59,.98);--theme-input:rgba(31,35,41,.98)
+}
+html[data-theme="dracula"]{
+  --bg:#282a36;--panel:rgba(40,42,54,.95);--panel-2:rgba(47,49,63,.96);--panel-3:rgba(55,57,72,.91);--line:rgba(139,233,253,.28);--line-bright:rgba(80,250,123,.60);--text:#f8f8f2;--muted:#c7c7d1;--dim:#8c8ca1;--lime:#50fa7b;--lime-2:#8dff9e;--cyan:#8be9fd;--blue:#6272a4;--purple:#bd93f9;--pink:#ff79c6;--gold:#f1fa8c;--theme-sidebar:rgba(32,34,44,.98);--theme-topbar:rgba(40,42,54,.95);--theme-card:rgba(40,42,54,.94);--theme-card-strong:rgba(47,49,63,.98);--theme-input:rgba(32,34,44,.98)
+}
+html[data-theme="night-owl"]{
+  --bg:#011627;--panel:rgba(1,22,39,.95);--panel-2:rgba(5,31,52,.96);--panel-3:rgba(8,39,65,.91);--line:rgba(130,170,255,.29);--line-bright:rgba(173,219,103,.60);--text:#d6deeb;--muted:#a7b6c7;--dim:#637777;--lime:#addb67;--lime-2:#c6f183;--cyan:#7fdbca;--blue:#82aaff;--purple:#c792ea;--pink:#f78c6c;--gold:#ecc48d;--theme-sidebar:rgba(1,18,31,.98);--theme-topbar:rgba(2,24,41,.95);--theme-card:rgba(3,26,44,.94);--theme-card-strong:rgba(5,33,54,.98);--theme-input:rgba(1,19,33,.98)
+}
+html[data-theme="catppuccin"]{
+  --bg:#1e1e2e;--panel:rgba(30,30,46,.95);--panel-2:rgba(36,36,54,.96);--panel-3:rgba(43,43,63,.91);--line:rgba(137,220,235,.27);--line-bright:rgba(166,227,161,.58);--text:#cdd6f4;--muted:#bac2de;--dim:#7f849c;--lime:#a6e3a1;--lime-2:#c3efbf;--cyan:#89dceb;--blue:#89b4fa;--purple:#cba6f7;--pink:#f5c2e7;--gold:#f9e2af;--theme-sidebar:rgba(24,24,37,.98);--theme-topbar:rgba(30,30,46,.95);--theme-card:rgba(30,30,46,.94);--theme-card-strong:rgba(36,36,54,.98);--theme-input:rgba(24,24,37,.98)
+}
+html[data-theme="synthwave"]{
+  --bg:#171520;--panel:rgba(30,25,45,.94);--panel-2:rgba(39,28,58,.96);--panel-3:rgba(49,31,70,.91);--line:rgba(54,249,246,.28);--line-bright:rgba(255,126,219,.62);--text:#f8f8ff;--muted:#c9bce0;--dim:#88799f;--lime:#72f1b8;--lime-2:#a5ffd4;--cyan:#36f9f6;--blue:#6f7bf7;--purple:#b893ff;--pink:#ff7edb;--gold:#fede5d;--theme-sidebar:rgba(22,18,33,.98);--theme-topbar:rgba(31,23,46,.95);--theme-card:rgba(33,24,49,.94);--theme-card-strong:rgba(41,27,59,.98);--theme-input:rgba(22,18,33,.98)
+}
+html[data-theme="horizon"]{
+  --bg:#1c1e26;--panel:rgba(28,30,38,.95);--panel-2:rgba(36,37,48,.96);--panel-3:rgba(44,43,55,.91);--line:rgba(37,176,188,.29);--line-bright:rgba(233,86,120,.58);--text:#d5d8da;--muted:#b8b5bd;--dim:#8b8189;--lime:#09f7a0;--lime-2:#66ffc4;--cyan:#25b0bc;--blue:#3fc4de;--purple:#b877db;--pink:#e95678;--gold:#fab795;--theme-sidebar:rgba(25,26,33,.98);--theme-topbar:rgba(31,31,40,.95);--theme-card:rgba(31,32,41,.94);--theme-card-strong:rgba(38,38,49,.98);--theme-input:rgba(25,26,33,.98)
+}
+html[data-theme="nord"]{
+  --bg:#2e3440;--panel:rgba(46,52,64,.95);--panel-2:rgba(52,59,72,.96);--panel-3:rgba(59,66,80,.91);--line:rgba(136,192,208,.29);--line-bright:rgba(163,190,140,.58);--text:#eceff4;--muted:#d8dee9;--dim:#8f9bad;--lime:#a3be8c;--lime-2:#bfd3aa;--cyan:#88c0d0;--blue:#81a1c1;--purple:#b48ead;--pink:#d08770;--gold:#ebcb8b;--theme-sidebar:rgba(39,44,54,.98);--theme-topbar:rgba(46,52,64,.95);--theme-card:rgba(46,52,64,.94);--theme-card-strong:rgba(53,60,73,.98);--theme-input:rgba(39,44,54,.98)
+}
+html[data-theme="solarized"]{
+  --bg:#002b36;--panel:rgba(0,43,54,.95);--panel-2:rgba(3,54,66,.96);--panel-3:rgba(7,64,76,.91);--line:rgba(42,161,152,.30);--line-bright:rgba(133,153,0,.58);--text:#eee8d5;--muted:#93a1a1;--dim:#657b83;--lime:#859900;--lime-2:#a8b82d;--cyan:#2aa198;--blue:#268bd2;--purple:#6c71c4;--pink:#d33682;--gold:#b58900;--theme-sidebar:rgba(0,36,45,.98);--theme-topbar:rgba(0,43,54,.95);--theme-card:rgba(0,43,54,.94);--theme-card-strong:rgba(3,54,66,.98);--theme-input:rgba(0,36,45,.98)
+}
+html[data-theme="monokai"]{
+  --bg:#272822;--panel:rgba(39,40,34,.95);--panel-2:rgba(47,48,41,.96);--panel-3:rgba(55,56,48,.91);--line:rgba(102,217,239,.28);--line-bright:rgba(166,226,46,.60);--text:#f8f8f2;--muted:#c9c9bd;--dim:#8f8f82;--lime:#a6e22e;--lime-2:#c4f05c;--cyan:#66d9ef;--blue:#66d9ef;--purple:#ae81ff;--pink:#f92672;--gold:#e6db74;--theme-sidebar:rgba(33,34,29,.98);--theme-topbar:rgba(39,40,34,.95);--theme-card:rgba(39,40,34,.94);--theme-card-strong:rgba(47,48,41,.98);--theme-input:rgba(33,34,29,.98)
+}
+html[data-theme="high-contrast"]{
+  --bg:#00040b;--panel:rgba(2,8,18,.98);--panel-2:rgba(4,14,28,.99);--panel-3:rgba(6,20,38,.96);--line:rgba(255,255,255,.36);--line-bright:rgba(182,255,59,.80);--text:#ffffff;--muted:#dbe5f5;--dim:#9aabc5;--lime:#b6ff3b;--lime-2:#ddff8b;--cyan:#55f5ff;--blue:#6a9cff;--purple:#c48cff;--pink:#ff65c7;--gold:#ffe36d;--theme-sidebar:rgba(0,4,11,.99);--theme-topbar:rgba(2,8,18,.98);--theme-card:rgba(3,11,24,.98);--theme-card-strong:rgba(5,17,34,.99);--theme-input:rgba(0,5,13,.99)
+}
+
+/* Apply theme surfaces to the high-value interface chrome. This makes every
+   theme visibly distinct even where older rules used literal dark blues. */
+html[data-theme] .sidebar{background:var(--theme-sidebar)!important;border-color:var(--line)!important}
+html[data-theme] .topbar{background:var(--theme-topbar)!important;border-color:var(--line)!important}
+html[data-theme] .glass-card,
+html[data-theme] .project-card,
+html[data-theme] .timeline-item,
+html[data-theme] .system-card,
+html[data-theme] .human-card,
+html[data-theme] .video-card,
+html[data-theme] .award-card,
+html[data-theme] .contact-card,
+html[data-theme] .contact-form-card,
+html[data-theme] .role-result,
+html[data-theme] .sf-current-card,
+html[data-theme] .sf-stack-card{background:var(--theme-card)!important;border-color:var(--line)!important}
+html[data-theme] .channel-card,
+html[data-theme] .side-more-menu,
+html[data-theme] .mobile-sheet nav button,
+html[data-theme] .search-result{background:var(--theme-card-strong)!important;border-color:var(--line)!important}
+html[data-theme] .top-search,
+html[data-theme] .search-input,
+html[data-theme] input,
+html[data-theme] textarea,
+html[data-theme] select{background:var(--theme-input)}
+html[data-theme] .mobile-dock{background:var(--theme-topbar)!important;border-color:var(--line)!important}
+html[data-theme] .primary-button{box-shadow:none!important}
+
+/* Quick theme launcher — intentionally static and GPU-cheap. */
+#theme-quick-open{position:relative;color:var(--cyan)!important}
+#theme-quick-open::after{content:"";position:absolute;right:5px;bottom:5px;width:5px;height:5px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 1px rgba(255,255,255,.45)}
+.theme-popover{position:fixed;z-index:1450;top:calc(var(--topbar) + 10px);right:18px;width:min(560px,calc(100vw - 28px));max-height:min(680px,calc(100dvh - var(--topbar) - 28px));overflow:auto;padding:14px;border:1px solid var(--line);border-radius:18px;background:var(--theme-sidebar,var(--panel));box-shadow:0 22px 65px rgba(0,0,0,.40);opacity:0;transform:translateY(-5px) scale(.99);transition:opacity .14s ease,transform .14s ease}
+.theme-popover.is-open{opacity:1;transform:none}
+.theme-popover-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:11px}
+.theme-popover-head small{display:block;color:var(--cyan);font-size:8px;font-weight:900;letter-spacing:.14em}.theme-popover-head strong{display:block;font-size:16px}.theme-popover-head button{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:transparent;font-size:20px}
+.theme-popover-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:11px;padding-top:10px;border-top:1px solid var(--line);font-size:9px;color:var(--dim)}
+.theme-popover-foot button{border:0;background:transparent;color:var(--lime);font-weight:850}.theme-popover-foot kbd{border:1px solid var(--line);border-radius:5px;padding:1px 5px;background:var(--theme-input)}
+.settings-theme-block{padding:4px 0 12px;border-bottom:1px solid rgba(255,255,255,.1)}
+.settings-theme-heading{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:10px}.settings-theme-heading span{font-weight:850}.settings-theme-heading small{color:var(--dim);font-size:9px;text-align:right}
+.theme-gallery{display:grid;gap:7px}.theme-gallery-quick{grid-template-columns:repeat(3,minmax(0,1fr))}.theme-gallery-settings{grid-template-columns:repeat(2,minmax(0,1fr))}
+.theme-choice{min-width:0;display:grid;grid-template-columns:46px minmax(0,1fr);align-items:center;gap:9px;text-align:left;padding:9px;border:1px solid var(--line);border-radius:12px;background:var(--theme-card);color:var(--text);transition:border-color .12s ease,background .12s ease}
+.theme-choice:hover,.theme-choice:focus-visible{border-color:var(--cyan);outline:none}.theme-choice.is-active{border-color:var(--lime);box-shadow:inset 0 0 0 1px var(--lime)}
+.theme-choice>span:last-child{min-width:0}.theme-choice strong,.theme-choice small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.theme-choice strong{font-size:10px}.theme-choice small{font-size:8px;color:var(--dim);margin-top:1px}
+.theme-swatch{display:grid;grid-template-columns:repeat(3,1fr);height:28px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}.theme-swatch i{display:block;background:var(--swatch)}
+
+/* ---------- Performance-first ECO rendering ----------
+   Keep the artwork itself; remove the costly browser compositing that makes
+   scrolling feel like 5 FPS on integrated/older GPUs. */
+html[data-render-quality="eco"] .glass-card,
+html[data-render-quality="eco"] .channel-card,
+html[data-render-quality="eco"] .topbar,
+html[data-render-quality="eco"] .mobile-dock,
+html[data-render-quality="eco"] .sky-readout,
+html[data-render-quality="eco"] .modal,
+html.sakura-constrained .glass-card,
+html.sakura-constrained .channel-card,
+html.sakura-constrained .topbar,
+html.sakura-constrained .mobile-dock,
+html.sakura-constrained .sky-readout,
+html.sakura-constrained .modal{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-render-quality="eco"] .world-glow{mix-blend-mode:normal!important;opacity:.84}
+html[data-render-quality="eco"] .petal{filter:none!important}
+html[data-render-quality="eco"] .signal-line{filter:none!important}
+html.sakura-constrained{scroll-behavior:auto}
+html.sakura-constrained .project-card:hover,
+html.sakura-constrained .timeline-item:hover,
+html.sakura-constrained .channel-card:hover{transform:none!important}
+html.sakura-constrained .animated-boat,
+html.sakura-constrained .boat-visual::after,
+html.sakura-constrained .signal-line{animation-duration:8s!important}
+html.sakura-very-constrained .signal-line,
+html.sakura-very-constrained #petal-layer{display:none!important}
+html.sakura-very-constrained .animated-boat,
+html.sakura-very-constrained .boat-visual::after{animation:none!important}
+html.sakura-very-constrained .world-glow{opacity:.72!important}
+
+/* Let the browser skip painting long off-screen evidence until it approaches. */
+.project-card,.timeline-item,.video-card,.award-card,.tech-index article,.human-card,.system-card,.sf-current-card,.sf-stack-card{content-visibility:auto;contain-intrinsic-size:1px 360px}
+
+/* ---------- Responsive composition: fill space without cramming ---------- */
+#main.main>.view.is-active{width:min(100%,1440px)!important}
+.sf-home{width:100%!important;max-width:1440px!important;margin-inline:auto!important}
+.sf-home-top{align-items:stretch!important}
+.sf-hero,.sf-profile,.sf-robot,.sf-search,.sf-signals,.sf-stats{min-width:0!important}
+
+@media (min-width:1281px){
+  .sf-home-top{grid-template-columns:minmax(0,1.7fr) minmax(190px,.42fr) minmax(270px,.72fr)!important;gap:12px!important}
+  .sf-robot-frame{height:100%!important;min-height:360px!important;max-height:520px!important}
+}
+@media (min-width:901px) and (max-width:1280px){
+  :root{--sidebar:clamp(178px,18vw,215px)!important}
+  #main.main{padding-inline:clamp(12px,2vw,22px)!important}
+  .sf-home-top{grid-template-columns:minmax(0,1fr) minmax(185px,240px)!important;gap:11px!important}
+  .sf-hero{grid-column:1!important}.sf-profile{grid-column:2!important}.sf-robot{grid-column:1/3!important;min-height:270px!important}
+  .sf-robot-frame{height:270px!important;min-height:270px!important}
+  .sf-proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .sf-signal-grid-primary{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media (min-width:901px) and (max-height:760px){
+  .side-nav{gap:3px!important}.nav-item{min-height:35px!important;padding-block:6px!important}.availability-mini{margin-top:8px!important}.sidebar-footer blockquote{display:none!important}
+}
+@media (max-width:900px){
+  .sky-controls button#theme-quick-open,.sky-controls button#location-sync{display:grid!important}
+  .sky-controls{gap:5px!important}.sky-controls button{width:38px!important;height:38px!important}
+  .theme-popover{top:70px;right:8px;width:calc(100vw - 16px);max-height:calc(100dvh - 86px)}
+  .theme-gallery-quick{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sf-home{gap:10px!important}.sf-home-top{gap:10px!important}.sf-search,.sf-signals,.sf-stats{margin-top:0!important}
+  .sf-signal-grid-primary{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .project-grid,.lab-layout,.contact-layout,.human-grid,.video-grid,.award-grid,.role-result-grid{gap:10px!important}
+}
+@media (max-width:620px){
+  .theme-gallery-settings,.theme-gallery-quick{grid-template-columns:1fr}
+  .theme-choice{grid-template-columns:54px minmax(0,1fr);padding:9px 10px}.theme-choice strong{font-size:11px}.theme-choice small{font-size:8.5px}
+  .sf-signal-grid-primary{grid-template-columns:1fr!important}
+  .sf-proof-grid{grid-template-columns:1fr 1fr!important}
+  .page-header,.sf-hero,.sf-profile,.contact-card,.contact-form-card{border-radius:16px!important}
+}
+@media (max-width:400px){
+  .sf-proof-grid{grid-template-columns:1fr!important}
+  .theme-popover-foot{align-items:flex-start;flex-direction:column}
+  .logo .brand-copy small{font-size:6.5px}
+}
+@media (min-width:901px){
+  .sky-controls #theme-quick-open{width:auto!important;min-width:72px!important;padding:0 10px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;font-size:10px!important;font-weight:900!important;letter-spacing:.08em!important}
+  .sky-controls #theme-quick-open span{font-size:15px;line-height:1}.sky-controls #theme-quick-open b{font:inherit}
+}
+@media (max-width:900px){.sky-controls #theme-quick-open b{display:none}.sky-controls #theme-quick-open span{font-size:17px}}
+
+
+/* =====================================================================
+   SUYASH DASH — ACADEMIC EMPHASIS + RESPONSIVE CONTROL + QUICK TOOLS
+   Final override layer. No routes or content systems are removed.
+   ===================================================================== */
+html[data-theme="cyber-sakura"]{--bg:#080816;--panel:#0f1230;--panel-2:#15183d;--panel-3:#15183d;--line:color-mix(in srgb,#7af7ff 26%,transparent);--line-bright:color-mix(in srgb,#a8ff4d 56%,transparent);--text:#f9f8ff;--muted:#c7bfdc;--dim:#837d9c;--lime:#a8ff4d;--lime-2:color-mix(in srgb,#a8ff4d 74%,white);--cyan:#7af7ff;--blue:#7af7ff;--purple:#9d72ff;--pink:#ff5cbd;--gold:#ffd86b;--theme-sidebar:#081022;--theme-topbar:#0d122b;--theme-card:#0f1230;--theme-card-strong:#15183d;--theme-input:#06081a}
+html[data-theme="kyoto-lantern"]{--bg:#120b0d;--panel:#241319;--panel-2:#301923;--panel-3:#301923;--line:color-mix(in srgb,#74e8d5 26%,transparent);--line-bright:color-mix(in srgb,#ffd166 56%,transparent);--text:#fff8ef;--muted:#d9c4bf;--dim:#9c817e;--lime:#ffd166;--lime-2:color-mix(in srgb,#ffd166 74%,white);--cyan:#74e8d5;--blue:#74e8d5;--purple:#a88cff;--pink:#ff7f8f;--gold:#f4c76f;--theme-sidebar:#120c13;--theme-topbar:#1e1219;--theme-card:#241319;--theme-card-strong:#301923;--theme-input:#100a0d}
+html[data-theme="shibuya-pulse"]{--bg:#080616;--panel:#150b2c;--panel-2:#1e1039;--panel-3:#1e1039;--line:color-mix(in srgb,#00e8ff 26%,transparent);--line-bright:color-mix(in srgb,#b6ff39 56%,transparent);--text:#fbf8ff;--muted:#c9bddc;--dim:#8d7b9f;--lime:#b6ff39;--lime-2:color-mix(in srgb,#b6ff39 74%,white);--cyan:#00e8ff;--blue:#00e8ff;--purple:#a56cff;--pink:#ff2f92;--gold:#ffcf5a;--theme-sidebar:#09071a;--theme-topbar:#120923;--theme-card:#150b2c;--theme-card-strong:#1e1039;--theme-input:#070513}
+html[data-theme="seoul-neon"]{--bg:#06101d;--panel:#0b1b31;--panel-2:#11263d;--panel-3:#11263d;--line:color-mix(in srgb,#5ee8ff 26%,transparent);--line-bright:color-mix(in srgb,#9cff57 56%,transparent);--text:#f5fbff;--muted:#b6c8d8;--dim:#7f95aa;--lime:#9cff57;--lime-2:color-mix(in srgb,#9cff57 74%,white);--cyan:#5ee8ff;--blue:#5ee8ff;--purple:#8d7dff;--pink:#ff6fae;--gold:#ffd166;--theme-sidebar:#06101f;--theme-topbar:#0a1728;--theme-card:#0b1b31;--theme-card-strong:#11263d;--theme-input:#050c17}
+html[data-theme="taipei-circuit"]{--bg:#051018;--panel:#0a2028;--panel-2:#0e2a35;--panel-3:#0e2a35;--line:color-mix(in srgb,#4fe1ff 26%,transparent);--line-bright:color-mix(in srgb,#8cffc8 56%,transparent);--text:#f5fffb;--muted:#b3ceca;--dim:#789a98;--lime:#8cffc8;--lime-2:color-mix(in srgb,#8cffc8 74%,white);--cyan:#4fe1ff;--blue:#4fe1ff;--purple:#7b8cff;--pink:#c07cff;--gold:#f4d36f;--theme-sidebar:#06151d;--theme-topbar:#0a1c25;--theme-card:#0a2028;--theme-card-strong:#0e2a35;--theme-input:#040d13}
+html[data-theme="singapore-night"]{--bg:#04110d;--panel:#09241c;--panel-2:#0d3026;--panel-3:#0d3026;--line:color-mix(in srgb,#66d9ff 26%,transparent);--line-bright:color-mix(in srgb,#79f29a 56%,transparent);--text:#f4fff9;--muted:#b6d2c4;--dim:#789b89;--lime:#79f29a;--lime-2:color-mix(in srgb,#79f29a 74%,white);--cyan:#66d9ff;--blue:#66d9ff;--purple:#a38cff;--pink:#ff80c8;--gold:#ffd869;--theme-sidebar:#04130f;--theme-topbar:#071d17;--theme-card:#09241c;--theme-card-strong:#0d3026;--theme-input:#030c09}
+html[data-theme="nasa-deep-space"]{--bg:#020714;--panel:#071226;--panel-2:#0b1b33;--panel-3:#0b1b33;--line:color-mix(in srgb,#66c8ff 26%,transparent);--line-bright:color-mix(in srgb,#8cff66 56%,transparent);--text:#f4f8ff;--muted:#b5c3d8;--dim:#7689a5;--lime:#8cff66;--lime-2:color-mix(in srgb,#8cff66 74%,white);--cyan:#66c8ff;--blue:#66c8ff;--purple:#7f90ff;--pink:#d58cff;--gold:#ffd36b;--theme-sidebar:#020817;--theme-topbar:#061020;--theme-card:#071226;--theme-card-strong:#0b1b33;--theme-input:#01050f}
+html[data-theme="purdue-gold"]{--bg:#0d0b08;--panel:#1b1812;--panel-2:#252117;--panel-3:#252117;--line:color-mix(in srgb,#f2d78c 26%,transparent);--line-bright:color-mix(in srgb,#cfb991 56%,transparent);--text:#fffaf0;--muted:#d8cfbe;--dim:#948a78;--lime:#cfb991;--lime-2:color-mix(in srgb,#cfb991 74%,white);--cyan:#f2d78c;--blue:#f2d78c;--purple:#b99cff;--pink:#8bc8ff;--gold:#ffe49a;--theme-sidebar:#0c0b09;--theme-topbar:#17140f;--theme-card:#1b1812;--theme-card-strong:#252117;--theme-input:#090806}
+html[data-theme="graphite-pro"]{--bg:#0b0d10;--panel:#15191f;--panel-2:#1c222a;--panel-3:#1c222a;--line:color-mix(in srgb,#7dcfff 26%,transparent);--line-bright:color-mix(in srgb,#a6e3a1 56%,transparent);--text:#f6f8fa;--muted:#c4cbd3;--dim:#8a949f;--lime:#a6e3a1;--lime-2:color-mix(in srgb,#a6e3a1 74%,white);--cyan:#7dcfff;--blue:#7dcfff;--purple:#7a9cff;--pink:#c7a0ff;--gold:#e5cf78;--theme-sidebar:#0b0e12;--theme-topbar:#12171d;--theme-card:#15191f;--theme-card-strong:#1c222a;--theme-input:#080a0d}
+html[data-theme="cobalt-robotics"]{--bg:#06101f;--panel:#0a1b36;--panel-2:#0e2747;--panel-3:#0e2747;--line:color-mix(in srgb,#67d7ff 26%,transparent);--line-bright:color-mix(in srgb,#9cff68 56%,transparent);--text:#f6f9ff;--muted:#b9c7dc;--dim:#7e90aa;--lime:#9cff68;--lime-2:color-mix(in srgb,#9cff68 74%,white);--cyan:#67d7ff;--blue:#67d7ff;--purple:#b58cff;--pink:#8aa4ff;--gold:#ffd36e;--theme-sidebar:#061020;--theme-topbar:#09172c;--theme-card:#0a1b36;--theme-card-strong:#0e2747;--theme-input:#050d19}
+html[data-theme="arctic-lab"]{--bg:#071116;--panel:#10242b;--panel-2:#16323b;--panel-3:#16323b;--line:color-mix(in srgb,#8cd8ff 26%,transparent);--line-bright:color-mix(in srgb,#a9f59a 56%,transparent);--text:#f5fffe;--muted:#bfd3d2;--dim:#809a9b;--lime:#a9f59a;--lime-2:color-mix(in srgb,#a9f59a 74%,white);--cyan:#8cd8ff;--blue:#8cd8ff;--purple:#7fa8ff;--pink:#d0a5ff;--gold:#e6e992;--theme-sidebar:#08141a;--theme-topbar:#0d1e24;--theme-card:#10242b;--theme-card-strong:#16323b;--theme-input:#061015}
+html[data-theme="silicon-valley"]{--bg:#07110c;--panel:#102319;--panel-2:#173025;--panel-3:#173025;--line:color-mix(in srgb,#58b9ff 26%,transparent);--line-bright:color-mix(in srgb,#84e39c 56%,transparent);--text:#f4fff8;--muted:#bdd1c4;--dim:#82988a;--lime:#84e39c;--lime-2:color-mix(in srgb,#84e39c 74%,white);--cyan:#58b9ff;--blue:#58b9ff;--purple:#7f95ff;--pink:#c183ff;--gold:#f4d77a;--theme-sidebar:#08130e;--theme-topbar:#0d1d15;--theme-card:#102319;--theme-card-strong:#173025;--theme-input:#06100b}
+html[data-theme="lunar-silver"]{--bg:#090d14;--panel:#151d2a;--panel-2:#1d2837;--panel-3:#1d2837;--line:color-mix(in srgb,#7ac7ff 26%,transparent);--line-bright:color-mix(in srgb,#d9f0ff 56%,transparent);--text:#f8fbff;--muted:#c7d1de;--dim:#8997a9;--lime:#d9f0ff;--lime-2:color-mix(in srgb,#d9f0ff 74%,white);--cyan:#7ac7ff;--blue:#7ac7ff;--purple:#91a9ff;--pink:#b9a2ff;--gold:#e6d58a;--theme-sidebar:#0a0f17;--theme-topbar:#121924;--theme-card:#151d2a;--theme-card-strong:#1d2837;--theme-input:#080b10}
+html[data-theme="emerald-terminal"]{--bg:#03100a;--panel:#082015;--panel-2:#0c2d1e;--panel-3:#0c2d1e;--line:color-mix(in srgb,#63d9ff 26%,transparent);--line-bright:color-mix(in srgb,#5cff8d 56%,transparent);--text:#f0fff6;--muted:#b4d7c2;--dim:#759a84;--lime:#5cff8d;--lime-2:color-mix(in srgb,#5cff8d 74%,white);--cyan:#63d9ff;--blue:#63d9ff;--purple:#86a6ff;--pink:#d7a1ff;--gold:#d8ff7d;--theme-sidebar:#04120c;--theme-topbar:#071c12;--theme-card:#082015;--theme-card-strong:#0c2d1e;--theme-input:#020b07}
+html[data-theme="signal-contrast"]{--bg:#02040a;--panel:#080d18;--panel-2:#0d1523;--panel-3:#0d1523;--line:color-mix(in srgb,#71eaff 26%,transparent);--line-bright:color-mix(in srgb,#c4ff4d 56%,transparent);--text:#ffffff;--muted:#dce5f2;--dim:#a8b5c8;--lime:#c4ff4d;--lime-2:color-mix(in srgb,#c4ff4d 74%,white);--cyan:#71eaff;--blue:#71eaff;--purple:#b292ff;--pink:#ff75c7;--gold:#ffe274;--theme-sidebar:#02050b;--theme-topbar:#070c15;--theme-card:#080d18;--theme-card-strong:#0d1523;--theme-input:#010308}
+
+
+/* Additional city palettes — CSS variables only, so they add no render loop. */
+html[data-theme="new-york-night"]{--bg:#05070d;--panel:#0d121c;--panel-2:#172033;--panel-3:#172033;--line:color-mix(in srgb,#5cc8ff 27%,transparent);--line-bright:color-mix(in srgb,#ffd166 58%,transparent);--text:#f8fbff;--muted:#bac5d4;--dim:#7d899a;--lime:#ffd166;--lime-2:#ffe39a;--cyan:#5cc8ff;--blue:#4d86ff;--purple:#9b7dff;--pink:#ff5d8f;--gold:#ffd166;--theme-sidebar:#060910;--theme-topbar:#0b101a;--theme-card:#101724;--theme-card-strong:#172033;--theme-input:#05080e}
+html[data-theme="san-francisco-fog"]{--bg:#071018;--panel:#101d26;--panel-2:#1b2e3a;--panel-3:#1b2e3a;--line:color-mix(in srgb,#7ad7ff 27%,transparent);--line-bright:color-mix(in srgb,#ff8a5b 58%,transparent);--text:#f6fbff;--muted:#b9c9d2;--dim:#7f929d;--lime:#ff8a5b;--lime-2:#ffb18f;--cyan:#7ad7ff;--blue:#63a9e8;--purple:#9c8cff;--pink:#f4c96b;--gold:#f4c96b;--theme-sidebar:#081117;--theme-topbar:#0d1921;--theme-card:#101f29;--theme-card-strong:#1b2e3a;--theme-input:#060d12}
+html[data-theme="london-electric"]{--bg:#070b18;--panel:#0f1726;--panel-2:#17243a;--panel-3:#17243a;--line:color-mix(in srgb,#6ed7ff 27%,transparent);--line-bright:color-mix(in srgb,#ff4d5e 58%,transparent);--text:#f7f8fb;--muted:#bdc4d0;--dim:#828b9a;--lime:#ff4d5e;--lime-2:#ff7f8c;--cyan:#6ed7ff;--blue:#477df0;--purple:#9b7cff;--pink:#f4e8d0;--gold:#f0c66d;--theme-sidebar:#080c17;--theme-topbar:#0d1421;--theme-card:#101927;--theme-card-strong:#17243a;--theme-input:#060a12}
+html[data-theme="paris-midnight"]{--bg:#090a19;--panel:#141426;--panel-2:#23233c;--panel-3:#23233c;--line:color-mix(in srgb,#8cc8ff 27%,transparent);--line-bright:color-mix(in srgb,#f0d28c 58%,transparent);--text:#fbf8f4;--muted:#c9c1c6;--dim:#91858f;--lime:#f0d28c;--lime-2:#f8e4b2;--cyan:#8cc8ff;--blue:#718cff;--purple:#ad86ff;--pink:#ff8fb7;--gold:#f0d28c;--theme-sidebar:#0b0b18;--theme-topbar:#121223;--theme-card:#18182b;--theme-card-strong:#23233c;--theme-input:#080816}
+html[data-theme="berlin-techno"]{--bg:#050505;--panel:#0e0e0e;--panel-2:#1c1c1c;--panel-3:#1c1c1c;--line:color-mix(in srgb,#00e5ff 27%,transparent);--line-bright:color-mix(in srgb,#d6ff00 60%,transparent);--text:#f6f6f6;--muted:#c0c0c0;--dim:#7d7d7d;--lime:#d6ff00;--lime-2:#e8ff66;--cyan:#00e5ff;--blue:#5d7cff;--purple:#ad6cff;--pink:#ff3d81;--gold:#f5d76e;--theme-sidebar:#060606;--theme-topbar:#0c0c0c;--theme-card:#121212;--theme-card-strong:#1c1c1c;--theme-input:#050505}
+html[data-theme="dubai-skyline"]{--bg:#080b14;--panel:#141824;--panel-2:#22283a;--panel-3:#22283a;--line:color-mix(in srgb,#49d6ff 27%,transparent);--line-bright:color-mix(in srgb,#e9c46a 58%,transparent);--text:#fffaf1;--muted:#cfc6b9;--dim:#91887c;--lime:#e9c46a;--lime-2:#f3d990;--cyan:#49d6ff;--blue:#4d8cff;--purple:#9d7dff;--pink:#ff7ab8;--gold:#f0c96e;--theme-sidebar:#090c14;--theme-topbar:#111621;--theme-card:#171c29;--theme-card-strong:#22283a;--theme-input:#070a11}
+html[data-theme="mumbai-monsoon"]{--bg:#071019;--panel:#102132;--panel-2:#173047;--panel-3:#173047;--line:color-mix(in srgb,#55d8ff 27%,transparent);--line-bright:color-mix(in srgb,#ffb703 58%,transparent);--text:#f8fbff;--muted:#bfd0dd;--dim:#8195a5;--lime:#ffb703;--lime-2:#ffd35c;--cyan:#55d8ff;--blue:#5c92ff;--purple:#a77cff;--pink:#ff5d8f;--gold:#ffb703;--theme-sidebar:#07111a;--theme-topbar:#0d1c29;--theme-card:#102333;--theme-card-strong:#173047;--theme-input:#050d14}
+html[data-theme="cape-town-dusk"]{--bg:#081018;--panel:#10232a;--panel-2:#18303a;--panel-3:#18303a;--line:color-mix(in srgb,#60cfff 27%,transparent);--line-bright:color-mix(in srgb,#80d99a 58%,transparent);--text:#f5fbf8;--muted:#bed0ca;--dim:#81968f;--lime:#80d99a;--lime-2:#a9e9b7;--cyan:#60cfff;--blue:#6f9fff;--purple:#a488ff;--pink:#ff8b6a;--gold:#f2c66d;--theme-sidebar:#081117;--theme-topbar:#0d1c22;--theme-card:#11252c;--theme-card-strong:#18303a;--theme-input:#060d11}
+html[data-theme="athens-aegean"]{--bg:#04111c;--panel:#0b2232;--panel-2:#123146;--panel-3:#123146;--line:color-mix(in srgb,#49c8ff 27%,transparent);--line-bright:color-mix(in srgb,#f5f3e8 58%,transparent);--text:#fbfcff;--muted:#c5d4df;--dim:#8096a8;--lime:#f5f3e8;--lime-2:#ffffff;--cyan:#49c8ff;--blue:#4f8fff;--purple:#8a7cff;--pink:#7cb8ff;--gold:#f0d58a;--theme-sidebar:#05131f;--theme-topbar:#092033;--theme-card:#0c2638;--theme-card-strong:#123146;--theme-input:#030d15}
+html[data-theme="hong-kong-harbor"]{--bg:#060813;--panel:#111326;--panel-2:#1a1830;--panel-3:#1a1830;--line:color-mix(in srgb,#00e5ff 27%,transparent);--line-bright:color-mix(in srgb,#ff4d6d 58%,transparent);--text:#fdf8ff;--muted:#c9bfd4;--dim:#8b7f99;--lime:#ff4d6d;--lime-2:#ff7c90;--cyan:#00e5ff;--blue:#4f7fff;--purple:#a467ff;--pink:#ff7bd5;--gold:#ffd166;--theme-sidebar:#070816;--theme-topbar:#0f1020;--theme-card:#121329;--theme-card-strong:#1a1830;--theme-input:#050611}
+html[data-theme="osaka-electric"]{--bg:#090817;--panel:#15112b;--panel-2:#211a3a;--panel-3:#211a3a;--line:color-mix(in srgb,#4de8ff 27%,transparent);--line-bright:color-mix(in srgb,#ff9f43 58%,transparent);--text:#fbf9ff;--muted:#c9c0d7;--dim:#8b819c;--lime:#ff9f43;--lime-2:#ffc375;--cyan:#4de8ff;--blue:#5b81ff;--purple:#9d6fff;--pink:#ff5db1;--gold:#ffd166;--theme-sidebar:#0a0818;--theme-topbar:#12102a;--theme-card:#17122e;--theme-card-strong:#211a3a;--theme-input:#070613}
+html[data-theme="mexico-city-noche"]{--bg:#07110d;--panel:#10241a;--panel-2:#1a3225;--panel-3:#1a3225;--line:color-mix(in srgb,#55d6c2 27%,transparent);--line-bright:color-mix(in srgb,#ffd166 58%,transparent);--text:#fffaf2;--muted:#c9d0c4;--dim:#879386;--lime:#ffd166;--lime-2:#ffe29b;--cyan:#55d6c2;--blue:#5c9cff;--purple:#9f7aff;--pink:#ff5c8a;--gold:#ffd166;--theme-sidebar:#07120e;--theme-topbar:#0d1c15;--theme-card:#11251b;--theme-card-strong:#1a3225;--theme-input:#050d09}
+
+/* Brand: bilingual identity stays readable without crowding navigation. */
+.logo{gap:11px!important;margin-bottom:18px!important}
+.logo .brand-copy{gap:3px!important}
+.logo .brand-copy strong{font-size:17px!important;line-height:.94!important;letter-spacing:.13em!important}
+.logo .brand-native{display:grid;gap:1px;margin-top:3px;min-width:0}
+.logo .brand-copy small{display:block!important;margin:0!important;font-size:8.6px!important;line-height:1.15!important;letter-spacing:.015em!important;white-space:nowrap!important;color:#9aa9c3!important}
+.logo .brand-copy small+small{font-size:9px!important;color:#b0bbce!important}
+
+/* Education is a first-class recruiter signal, not muted metadata. */
+.sf-hero-identity{align-items:center!important;gap:12px!important}
+.sf-academic-lockup{margin-left:auto;display:flex;align-items:stretch;justify-content:flex-end;gap:7px;min-width:0}
+.sf-school-badge,.sf-major-badge{display:flex;align-items:center;gap:7px;min-width:0;padding:7px 9px;border:1px solid var(--line);border-radius:11px;background:var(--theme-card-strong,rgba(3,12,29,.52))}
+.sf-school-badge>i{display:grid;place-items:center;flex:0 0 24px;width:24px;height:22px;border-radius:5px;background:#cfb991;color:#18120a;font-size:12px;font-style:italic;font-weight:1000}
+.sf-school-badge span,.sf-major-badge{min-width:0}.sf-school-badge b,.sf-major-badge b{display:block;color:var(--text);font-size:10.5px;line-height:1.15;white-space:nowrap}.sf-school-badge small,.sf-major-badge small{display:block;margin-top:2px;color:var(--muted);font-size:8px;line-height:1.15;white-space:nowrap}.sf-major-badge b{color:var(--lime);font-size:11px}
+.sf-profile-academic{display:grid!important;gap:2px!important;margin:0!important}.sf-profile-academic strong{color:var(--text);font-size:12px}.sf-profile-academic b{color:var(--lime);font-size:11.5px}.sf-profile-academic small{color:var(--muted);font-size:9.5px;line-height:1.35}
+
+/* Desktop header: keep time/sky useful without allowing it to grow over Home. */
+@media (min-width:901px){
+  :root{--topbar:64px!important;--sidebar:clamp(184px,13vw,224px)!important}
+  .app-shell{grid-template-rows:var(--topbar) minmax(0,1fr)!important}
+  .topbar{height:var(--topbar)!important;min-height:var(--topbar)!important;grid-template-columns:minmax(220px,1fr) minmax(190px,250px) auto!important;gap:clamp(8px,1vw,14px)!important;padding:7px clamp(12px,1.35vw,22px)!important;overflow:visible!important}
+  .top-search{height:44px!important;min-width:0!important}
+  .sky-readout{width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"time date" "location location"!important;align-items:center!important;column-gap:8px!important;row-gap:1px!important;text-align:right!important;line-height:1.1!important;overflow:hidden!important}
+  .sky-readout strong{grid-area:time;font-size:16px!important;white-space:nowrap!important}.sky-readout span{grid-area:date;margin:0!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:10px!important}.sky-readout small{grid-area:location;display:block!important;min-width:0!important;max-width:100%!important;margin:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:8.4px!important}
+  .sky-controls{display:flex!important;align-items:center!important;flex-wrap:nowrap!important;gap:6px!important;min-width:max-content!important}.sky-controls button{flex:0 0 auto!important}
+  #main.main{padding-top:14px!important}
+}
+@media (min-width:901px) and (max-width:1180px){
+  :root{--sidebar:clamp(174px,16vw,196px)!important}
+  .topbar{grid-template-columns:minmax(180px,1fr) 145px auto!important;padding-inline:9px!important;gap:7px!important}.top-search{padding-inline:10px!important}.top-search kbd{display:none!important}.top-search>span:nth-child(2){font-size:11px!important}
+  .sky-readout{grid-template-columns:1fr!important;grid-template-areas:"time" "location"!important;justify-items:end!important}.sky-readout span{display:none!important}.sky-readout strong{font-size:14px!important}.sky-readout small{max-width:145px!important;font-size:7.7px!important}
+  .sky-controls button{width:36px!important;height:36px!important}.sky-controls #theme-quick-open{min-width:60px!important;padding-inline:7px!important}
+  .logo .brand-copy strong{font-size:15px!important}.logo .brand-copy small{font-size:7.8px!important}.logo .brand-copy small+small{font-size:8.2px!important}
+}
+@media (min-width:901px) and (max-height:760px){
+  .logo .brand-copy small{display:block!important;font-size:7px!important}.logo .brand-copy small+small{font-size:7.4px!important}
+}
+
+/* Home: wide screens use the full 3-column showcase; normal laptops use a
+   compact right rail instead of dropping the robot into a giant full-width row. */
+@media (min-width:1451px){
+  .sf-home-top{grid-template-columns:minmax(0,1.62fr) minmax(205px,.42fr) minmax(285px,.72fr)!important;grid-template-rows:auto!important;gap:12px!important}
+  .sf-hero{grid-column:1!important;grid-row:1!important}.sf-profile{grid-column:2!important;grid-row:1!important}.sf-robot{grid-column:3!important;grid-row:1!important}.sf-robot-frame{height:100%!important;min-height:350px!important;max-height:500px!important}
+}
+@media (min-width:901px) and (max-width:1450px){
+  .sf-home-top{grid-template-columns:minmax(0,1fr) clamp(238px,24vw,310px)!important;grid-template-rows:auto auto!important;gap:11px!important;align-items:stretch!important}
+  .sf-hero{grid-column:1!important;grid-row:1/3!important;padding:clamp(20px,2vw,27px)!important}.sf-profile{grid-column:2!important;grid-row:1!important;padding:10px!important}.sf-profile-photo img{max-height:225px!important}.sf-robot{grid-column:2!important;grid-row:2!important;grid-template-rows:auto 185px auto!important;min-height:0!important;padding:10px 11px!important}.sf-robot-frame{height:185px!important;min-height:185px!important;max-height:185px!important}.sf-hero h1{font-size:clamp(2.55rem,4.25vw,3.9rem)!important}.sf-proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .sf-academic-lockup{display:grid!important;grid-template-columns:1fr!important;gap:5px!important}.sf-school-badge,.sf-major-badge{padding:6px 7px!important}.sf-school-badge b,.sf-major-badge b{font-size:9.5px!important}.sf-school-badge small,.sf-major-badge small{font-size:7.5px!important}
+}
+@media (min-width:901px) and (max-width:1080px){
+  .sf-home-top{grid-template-columns:minmax(0,1fr) 230px!important}.sf-hero h1{font-size:clamp(2.35rem,4.7vw,3.25rem)!important}.sf-profile-photo img{max-height:190px!important}.sf-robot{grid-template-rows:auto 160px auto!important}.sf-robot-frame{height:160px!important;min-height:160px!important;max-height:160px!important}
+  .sf-hero-identity{align-items:flex-start!important;flex-direction:column!important}.sf-academic-lockup{margin-left:0!important;width:100%!important;grid-template-columns:1fr 1fr!important}.sf-school-badge small{display:none!important}
+}
+@media (max-width:900px){
+  .sf-hero-identity{align-items:flex-start!important;flex-direction:column!important}.sf-academic-lockup{margin:0!important;width:100%!important;display:grid!important;grid-template-columns:1fr 1fr!important}.sf-school-badge,.sf-major-badge{padding:7px 8px!important}.sf-school-badge b,.sf-major-badge b{font-size:9.5px!important}.sf-school-badge small,.sf-major-badge small{font-size:7.5px!important}
+}
+@media (max-width:520px){.sf-academic-lockup{grid-template-columns:1fr!important}.sf-school-badge b,.sf-major-badge b{font-size:10px!important}}
+
+/* Theme gallery: many choices remain lightweight because they are CSS-only. */
+.theme-popover{width:min(650px,calc(100vw - 28px))!important}
+.theme-filter-row{display:flex;gap:5px;overflow-x:auto;padding:0 0 9px;scrollbar-width:none}.theme-filter-row::-webkit-scrollbar{display:none}.theme-filter-row button{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;background:var(--theme-input);color:var(--muted);padding:6px 9px;font-size:8.5px;font-weight:800}.theme-filter-row button.is-active{border-color:var(--lime);background:color-mix(in srgb,var(--lime) 11%,var(--theme-input));color:var(--text)}
+.theme-gallery-quick{grid-template-columns:repeat(3,minmax(0,1fr))!important}.theme-gallery-settings{grid-template-columns:repeat(3,minmax(0,1fr))!important}.theme-choice{content-visibility:auto;contain:layout paint style}.personal-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:11px;padding-top:10px;border-top:1px solid var(--line)}.personal-tools button,.settings-utility-row button{min-width:0;border:1px solid var(--line);border-radius:11px;background:var(--theme-card-strong);color:var(--text);padding:9px;text-align:left}.personal-tools button>span{display:block;color:var(--cyan);font-size:15px;margin-bottom:4px}.personal-tools b,.personal-tools small{display:block}.personal-tools b{font-size:9.5px}.personal-tools small{margin-top:2px;color:var(--dim);font-size:7.5px;line-height:1.25}.personal-tools button:hover,.personal-tools button.is-active,.settings-utility-row button:hover,.settings-utility-row button.is-active{border-color:var(--lime)}
+.settings-utility-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0 12px}.settings-utility-row button{font-size:10px;text-align:center}
+
+/* Language is on-demand. No translator code runs until the visitor asks. */
+.language-panel{width:min(720px,94vw)!important}.language-intro{color:var(--muted);font-size:12px;line-height:1.55}.language-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}.language-grid button{min-width:0;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--theme-card-strong);color:var(--text);text-align:left}.language-grid button:hover{border-color:var(--cyan)}.language-grid b,.language-grid small{display:block}.language-grid b{font-size:13px}.language-grid small{margin-top:3px;color:var(--dim);font-size:9px}.language-status{padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--theme-input);color:var(--muted);font-size:10px;line-height:1.45}
+
+/* Optional recruiter focus does not remove information; it only quiets decorative motion. */
+html[data-focus-mode="1"] .petal-layer,html[data-focus-mode="1"] .signal-line,html[data-focus-mode="1"] .night-sleep-signal{display:none!important}html[data-focus-mode="1"] .world-glow{opacity:.6!important}html[data-focus-mode="1"] .glass-card{background:var(--theme-card)!important}
+
+@media (max-width:700px){.theme-gallery-quick,.theme-gallery-settings{grid-template-columns:repeat(2,minmax(0,1fr))!important}.personal-tools{grid-template-columns:1fr 1fr}.language-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.theme-gallery-quick,.theme-gallery-settings,.language-grid{grid-template-columns:1fr!important}}
+
+/* Clean print/PDF view is intentionally opt-in. */
+@media print{body{background:#fff!important;color:#111!important}.sidebar,.topbar,.mobile-dock,.ai-fab,#v17-world-stage,.scenic-plates,.scenic-foregrounds,.world-glow,.petal-layer,.signal-line{display:none!important}.app-shell{display:block!important}.main{padding:0!important}.view{display:none!important}.view.is-active{display:block!important;max-width:none!important}.glass-card,.project-card,.timeline-item,.channel-card{background:#fff!important;color:#111!important;border:1px solid #bbb!important;box-shadow:none!important;break-inside:avoid}.view.is-active *{color:#111!important}.primary-button,.secondary-button{display:none!important}}
+
+/* Final compact-header safety: preserve every control without allowing the header
+   to collide with page content at the narrowest desktop widths. */
+@media (min-width:901px) and (max-width:1040px){
+  .topbar{grid-template-columns:minmax(0,1fr) 116px auto!important;gap:5px!important;padding-inline:7px!important}
+  .sky-readout small{max-width:116px!important}
+  .sky-controls{gap:4px!important}
+  .sky-controls button{width:34px!important;height:34px!important;min-width:34px!important;padding:0!important}
+  .sky-controls #theme-quick-open{min-width:34px!important;width:34px!important}
+  .sky-controls #theme-quick-open b{display:none!important}
+  .top-search>span:nth-child(2){font-size:10.5px!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+}
+@media (min-width:901px) and (max-height:760px){
+  .logo .brand-copy small{display:block!important;font-size:8px!important;line-height:1.18!important}
+  .logo .brand-copy small+small{font-size:8.4px!important}
+}
+
+
+/* =====================================================================
+   FINAL PROFESSIONAL POLISH — language access, academic signal, previews
+   Targeted additions only; existing Sakura Signal composition preserved.
+   ===================================================================== */
+
+/* Native-name lockup: readable, intentional, still secondary to the name. */
+.logo .brand-copy{min-width:0}
+.logo .brand-native{display:grid!important;gap:2px!important;margin-top:5px!important}
+.logo .brand-copy .brand-native small{display:block!important;color:var(--muted)!important;font-size:clamp(8.5px,.66vw,10px)!important;font-weight:700!important;line-height:1.18!important;letter-spacing:.015em!important;white-space:nowrap!important}
+.logo .brand-copy .brand-native small[lang="hi"]{font-size:clamp(9px,.7vw,10.5px)!important;color:color-mix(in srgb,var(--muted) 88%,white)!important}
+
+/* Language is a first-class utility on wide screens without crowding laptops. */
+.sky-controls #theme-quick-open,.sky-controls #language-quick-open{width:auto!important;min-width:72px!important;padding-inline:10px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important}
+.sky-controls #theme-quick-open b,.sky-controls #language-quick-open b{font-size:9px!important;letter-spacing:.08em!important}
+.sky-controls #language-quick-open span{color:var(--cyan);font-weight:950}
+#side-language-open{display:flex}
+@media (max-width:1450px) and (min-width:761px){
+  .sky-controls #language-quick-open{display:none!important}
+}
+@media (max-width:1180px) and (min-width:761px){
+  .sky-controls #theme-quick-open{min-width:38px!important;width:38px!important;padding:0!important}
+  .sky-controls #theme-quick-open b{display:none!important}
+}
+@media (max-width:760px){
+  .sky-controls #language-quick-open{display:none!important}
+}
+
+/* Purdue + major: make the academic identity read like a credential, not metadata. */
+.sf-hero-identity{gap:13px!important}
+.sf-academic-lockup{gap:8px!important}
+.sf-school-badge,.sf-major-badge{min-height:48px!important;padding:8px 11px!important;border-radius:12px!important;background:color-mix(in srgb,var(--theme-card-strong) 92%,transparent)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)!important}
+.sf-school-badge{border-color:color-mix(in srgb,#cfb991 45%,var(--line))!important}
+.sf-major-badge{border-color:color-mix(in srgb,var(--lime) 42%,var(--line))!important}
+.sf-school-badge>i{flex-basis:30px!important;width:30px!important;height:28px!important;font-size:14px!important;background:#cfb991!important;color:#17120a!important}
+.sf-school-badge b{font-size:12.5px!important;font-weight:950!important;letter-spacing:.005em!important;color:#fff8e8!important}
+.sf-school-badge small{font-size:9px!important;color:#cfb991!important;font-weight:750!important}
+.sf-major-badge b{font-size:12.5px!important;font-weight:950!important;letter-spacing:.005em!important;color:var(--lime)!important}
+.sf-major-badge small{font-size:9px!important;color:var(--muted)!important;font-weight:750!important}
+.sf-profile-academic{margin:2px 0 5px!important;padding:9px 10px!important;border:1px solid color-mix(in srgb,#cfb991 32%,var(--line))!important;border-radius:11px!important;background:color-mix(in srgb,var(--theme-card-strong) 78%,transparent)!important}
+.sf-profile-academic strong{font-size:13px!important;font-weight:950!important;color:#fff8e8!important}.sf-profile-academic b{font-size:12.5px!important;font-weight:950!important}.sf-profile-academic small{font-size:9.5px!important}
+
+@media (max-width:1320px) and (min-width:761px){
+  .sf-academic-lockup{width:100%!important;grid-template-columns:1fr 1fr!important}
+  .sf-school-badge,.sf-major-badge{min-height:44px!important;padding:7px 9px!important}
+  .sf-school-badge b,.sf-major-badge b{font-size:10.5px!important}.sf-school-badge small,.sf-major-badge small{font-size:8px!important}
+}
+@media (max-width:560px){
+  .sf-academic-lockup{grid-template-columns:1fr!important}
+  .sf-school-badge,.sf-major-badge{min-height:42px!important}
+  .sf-school-badge b,.sf-major-badge b{font-size:10.5px!important}.sf-school-badge small,.sf-major-badge small{font-size:8px!important}
+}
+
+/* Theme previews use the exact palette that will actually be applied. */
+.theme-choice{position:relative;overflow:hidden!important;padding:9px!important;gap:9px!important;align-items:center!important}
+.theme-preview{position:relative;display:block;flex:0 0 78px;width:78px;height:48px;border:1px solid color-mix(in srgb,var(--preview-text) 18%,transparent);border-radius:9px;background:var(--preview-bg);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.015)}
+.theme-preview::before{content:"";position:absolute;left:7px;top:7px;width:42px;height:8px;border-radius:3px;background:var(--preview-text);opacity:.88}
+.theme-preview::after{content:"";position:absolute;left:7px;top:20px;width:49px;height:20px;border-radius:5px;background:var(--preview-card);border:1px solid color-mix(in srgb,var(--preview-accent) 30%,transparent)}
+.theme-preview .theme-preview-accent{position:absolute;z-index:2;right:6px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--preview-accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--preview-accent) 14%,transparent)}
+.theme-preview .theme-preview-cyan{position:absolute;z-index:2;left:12px;bottom:10px;width:16px;height:3px;border-radius:99px;background:var(--preview-cyan)}
+.theme-preview .theme-preview-pink{position:absolute;z-index:2;left:32px;bottom:10px;width:12px;height:3px;border-radius:99px;background:var(--preview-pink)}
+.theme-choice>span:last-child{min-width:0}.theme-choice>span:last-child strong,.theme-choice>span:last-child small{display:block}.theme-choice>span:last-child strong{font-size:9.5px;line-height:1.2}.theme-choice>span:last-child small{margin-top:2px;color:var(--dim);font-size:7.5px;line-height:1.25}
+.theme-choice.is-active .theme-preview{outline:2px solid var(--lime);outline-offset:1px}
+@media (max-width:540px){.theme-preview{flex-basis:66px;width:66px;height:43px}}
+
+/* Replace the old Print utility with genuinely useful recruiter actions. */
+.personal-tools button#quick-recruiter-brief>span{color:var(--gold)}
+.settings-utility-row #settings-recruiter-brief{border-color:color-mix(in srgb,var(--gold) 28%,var(--line))}
+
+/* The quick language control should feel as discoverable as Theme. */
+#language-quick-open:hover{border-color:var(--cyan)!important;color:var(--cyan)!important}
+
+
+/* =====================================================================
+   FINAL REQUESTED POLISH — visible language, academic prominence,
+   exact theme previews, and lightweight recruiter utilities.
+   Existing Sakura Signal content and composition remain intact.
+   ===================================================================== */
+.side-utility-strip{display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:10px 1px 12px}
+.side-utility-strip button{min-width:0;display:grid;place-items:center;gap:3px;padding:8px 4px;border:1px solid var(--line);border-radius:11px;background:var(--theme-card-strong,rgba(7,20,46,.78));color:var(--muted);font-size:8px;font-weight:850;letter-spacing:.02em}
+.side-utility-strip button span{font-size:14px;line-height:1;color:var(--cyan)}.side-utility-strip button b{font:inherit;white-space:nowrap}.side-utility-strip button:hover,.side-utility-strip button:focus-visible{color:var(--text);border-color:var(--lime);outline:none}
+@media (min-width:761px) and (max-width:1450px){.side-utility-strip{display:grid}}
+@media (min-width:761px) and (max-height:720px){.side-utility-strip{margin-block:6px 8px}.side-utility-strip button{padding-block:6px}}
+.sky-controls #language-quick-open{border-color:color-mix(in srgb,var(--cyan) 28%,var(--line))!important}
+@media (min-width:1451px){.sky-controls #language-quick-open{display:flex!important}}
+@media (min-width:761px) and (max-width:1450px){.sky-controls #language-quick-open{display:none!important}}
+
+/* Purdue + RET are primary recruiter credentials. */
+.sf-hero-identity{padding-bottom:10px!important;border-bottom:1px solid color-mix(in srgb,#cfb991 17%,var(--line))!important}
+.sf-academic-lockup{flex:1 1 520px!important;max-width:650px!important;gap:9px!important}
+.sf-school-badge,.sf-major-badge{min-height:54px!important;padding:9px 12px!important}
+.sf-school-badge{border-color:color-mix(in srgb,#cfb991 62%,var(--line))!important;box-shadow:inset 3px 0 0 #cfb991!important}
+.sf-major-badge{border-color:color-mix(in srgb,var(--lime) 55%,var(--line))!important;box-shadow:inset 3px 0 0 var(--lime)!important}
+.sf-school-badge b{font-size:clamp(12px,.88vw,14px)!important;font-weight:1000!important;letter-spacing:.035em!important;text-transform:uppercase}.sf-school-badge small{font-size:clamp(8.5px,.62vw,9.5px)!important;font-weight:800!important}
+.sf-major-badge b{font-size:clamp(12.5px,.92vw,14.5px)!important;font-weight:1000!important;letter-spacing:.018em!important}.sf-major-badge small{font-size:clamp(8.5px,.62vw,9.5px)!important;font-weight:800!important}
+.sf-profile-academic{border-color:color-mix(in srgb,#cfb991 48%,var(--line))!important;box-shadow:inset 3px 0 0 #cfb991!important}.sf-profile-academic strong{font-size:14px!important;letter-spacing:.02em!important}.sf-profile-academic b{font-size:13.5px!important;line-height:1.2!important}.sf-profile-academic small{font-size:10px!important}
+@media (max-width:1320px) and (min-width:761px){.sf-academic-lockup{max-width:none!important}.sf-school-badge,.sf-major-badge{min-height:48px!important}.sf-school-badge b,.sf-major-badge b{font-size:11px!important}.sf-school-badge small,.sf-major-badge small{font-size:8px!important}}
+@media (max-width:700px){.sf-hero-identity{padding-bottom:8px!important}.sf-school-badge,.sf-major-badge{min-height:46px!important}.sf-school-badge b,.sf-major-badge b{font-size:10.5px!important}}
+
+/* Theme previews are generated from the same final CSS palette used by applyTheme. */
+.theme-choice{align-items:center!important;gap:9px!important}.theme-preview{background:linear-gradient(180deg,color-mix(in srgb,var(--preview-cyan) 14%,transparent),transparent 43%),var(--preview-bg)!important}.theme-preview::before{background:var(--preview-text)!important}.theme-preview::after{background:var(--preview-card)!important;border-color:color-mix(in srgb,var(--preview-accent) 42%,transparent)!important}.theme-choice.is-active{border-color:var(--lime)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--lime) 20%,transparent)!important}
+
+/* 15 language views: deliberate 3 x 5 grid on desktop. */
+.language-panel{width:min(760px,94vw)!important}.language-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch}.language-grid button{min-height:61px;position:relative}.language-grid button[aria-pressed="true"]{border-color:var(--lime)!important;background:color-mix(in srgb,var(--theme-card-strong) 88%,var(--lime) 12%)!important}.language-grid button[aria-pressed="true"]::after{content:"✓";position:absolute;right:10px;top:9px;color:var(--lime);font-weight:1000}
+@media (max-width:700px){.language-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}@media (max-width:420px){.language-grid{grid-template-columns:1fr!important}}
+
+/* Recruiter brief is the useful replacement for the old print-first action. */
+.brief-action-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}.brief-action-grid button{min-width:0;min-height:44px}.settings-tool-note{margin:-3px 0 9px!important;color:var(--dim)!important;font-size:9px!important;line-height:1.45!important}@media (max-width:560px){.brief-action-grid{grid-template-columns:1fr}}
+#side-language-open span{color:var(--cyan)}
+
+
+/* =====================================================================
+   THEME GALLERY + LIGHTWEIGHT PERSONALIZATION — final presentation pass
+   ===================================================================== */
+.theme-popover{width:min(720px,calc(100vw - 28px))!important}
+.theme-gallery-quick,.theme-gallery-settings{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+.theme-choice{display:grid!important;grid-template-columns:78px minmax(0,1fr)!important;gap:11px!important;min-height:70px!important;padding:10px!important;overflow:hidden!important;align-items:center!important}
+.theme-choice>span:last-child{position:relative!important;z-index:1!important;min-width:0!important;overflow:hidden!important}
+.theme-choice>span:last-child strong{font-size:10.5px!important;line-height:1.2!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;word-break:normal!important}
+.theme-choice>span:last-child small{margin-top:3px!important;font-size:8px!important;line-height:1.3!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;word-break:normal!important}
+.theme-preview{width:78px!important;min-width:78px!important;max-width:78px!important;height:48px!important}
+@media (max-width:620px){.theme-gallery-quick,.theme-gallery-settings{grid-template-columns:1fr!important}.theme-choice{grid-template-columns:70px minmax(0,1fr)!important}.theme-preview{width:70px!important;min-width:70px!important;max-width:70px!important}}
+
+.settings-view-controls{margin:10px 0 12px;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--theme-card,rgba(5,16,39,.72))}
+.settings-control-row{display:grid;grid-template-columns:minmax(150px,.78fr) minmax(0,1.22fr);gap:12px;align-items:center;padding:10px 0;border-top:1px solid color-mix(in srgb,var(--line) 72%,transparent)}
+.settings-control-row:first-of-type{border-top:0}.settings-control-row b,.settings-control-row small{display:block}.settings-control-row b{font-size:10.5px;color:var(--text)}.settings-control-row small{margin-top:2px;font-size:8.5px;line-height:1.35;color:var(--dim)}
+.settings-segments{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.settings-segments button{min-width:0;padding:8px 6px;border:1px solid var(--line);border-radius:9px;background:var(--theme-input);color:var(--muted);font-size:8.5px;font-weight:850}.settings-segments button:hover,.settings-segments button:focus-visible{border-color:var(--cyan);color:var(--text);outline:none}.settings-segments button.is-active{border-color:var(--lime);background:color-mix(in srgb,var(--lime) 10%,var(--theme-input));color:var(--text)}
+@media (max-width:620px){.settings-control-row{grid-template-columns:1fr}.settings-segments{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Balanced is the current look. Other options are opt-in and CSS-only. */
+html[data-density="compact"] .project-grid,html[data-density="compact"] .timeline-list,html[data-density="compact"] .tech-index,html[data-density="compact"] .media-grid,html[data-density="compact"] .awards-grid{gap:8px!important}
+html[data-density="compact"] .project-card,html[data-density="compact"] .timeline-item,html[data-density="compact"] .channel-card,html[data-density="compact"] .human-card,html[data-density="compact"] .system-card{padding:clamp(11px,1.2vw,15px)!important}
+html[data-density="comfortable"] .project-grid,html[data-density="comfortable"] .timeline-list,html[data-density="comfortable"] .tech-index,html[data-density="comfortable"] .media-grid,html[data-density="comfortable"] .awards-grid{gap:16px!important}
+html[data-density="comfortable"] .project-card,html[data-density="comfortable"] .timeline-item,html[data-density="comfortable"] .channel-card,html[data-density="comfortable"] .human-card,html[data-density="comfortable"] .system-card{padding:clamp(17px,1.8vw,22px)!important}
+html[data-glow="subtle"] .primary-button,html[data-glow="subtle"] .glass-card,html[data-glow="subtle"] .channel-card{box-shadow:none!important}
+html[data-glow="subtle"] .world-glow{opacity:.58!important}
+html[data-glow="vivid"] .primary-button{box-shadow:0 0 22px color-mix(in srgb,var(--lime) 22%,transparent)!important}
+html[data-glow="vivid"] .sf-school-badge{box-shadow:inset 3px 0 0 #cfb991,0 0 18px color-mix(in srgb,#cfb991 12%,transparent)!important}
+html[data-glow="vivid"] .sf-major-badge{box-shadow:inset 3px 0 0 var(--lime),0 0 18px color-mix(in srgb,var(--lime) 12%,transparent)!important}
