@@ -16,7 +16,7 @@ Gemini -> Groq -> OpenRouter -> verified local recovery
 IMPORTANT:
 - Put the keys ONLY in server.js, never in index.html or scripts.js.
 - Before GitHub deployment, leave the three strings blank and add keys as hosting environment variables.
-- The correct provider spelling is Groq.
+- The correct provider spelling is Groq. 
 */
 
 const PASTE_API_KEYS_HERE = Object.freeze({
