@@ -11,7 +11,7 @@
 <meta content="website" property="og:type"/>
 <title>Suyash Dash | AI Robotics, Automation, Computer Vision &amp; Autonomous Systems</title>
 <link href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2730%27 fill=%27%23071126%27 stroke=%27%2393ff42%27 stroke-width=%272%27/%3E%3Ctext x=%2732%27 y=%2740%27 text-anchor=%27middle%27 font-size=%2724%27 font-family=%27Arial%27 font-weight=%27700%27 fill=%27%2393ff42%27%3ESD%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
-<link href="styles.css?v=signal-controls-20260908-3" rel="stylesheet"/>
+<link href="styles.css?v=signal-controls-20260908-11" rel="stylesheet"/>
 <script>
     /* Paint a sensible local-time phase before the main script finishes. */
     (()=>{const d=new Date(),h=d.getHours()+d.getMinutes()/60,r=document.documentElement.style;
@@ -20,12 +20,13 @@
     })();
     try {
       const savedTheme = localStorage.getItem('sd-theme') || 'sakura';
-      const allowedThemes = ["sakura", "neon-tokyo", "cyber-sakura", "kyoto-lantern", "shibuya-pulse", "aurora-grid", "cherry-blossom", "crimson-sakura", "midnight-circuit", "tokyo-night", "seoul-neon", "taipei-circuit", "singapore-night", "nasa-deep-space", "new-york-night", "san-francisco-fog", "london-electric", "paris-midnight", "berlin-techno", "dubai-skyline", "mumbai-monsoon", "cape-town-dusk", "athens-aegean", "hong-kong-harbor", "osaka-electric", "mexico-city-noche", "purdue-gold", "graphite-pro", "cobalt-robotics", "arctic-lab", "silicon-valley", "lunar-silver", "github-dark", "one-dark", "dracula", "night-owl", "catppuccin", "synthwave", "horizon", "nord", "solarized", "monokai", "emerald-terminal", "signal-contrast", "sakura-dawn", "wisteria-night", "matcha-garden", "fuji-dawn", "maple-ember", "plum-blossom", "koi-lantern", "indigo-rain"];
+      const allowedThemes = ["sakura", "neon-tokyo", "cyber-sakura", "kyoto-lantern", "shibuya-pulse", "aurora-grid", "cherry-blossom", "crimson-sakura", "midnight-circuit", "tokyo-night", "seoul-neon", "taipei-circuit", "singapore-night", "nasa-deep-space", "new-york-night", "san-francisco-fog", "london-electric", "paris-midnight", "berlin-techno", "dubai-skyline", "mumbai-monsoon", "cape-town-dusk", "athens-aegean", "hong-kong-harbor", "osaka-electric", "mexico-city-noche", "purdue-gold", "graphite-pro", "cobalt-robotics", "arctic-lab", "silicon-valley", "lunar-silver", "github-dark", "one-dark", "dracula", "night-owl", "catppuccin", "synthwave", "horizon", "nord", "solarized", "monokai", "emerald-terminal", "signal-contrast", "sakura-dawn", "wisteria-night", "matcha-garden", "fuji-dawn", "maple-ember", "plum-blossom", "koi-lantern", "indigo-rain", "sunrise-glow", "sunset-ember", "blue-hour-twilight", "coral-lagoon", "future-pocket-blue", "comet-twilight", "moonrise-silver", "rainy-neon", "alpine-morning", "doraemon-blue", "nobita-classic", "shizuka-pink", "suneo-sky", "gian-orange", "dorami-sunshine", "bikini-bottom", "your-name-twilight", "taki-tokyo", "mitsuha-itomori"];
       document.documentElement.dataset.theme = allowedThemes.includes(savedTheme) ? savedTheme : 'sakura';
     } catch { document.documentElement.dataset.theme = 'sakura'; }
   </script>
 </head>
 <body>
+<div aria-hidden="true" class="reading-progress" id="reading-progress"><i></i></div>
 <!-- V12: fully procedural, continuously rendered anime environment. -->
 <div aria-hidden="true" id="v17-world-stage">
 <canvas id="v17-base"></canvas>
@@ -273,12 +274,12 @@
 <strong id="current-time" role="button" tabindex="0" aria-label="Current local time. Activate to switch between 12-hour and 24-hour time." title="Switch 12 / 24-hour time">--:--</strong>
 <span id="current-date">Loading date…</span>
 <span class="local-temperature" id="local-temperature" hidden role="button" tabindex="0" aria-label="Local temperature. Activate to switch between Fahrenheit and Celsius." title="Switch °F / °C">--°</span>
-<small id="location-label"><i></i>Determining sky location…</small>
+<small id="location-label"><i></i>Private sky estimate • no location shared</small>
 </div>
 <div class="sky-controls">
 <button aria-expanded="false" aria-haspopup="dialog" id="theme-quick-open" title="Change interface theme" type="button"><span aria-hidden="true">◈</span><b>THEME</b></button>
 <button aria-haspopup="dialog" id="language-quick-open" title="Change portfolio language" type="button"><span aria-hidden="true">文</span><b>LANG</b></button>
-<button id="location-sync" title="Privately sync sun and moon to this device" type="button">◎</button>
+<button id="location-sync" title="Optional precise sky — off by default; review privacy details before enabling" aria-label="Optional precise sky accuracy. Off by default; no location is required." type="button">◎</button>
 <button aria-pressed="false" id="sound-toggle" title="Toggle interface sound" type="button">♫</button>
 <button id="replay-intro" title="Replay introduction" type="button">↻</button>
 </div>
@@ -676,13 +677,13 @@
 </div>
 <div aria-label="Quick theme picker" class="theme-popover" hidden id="theme-popover" role="dialog">
 <div class="theme-popover-head"><div><small>PERSONALIZE THE SIGNAL</small><strong>Theme gallery</strong></div><button aria-label="Close theme picker" id="theme-quick-close" type="button">×</button></div>
-<div class="theme-filter-row" aria-label="Theme categories"><button class="is-active" data-theme-filter="All" type="button">All</button><button data-theme-filter="Signature" type="button">Signature</button><button data-theme-filter="Professional" type="button">Professional</button><button data-theme-filter="City" type="button">City</button><button data-theme-filter="Editor" type="button">Editor</button></div>
+<div class="theme-filter-row" aria-label="Theme categories"><button class="is-active" data-theme-filter="All" type="button">All</button><button data-theme-filter="Signature" type="button">Signature</button><button data-theme-filter="Professional" type="button">Professional</button><button data-theme-filter="City" type="button">City</button><button data-theme-filter="Editor" type="button">Editor</button><button data-theme-filter="Pop Culture" type="button">Pop Culture</button><button class="theme-filter-random" data-theme-filter="Random" type="button">↻ Random</button></div>
 <div class="theme-gallery theme-gallery-quick" id="quick-theme-grid" role="list"></div>
 <div class="personal-tools" aria-label="Quick portfolio tools"><button id="focus-toggle" type="button"><span>◫</span><b>Focus</b><small>Calmer recruiter view</small></button><button id="language-open" type="button"><span>文</span><b>Language</b><small>Translate this view</small></button><button id="share-page" type="button"><span>↗</span><b>Share</b><small>Copy this section</small></button><button id="quick-recruiter-brief" type="button"><span>◎</span><b>Recruiter brief</b><small>Best evidence in 60 seconds</small></button></div>
-<div class="theme-popover-foot"><span>Previews use each theme’s exact interface palette • Press <kbd>T</kbd> to reopen</span><button id="theme-open-settings" type="button">More settings →</button></div>
+<div class="theme-popover-foot"><span>Previews use each theme’s exact interface palette • Press <kbd>T</kbd> to reopen</span><div class="theme-popover-actions"><button id="theme-randomize" type="button">↻ Randomize theme</button><button id="theme-open-settings" type="button">More settings →</button></div></div>
 </div>
 <div aria-labelledby="language-title" aria-modal="true" class="modal" hidden="" id="language-modal" role="dialog">
-<div class="modal-panel language-panel glass-card"><div class="modal-head"><div><small class="video-kicker">LANGUAGE VIEW</small><h2 id="language-title">Read the portfolio your way</h2></div><button aria-label="Close" data-close-modal="" type="button">×</button></div><p class="language-intro">Choose the language you’re most comfortable reading. The current portfolio view translates when you ask, while names, project titles, robot models, and technical terms stay clear and recognizable.</p><div class="language-grid" id="language-grid" role="list"></div><div class="language-status" id="language-status" aria-live="polite">English is the original portfolio language.</div></div>
+<div class="modal-panel language-panel glass-card"><div class="modal-head"><div><small class="video-kicker">LANGUAGE VIEW</small><h2 id="language-title">Read the portfolio your way</h2></div><button aria-label="Close" data-close-modal="" type="button">×</button></div><p class="language-intro">Choose the language you’re most comfortable reading. Translation stays inside the portfolio on desktop and mobile, and you can switch languages or return to English at any time. Names, project titles, robot models, and technical terms stay recognizable.</p><div class="language-grid" id="language-grid" role="list"></div><div class="language-status" id="language-status" aria-live="polite">English is the original portfolio language.</div></div>
 </div>
 <div aria-labelledby="settings-title" aria-modal="true" class="modal" hidden="" id="settings-modal" role="dialog">
 <div class="modal-panel settings-panel glass-card">
@@ -694,11 +695,16 @@
     <div class="settings-theme-select-row">
       <select id="setting-theme" aria-label="Choose interface theme"><option value="sakura">Sakura Original</option></select>
       <button class="secondary-button" id="settings-theme-browse" type="button">Browse gallery</button>
+      <button class="secondary-button" id="settings-theme-randomize" type="button">↻ Random</button>
     </div>
   </div>
 </div>
 <p class="theme-help">Themes recolor the interface only. The live Sakura world keeps its astronomy and artwork, so switching palettes adds essentially no rendering cost.</p>
-<div class="settings-utility-row"><button id="settings-language-open" type="button">文 Language</button><button id="settings-focus-toggle" type="button">◫ Focus view</button><button id="settings-share-page" type="button">↗ Share page</button><button id="settings-recruiter-brief" type="button">◎ Recruiter brief</button></div>
+<div class="settings-view-controls settings-theme-behavior">
+  <div class="settings-theme-heading"><span>Theme behavior</span><small>Keep a fixed palette or let the interface gently follow the local sky.</small></div>
+  <div class="settings-control-row"><div><b>Sky Sync</b><small>Both modes keep the same location-aware clock, temperature, sunrise, sunset, sun/moon positions, and 24-hour world. Manual keeps your chosen palette. Sky Sync changes only the interface theme: Sunrise Glow → Sakura Original → Sunset Ember → Blue Hour Twilight → Midnight Circuit, with gentle crossfades in real time and 24H Preview.</small></div><div class="settings-segments" aria-label="Theme behavior"><button data-theme-mode="manual" type="button">Manual</button><button data-theme-mode="sky" type="button">Sky Sync</button></div></div>
+</div>
+<div class="settings-utility-row"><button id="settings-language-open" type="button">文 Language</button><button id="settings-focus-toggle" type="button">◫ Focus view</button><button id="settings-share-page" type="button">↗ Share page</button><button id="settings-recruiter-brief" type="button">◎ Recruiter brief</button><button id="settings-tour-start" type="button">✦ Guided tour</button></div>
 <p class="settings-tool-note">These tools run only when you use them. They add no continuous animation or background network activity.</p>
 <div class="settings-view-controls">
   <div class="settings-theme-heading"><span>View controls</span><small>Personalize readability without changing the portfolio content.</small></div>
@@ -710,6 +716,10 @@
   <div class="settings-control-row"><div><b>Text comfort</b><small>Increase reading size without changing the portfolio structure.</small></div><div class="settings-segments" aria-label="Text comfort"><button data-text-comfort-choice="standard" type="button">Standard</button><button data-text-comfort-choice="comfortable" type="button">Comfortable</button></div></div>
   <div class="settings-control-row"><div><b>Signal lens</b><small>Surface the engineering evidence most relevant to the visitor. Nothing is hidden.</small></div><div class="settings-segments settings-segments-four" aria-label="Portfolio signal lens"><button data-signal-lens-choice="balanced" type="button">Balanced</button><button data-signal-lens-choice="robotics" type="button">Robotics</button><button data-signal-lens-choice="ai" type="button">AI / Software</button><button data-signal-lens-choice="research" type="button">Research</button></div></div>
   <div class="settings-control-row"><div><b>Experience profiles</b><small>Apply a polished set of existing preferences in one click; every control remains editable afterward.</small></div><div class="settings-segments settings-segments-four" aria-label="Experience profiles"><button data-experience-profile="balanced" type="button">Balanced</button><button data-experience-profile="recruiter" type="button">Recruiter</button><button data-experience-profile="accessible" type="button">Accessible</button><button data-experience-profile="showcase" type="button">Showcase</button></div></div>
+  <div class="settings-control-row"><div><b>Resume last section</b><small>Optionally reopen the last portfolio section visited on this device. Stored locally only.</small></div><label class="settings-inline-toggle"><input id="setting-resume-route" type="checkbox"/><span>Remember</span></label></div>
+  <div class="settings-control-row"><div><b>Reading progress</b><small>Show a subtle progress line for the current page. It updates only while scrolling and adds no background network work.</small></div><label class="settings-inline-toggle"><input id="setting-reading-progress" type="checkbox"/><span>Show</span></label></div>
+  <div class="settings-control-row"><div><b>Shortcut hints</b><small>Show compact keyboard hints such as Ctrl K, T, L, and B. Turn them off for an even cleaner interface.</small></div><label class="settings-inline-toggle"><input id="setting-shortcut-hints" type="checkbox"/><span>Show</span></label></div>
+  <div class="settings-control-row"><div><b>Neon edge signal</b><small>Static adds a clean theme-colored neon outline. Flow keeps that outline and sends a slow ambient light runner around major panels. Colors always follow the active theme, including Random and Sky Sync.</small></div><div class="settings-segments" aria-label="Neon edge signal"><button data-edge-signal-choice="off" type="button">Off</button><button data-edge-signal-choice="static" type="button">Static</button><button data-edge-signal-choice="flow" type="button">Flow</button></div></div>
 </div>
 <div class="settings-view-controls settings-performance-controls">
   <div class="settings-theme-heading"><span>Rendering studio</span><small>Optional controls stay capped by ECO / AUTO / HIGH so weaker devices are protected.</small></div>
@@ -725,12 +735,27 @@
 <label><span>Interface sounds</span><input id="setting-sound" type="checkbox"/></label>
 <label><span>Reduce ambient motion</span><input id="setting-motion" type="checkbox"/></label>
 <label><span>Always replay intro on refresh</span><input id="setting-intro" type="checkbox"/></label>
-<button class="primary-button" id="settings-location" type="button">Use precise location for sky</button>
-<p class="settings-note">For exact sunrise and sunset, the browser needs location permission. If permission is granted, Sakura Signal uses the visitor's coordinates and current date; otherwise it uses a private time-zone estimate. Coordinates stay in the browser session and are not sent to the portfolio server.</p>
+<button class="primary-button" id="settings-location" type="button">Optional: improve sky accuracy</button>
+<p class="settings-note">The portfolio works without location access and starts with a private time-zone estimate. Precise sky is optional. If you choose it, Sakura Signal first explains what is used before the browser asks permission; coordinates stay in the browser session and are not sent to the portfolio server.</p>
 </div>
 </div>
+
+<div aria-labelledby="signal-tour-title" aria-modal="true" class="modal" hidden id="signal-tour-modal" role="dialog">
+<div class="modal-panel signal-tour-panel glass-card">
+<div class="modal-head"><div><small class="video-kicker">60-SECOND SIGNAL TOUR</small><h2 id="signal-tour-title">A guided path through the strongest evidence</h2></div><button aria-label="Close" data-close-modal type="button">×</button></div>
+<div class="signal-tour-progress"><span id="signal-tour-count">1 of 5</span><i><b id="signal-tour-bar"></b></i></div>
+<div class="signal-tour-body"><small id="signal-tour-kicker">START HERE</small><h3 id="signal-tour-step-title">Systems, not isolated demos</h3><p id="signal-tour-copy">A short recruiter-oriented tour that moves through the strongest robotics, AI, research, and delivery evidence without hiding any part of the portfolio.</p></div>
+<div class="signal-tour-actions"><button class="secondary-button" id="signal-tour-back" type="button">Back</button><button class="secondary-button" id="signal-tour-open" type="button">Open section</button><button class="primary-button" id="signal-tour-next" type="button">Next →</button></div>
+</div></div>
+<div aria-labelledby="location-consent-title" aria-modal="true" class="modal" hidden id="location-consent-modal" role="dialog">
+<div class="modal-panel location-consent-panel glass-card">
+<div class="modal-head"><div><small class="video-kicker">OPTIONAL LOCAL SKY</small><h2 id="location-consent-title">Improve sunrise and sunset accuracy</h2></div><button aria-label="Close" data-close-modal type="button">×</button></div>
+<p>Your portfolio already works without location access. By default, Sakura Signal estimates the local sky from the device time zone.</p>
+<div class="location-consent-grid"><article><b>What precise location improves</b><span>Exact sunrise, sunset, sun/moon position, and optional local temperature for the visitor’s current area.</span></article><article><b>What stays private</b><span>Coordinates remain in this browser session and are not sent to Suyash’s portfolio server. Weather uses rounded coordinates only when temperature is enabled.</span></article></div>
+<div class="location-consent-actions"><button class="secondary-button" data-close-modal type="button">Not now</button><button class="primary-button" id="location-consent-confirm" type="button">Continue to browser permission</button></div>
+</div></div>
 <div class="mobile-sheet" hidden="" id="mobile-sheet"><button data-close-sheet="" type="button">×</button><nav><small>PRIMARY</small><button data-route="home" type="button">Home</button><button data-route="projects" type="button">Projects</button><button data-route="robotics" type="button">Robot Lab</button><button data-route="experience" type="button">Experience</button><button data-route="contact" type="button">Contact</button><small>MORE</small><button data-route="why" type="button">Why Suyash</button><button data-route="technology" type="button">Technology</button><button data-route="proof" type="button">Recognition &amp; Media</button><button data-route="ai" type="button">AI Guide</button><button data-route="role-match" type="button">Role Match</button><button id="mobile-theme-open" type="button">◈ Theme</button><button id="mobile-language-open" type="button">文 Language</button><button id="mobile-brief-open" type="button">◎ Recruiter brief</button><button id="mobile-settings-open" type="button">Settings</button></nav></div>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
-<script defer src="scripts.js?v=signal-controls-20260908-3"></script>
+<script defer src="scripts.js?v=signal-controls-20260908-11"></script>
 </body>
 </html>
