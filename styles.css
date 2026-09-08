@@ -5195,3 +5195,1301 @@ html[data-signal-lens="robotics"] .sf-signal-grid-primary .channel-card:nth-chil
 html[data-signal-lens="robotics"] .sf-signal-grid-primary .channel-card:nth-child(1),html[data-signal-lens="ai"] .sf-signal-grid-primary .channel-card:nth-child(4),html[data-signal-lens="research"] .sf-signal-grid-primary .channel-card:nth-child(2){order:-2!important}
 html[data-signal-lens="robotics"] .sf-signal-grid-primary .channel-card:nth-child(3),html[data-signal-lens="ai"] .sf-signal-grid-primary .channel-card:nth-child(5){order:-1!important}
 @media(max-width:560px){.settings-segments-four{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+
+/* =====================================================================
+   V10 ORIGINAL PALETTE THEMES — palette-only homages, no copyrighted art
+   ===================================================================== */
+html[data-theme="sunrise-glow"]{--bg:#160d13;--panel:#2b1820;--panel-2:#3a2029;--panel-3:#4b2932;--line:rgba(255,179,107,.34);--line-bright:rgba(255,138,168,.66);--text:#fff9f5;--muted:#e8c2b8;--dim:#a9847c;--lime:#ffb36b;--lime-2:#ffc78d;--cyan:#ffe2a6;--blue:#8fc9ff;--purple:#c89cff;--pink:#ff8aa8;--gold:#ffd36f;--theme-sidebar:rgba(27,13,20,.98);--theme-topbar:rgba(43,24,32,.95);--theme-card:rgba(51,28,37,.93);--theme-card-strong:rgba(60,32,42,.98);--theme-card-soft:rgba(39,21,29,.92);--theme-input:rgba(27,13,20,.98)}
+html[data-theme="sunset-ember"]{--bg:#15090b;--panel:#33161a;--panel-2:#472022;--panel-3:#5a2929;--line:rgba(255,138,91,.36);--line-bright:rgba(255,95,135,.68);--text:#fff8f2;--muted:#e8b9ad;--dim:#a97970;--lime:#ff8a5b;--lime-2:#ffa272;--cyan:#ffc857;--blue:#7fbfff;--purple:#b683ff;--pink:#ff5f87;--gold:#ffd166;--theme-sidebar:rgba(28,9,12,.98);--theme-topbar:rgba(51,20,24,.95);--theme-card:rgba(57,22,26,.94);--theme-card-strong:rgba(71,27,31,.98);--theme-card-soft:rgba(43,16,20,.92);--theme-input:rgba(28,9,12,.98)}
+html[data-theme="blue-hour-twilight"]{--bg:#070b1a;--panel:#121a36;--panel-2:#1b2850;--panel-3:#263568;--line:rgba(135,167,255,.35);--line-bright:rgba(200,140,255,.64);--text:#f7f8ff;--muted:#c1c8e8;--dim:#7f8caf;--lime:#87a7ff;--lime-2:#a7baff;--cyan:#79d6ff;--blue:#6b9dff;--purple:#a483ff;--pink:#c88cff;--gold:#f0cb79;--theme-sidebar:rgba(7,11,26,.98);--theme-topbar:rgba(18,26,54,.95);--theme-card:rgba(21,31,64,.94);--theme-card-strong:rgba(27,40,80,.98);--theme-card-soft:rgba(17,25,52,.92);--theme-input:rgba(7,11,26,.98)}
+html[data-theme="coral-lagoon"]{--bg:#07131a;--panel:#0f2d3b;--panel-2:#164052;--panel-3:#1d5267;--line:rgba(86,230,255,.34);--line-bright:rgba(255,216,77,.70);--text:#fbffff;--muted:#b8dbe3;--dim:#7599a2;--lime:#ffd84d;--lime-2:#ffe477;--cyan:#56e6ff;--blue:#62b8ff;--purple:#a98cff;--pink:#ff7fa6;--gold:#ffd15d;--theme-sidebar:rgba(6,18,24,.98);--theme-topbar:rgba(15,45,59,.95);--theme-card:rgba(17,51,66,.94);--theme-card-strong:rgba(22,64,82,.98);--theme-card-soft:rgba(13,38,50,.92);--theme-input:rgba(6,18,24,.98)}
+html[data-theme="future-pocket-blue"]{--bg:#06111d;--panel:#0b2a49;--panel-2:#10395f;--panel-3:#164b78;--line:rgba(73,184,255,.36);--line-bright:rgba(244,251,255,.58);--text:#f8fcff;--muted:#bdd8e8;--dim:#7895a7;--lime:#49b8ff;--lime-2:#78caff;--cyan:#f4fbff;--blue:#3ca7ff;--purple:#9e8cff;--pink:#ff5968;--gold:#ffd368;--theme-sidebar:rgba(6,17,29,.98);--theme-topbar:rgba(11,42,73,.95);--theme-card:rgba(13,49,83,.94);--theme-card-strong:rgba(16,57,95,.98);--theme-card-soft:rgba(9,36,62,.92);--theme-input:rgba(6,17,29,.98)}
+html[data-theme="comet-twilight"]{--bg:#090a1d;--panel:#171a3d;--panel-2:#232655;--panel-3:#30326c;--line:rgba(121,184,255,.34);--line-bright:rgba(255,131,168,.65);--text:#faf9ff;--muted:#c9c6e9;--dim:#8783ad;--lime:#79b8ff;--lime-2:#9dcbff;--cyan:#b28dff;--blue:#6da7ff;--purple:#a47cff;--pink:#ff83a8;--gold:#f4cf79;--theme-sidebar:rgba(9,10,29,.98);--theme-topbar:rgba(23,26,61,.95);--theme-card:rgba(27,30,70,.94);--theme-card-strong:rgba(35,38,85,.98);--theme-card-soft:rgba(20,22,56,.92);--theme-input:rgba(9,10,29,.98)}
+html[data-theme="moonrise-silver"]{--bg:#060b14;--panel:#101d31;--panel-2:#172942;--panel-3:#203754;--line:rgba(230,241,255,.30);--line-bright:rgba(134,199,255,.58);--text:#fbfdff;--muted:#c4d2e2;--dim:#7f91a4;--lime:#e6f1ff;--lime-2:#ffffff;--cyan:#86c7ff;--blue:#72aaff;--purple:#9c89ff;--pink:#b59cff;--gold:#d9cf9c;--theme-sidebar:rgba(6,11,20,.98);--theme-topbar:rgba(16,29,49,.95);--theme-card:rgba(18,34,56,.94);--theme-card-strong:rgba(23,41,66,.98);--theme-card-soft:rgba(13,27,45,.92);--theme-input:rgba(6,11,20,.98)}
+html[data-theme="rainy-neon"]{--bg:#050a12;--panel:#0b1e31;--panel-2:#102942;--panel-3:#173852;--line:rgba(116,232,255,.33);--line-bright:rgba(255,106,169,.62);--text:#f6fbff;--muted:#b7cadb;--dim:#73889d;--lime:#74e8ff;--lime-2:#9af0ff;--cyan:#7f9bff;--blue:#58c8ff;--purple:#9d83ff;--pink:#ff6aa9;--gold:#ebc66e;--theme-sidebar:rgba(5,10,18,.98);--theme-topbar:rgba(11,30,49,.95);--theme-card:rgba(13,35,56,.94);--theme-card-strong:rgba(16,41,66,.98);--theme-card-soft:rgba(10,26,43,.92);--theme-input:rgba(5,10,18,.98)}
+html[data-theme="alpine-morning"]{--bg:#071015;--panel:#12252d;--panel-2:#1b343c;--panel-3:#25444c;--line:rgba(168,230,255,.32);--line-bright:rgba(184,245,154,.60);--text:#f8fffd;--muted:#bfd7d0;--dim:#7b9992;--lime:#b8f59a;--lime-2:#cef8b8;--cyan:#a8e6ff;--blue:#78c5ff;--purple:#b7a0ff;--pink:#ffd4e2;--gold:#e7d487;--theme-sidebar:rgba(7,16,21,.98);--theme-topbar:rgba(18,37,45,.95);--theme-card:rgba(20,42,50,.94);--theme-card-strong:rgba(27,52,60,.98);--theme-card-soft:rgba(16,33,40,.92);--theme-input:rgba(7,16,21,.98)}
+
+@media (max-width:900px){
+  body[data-route="home"] .sf-profile{display:grid!important;grid-template-columns:104px minmax(0,1fr)!important;grid-template-areas:"photo copy"!important;gap:14px!important;align-items:start!important;padding:12px!important;overflow:hidden!important}
+  body[data-route="home"] .sf-profile-photo{grid-area:photo!important;grid-row:auto!important;width:104px!important;height:130px!important;max-height:130px!important;margin:0!important;align-self:start!important}
+  body[data-route="home"] .sf-profile-copy{grid-area:copy!important;min-width:0!important;display:flex!important;flex-direction:column!important;gap:7px!important;align-self:start!important}
+  body[data-route="home"] .sf-profile-copy h2{margin:0!important;font-size:20px!important;line-height:1.05!important}
+  body[data-route="home"] .sf-profile-academic{width:100%!important;min-width:0!important;margin:0!important;padding:9px!important;overflow:hidden!important}
+  body[data-route="home"] .sf-profile-academic strong,body[data-route="home"] .sf-profile-academic b,body[data-route="home"] .sf-profile-academic small{display:block!important;max-width:100%!important;white-space:normal!important;overflow-wrap:break-word!important}
+  body[data-route="home"] .sf-location{min-width:0!important;margin:0!important}.sf-location span{white-space:normal!important}
+}
+@media (max-width:520px){body[data-route="home"] .sf-profile{grid-template-columns:88px minmax(0,1fr)!important;gap:11px!important;padding:11px!important}body[data-route="home"] .sf-profile-photo{width:88px!important;height:110px!important;max-height:110px!important}body[data-route="home"] .sf-profile-copy h2{font-size:18px!important}body[data-route="home"] .sf-profile-academic strong{font-size:12px!important}body[data-route="home"] .sf-profile-academic b{font-size:11px!important}body[data-route="home"] .sf-profile-academic small{font-size:9px!important}}
+.location-consent-panel{width:min(560px,calc(100vw - 28px))!important}.location-consent-panel>p{color:var(--muted);line-height:1.65;margin:0 0 14px}.location-consent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.location-consent-grid article{padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--theme-card-soft)}.location-consent-grid b{display:block;color:var(--text);margin-bottom:5px}.location-consent-grid span{display:block;color:var(--muted);font-size:11px;line-height:1.5}.location-consent-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:16px}@media(max-width:560px){.location-consent-grid{grid-template-columns:1fr}.location-consent-actions{flex-direction:column-reverse}.location-consent-actions button{width:100%}}
+.settings-theme-behavior{margin-top:10px!important}.settings-theme-behavior .settings-control-row{margin-bottom:0!important}
+
+
+/* =====================================================================
+   V11 DORAEMON CAST PALETTES — interface-color homages only.
+   No copyrighted characters, logos, artwork, or proprietary assets.
+   ===================================================================== */
+html[data-theme="doraemon-blue"]{--bg:#061521;--panel:#0a2b42;--panel-2:#103b59;--panel-3:#174c6d;--line:rgba(90,193,241,.38);--line-bright:rgba(41,169,232,.72);--text:#f7fbff;--muted:#bfd8e7;--dim:#7f9eaf;--lime:#29a9e8;--lime-2:#5fc4f2;--cyan:#f7fbff;--blue:#178dcc;--purple:#8b91ff;--pink:#ef4050;--gold:#f2c84b;--theme-sidebar:rgba(5,18,29,.98);--theme-topbar:rgba(8,39,60,.95);--theme-card:rgba(10,43,66,.94);--theme-card-strong:rgba(14,56,84,.98);--theme-card-soft:rgba(8,34,53,.92);--theme-input:rgba(5,21,33,.98)}
+html[data-theme="nobita-classic"]{--bg:#12101a;--panel:#261d2a;--panel-2:#35283b;--panel-3:#463448;--line:rgba(239,90,90,.33);--line-bright:rgba(239,90,90,.68);--text:#f8f8fb;--muted:#d8c7cf;--dim:#9d8790;--lime:#ef5a5a;--lime-2:#ff8585;--cyan:#6aa6e8;--blue:#3e6fa8;--purple:#9b83d6;--pink:#f58b9e;--gold:#f0c85f;--theme-sidebar:rgba(17,14,25,.98);--theme-topbar:rgba(38,29,42,.95);--theme-card:rgba(42,31,46,.94);--theme-card-strong:rgba(53,40,59,.98);--theme-card-soft:rgba(32,24,36,.92);--theme-input:rgba(17,14,25,.98)}
+html[data-theme="shizuka-pink"]{--bg:#170d16;--panel:#31182b;--panel-2:#432139;--panel-3:#592c49;--line:rgba(239,143,186,.35);--line-bright:rgba(245,111,159,.70);--text:#fff8fc;--muted:#ebc8d8;--dim:#aa8296;--lime:#ef8fba;--lime-2:#f7b0d0;--cyan:#ffd8e8;--blue:#9bc6ff;--purple:#c395ff;--pink:#f56f9f;--gold:#f2cc7d;--theme-sidebar:rgba(25,10,22,.98);--theme-topbar:rgba(49,24,43,.95);--theme-card:rgba(54,26,48,.94);--theme-card-strong:rgba(67,33,57,.98);--theme-card-soft:rgba(42,20,37,.92);--theme-input:rgba(25,10,22,.98)}
+html[data-theme="suneo-sky"]{--bg:#071417;--panel:#102d31;--panel-2:#183d40;--panel-3:#215052;--line:rgba(103,201,219,.34);--line-bright:rgba(103,201,219,.70);--text:#f6fffe;--muted:#c0dcda;--dim:#7d9d9b;--lime:#67c9db;--lime-2:#8bd8e7;--cyan:#8ed8c1;--blue:#58aeca;--purple:#9c8fe3;--pink:#f08da9;--gold:#d5ad55;--theme-sidebar:rgba(6,19,22,.98);--theme-topbar:rgba(16,45,49,.95);--theme-card:rgba(18,49,53,.94);--theme-card-strong:rgba(24,61,64,.98);--theme-card-soft:rgba(13,37,40,.92);--theme-input:rgba(6,19,22,.98)}
+html[data-theme="gian-orange"]{--bg:#170c07;--panel:#342017;--panel-2:#472b1e;--panel-3:#5b3927;--line:rgba(243,146,59,.36);--line-bright:rgba(243,146,59,.72);--text:#fff8f2;--muted:#e8c7ad;--dim:#a88771;--lime:#f3923b;--lime-2:#ffb168;--cyan:#ffd39b;--blue:#7fb9e8;--purple:#aa87d8;--pink:#ee795f;--gold:#f1c45b;--theme-sidebar:rgba(23,12,7,.98);--theme-topbar:rgba(52,32,23,.95);--theme-card:rgba(57,35,25,.94);--theme-card-strong:rgba(71,43,30,.98);--theme-card-soft:rgba(43,26,19,.92);--theme-input:rgba(23,12,7,.98)}
+html[data-theme="dorami-sunshine"]{--bg:#171407;--panel:#342e0e;--panel-2:#474014;--panel-3:#5b521c;--line:rgba(247,201,40,.36);--line-bright:rgba(247,201,40,.74);--text:#fffdf3;--muted:#e8deb7;--dim:#a99d72;--lime:#f7c928;--lime-2:#ffe06f;--cyan:#fff4c7;--blue:#77b9ef;--purple:#b895e8;--pink:#ef4a57;--gold:#f5cf43;--theme-sidebar:rgba(23,20,7,.98);--theme-topbar:rgba(52,46,14,.95);--theme-card:rgba(57,50,15,.94);--theme-card-strong:rgba(71,64,20,.98);--theme-card-soft:rgba(43,38,12,.92);--theme-input:rgba(23,20,7,.98)}
+
+
+/* =====================================================================
+   V12 PALETTE + MOBILE POLISH
+   Color-palette homages only. No copyrighted character art, logos, film
+   frames, backgrounds, or other protected visual assets are embedded.
+   ===================================================================== */
+/* Nobita: corrected to the familiar yellow shirt + blue bottoms shown in the supplied reference. */
+html[data-theme="nobita-classic"]{--bg:#0a101d;--panel:#172440;--panel-2:#213254;--panel-3:#2b4169;--line:rgba(243,216,79,.34);--line-bright:rgba(243,216,79,.74);--text:#fbfcff;--muted:#c8d2e4;--dim:#8391aa;--lime:#f3d84f;--lime-2:#ffe675;--cyan:#78b7ef;--blue:#4b73b9;--purple:#8b82cf;--pink:#ef5a5a;--gold:#f3d84f;--theme-sidebar:rgba(7,13,25,.98);--theme-topbar:rgba(16,27,49,.95);--theme-card:rgba(23,36,64,.94);--theme-card-strong:rgba(31,49,82,.98);--theme-card-soft:rgba(17,28,50,.92);--theme-input:rgba(8,15,28,.98)}
+/* Doraemon-family palette refinements based on the supplied group reference. */
+html[data-theme="doraemon-blue"]{--lime:#1993c5;--lime-2:#45b4df;--cyan:#f2f2f1;--pink:#dc4d55;--gold:#e0b25f;--line-bright:rgba(25,147,197,.76)}
+html[data-theme="shizuka-pink"]{--lime:#e88ab7;--lime-2:#f3b2d1;--cyan:#f7e7ed;--pink:#d94e67;--gold:#e6c268}
+html[data-theme="suneo-sky"]{--lime:#55aa82;--lime-2:#7dc8a5;--cyan:#7cc7e0;--blue:#3e83a6;--pink:#df8a76;--gold:#d7aa64}
+html[data-theme="gian-orange"]{--lime:#e58a35;--lime-2:#f3aa55;--cyan:#f0d65c;--blue:#3d5d93;--pink:#d96b4b;--gold:#f0d65c}
+html[data-theme="dorami-sunshine"]{--lime:#f0cf32;--lime-2:#ffe56c;--cyan:#f9f6eb;--pink:#d94d58;--blue:#5ca9de;--gold:#f0cf32}
+
+/* Bright underwater-cartoon palette inspired only by SpongeBob's familiar color language. */
+html[data-theme="bikini-bottom"]{--bg:#07171c;--panel:#10323a;--panel-2:#174750;--panel-3:#205b61;--line:rgba(69,199,230,.34);--line-bright:rgba(248,226,77,.76);--text:#fffdf1;--muted:#d3e4db;--dim:#8ba49d;--lime:#f8e24d;--lime-2:#fff078;--cyan:#45c7e6;--blue:#399fc9;--purple:#aa88d9;--pink:#ee759f;--gold:#d8904f;--theme-sidebar:rgba(6,20,24,.98);--theme-topbar:rgba(14,44,51,.95);--theme-card:rgba(16,50,58,.94);--theme-card-strong:rgba(23,71,80,.98);--theme-card-soft:rgba(12,38,44,.92);--theme-input:rgba(6,21,25,.98)}
+/* Your Name-inspired palette homages: colors only, no film artwork or character imagery. */
+html[data-theme="your-name-twilight"]{--bg:#080d1b;--panel:#152544;--panel-2:#20375b;--panel-3:#2c496e;--line:rgba(102,167,215,.35);--line-bright:rgba(217,95,120,.68);--text:#f8fbff;--muted:#cad7e6;--dim:#8495aa;--lime:#66a7d7;--lime-2:#8fc4e6;--cyan:#e7edf3;--blue:#487caf;--purple:#7c73aa;--pink:#d95f78;--gold:#dcbc8f;--theme-sidebar:rgba(7,12,26,.98);--theme-topbar:rgba(20,35,65,.95);--theme-card:rgba(23,40,72,.94);--theme-card-strong:rgba(32,55,91,.98);--theme-card-soft:rgba(17,31,57,.92);--theme-input:rgba(7,13,27,.98)}
+html[data-theme="taki-tokyo"]{--bg:#08101b;--panel:#15263b;--panel-2:#20364f;--panel-3:#2a4761;--line:rgba(79,120,174,.36);--line-bright:rgba(107,140,88,.68);--text:#f7f8f5;--muted:#cad3d7;--dim:#86969e;--lime:#6b8c58;--lime-2:#8eaa75;--cyan:#f3f4ef;--blue:#4f78ae;--purple:#787398;--pink:#b96872;--gold:#d7c595;--theme-sidebar:rgba(7,14,24,.98);--theme-topbar:rgba(18,34,54,.95);--theme-card:rgba(22,40,61,.94);--theme-card-strong:rgba(32,54,79,.98);--theme-card-soft:rgba(16,31,48,.92);--theme-input:rgba(7,15,26,.98)}
+html[data-theme="mitsuha-itomori"]{--bg:#110c17;--panel:#2a1d30;--panel-2:#3a2942;--panel-3:#4b3654;--line:rgba(184,77,92,.34);--line-bright:rgba(231,197,155,.68);--text:#fff9f5;--muted:#decbd1;--dim:#9a818d;--lime:#b84d5c;--lime-2:#d66b78;--cyan:#e7c59b;--blue:#6e7fa9;--purple:#7b6d91;--pink:#d9829a;--gold:#e7c59b;--theme-sidebar:rgba(17,10,22,.98);--theme-topbar:rgba(42,29,48,.95);--theme-card:rgba(48,33,55,.94);--theme-card-strong:rgba(58,41,66,.98);--theme-card-soft:rgba(37,25,43,.92);--theme-input:rgba(17,11,23,.98)}
+
+/* Mobile profile: stack the portrait above copy so it can never overlap academic text. */
+@media(max-width:720px){
+  body[data-route="home"] .sf-profile{display:block!important;padding:12px!important;overflow:hidden!important}
+  body[data-route="home"] .sf-profile-photo{width:116px!important;height:145px!important;max-height:145px!important;margin:0 auto 12px!important;float:none!important}
+  body[data-route="home"] .sf-profile-copy{display:flex!important;flex-direction:column!important;gap:8px!important;min-width:0!important;width:100%!important;text-align:left!important}
+  body[data-route="home"] .sf-profile-copy h2{margin:0!important;text-align:center!important;font-size:20px!important}
+  body[data-route="home"] .sf-profile-academic{margin:0!important;width:100%!important;max-width:100%!important;padding:10px!important;overflow:hidden!important}
+  body[data-route="home"] .sf-profile-academic strong,body[data-route="home"] .sf-profile-academic b,body[data-route="home"] .sf-profile-academic small{display:block!important;white-space:normal!important;overflow-wrap:anywhere!important;max-width:100%!important}
+  body[data-route="home"] .sf-location{width:100%!important;min-width:0!important;margin:0!important}
+}
+@media(max-width:430px){body[data-route="home"] .sf-profile-photo{width:104px!important;height:130px!important}body[data-route="home"] .sf-profile-copy h2{font-size:18px!important}}
+
+/* Guided tour: deliberately static, compact, and non-distracting. */
+.signal-tour-panel{width:min(620px,calc(100vw - 28px))!important}
+.signal-tour-progress{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px;margin:2px 0 16px;color:var(--muted);font-size:11px;font-weight:800}
+.signal-tour-progress i{display:block;height:5px;border-radius:999px;background:var(--theme-card-soft);overflow:hidden;border:1px solid var(--line)}
+.signal-tour-progress b{display:block;height:100%;width:20%;border-radius:inherit;background:linear-gradient(90deg,var(--lime),var(--cyan));transition:width .18s ease}
+.signal-tour-body{padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--theme-card-soft)}
+.signal-tour-body small{display:block;color:var(--lime);font-weight:900;letter-spacing:.1em;margin-bottom:7px}.signal-tour-body h3{margin:0 0 8px;color:var(--text);font-size:22px}.signal-tour-body p{margin:0;color:var(--muted);line-height:1.65}
+.signal-tour-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:14px}.signal-tour-actions button:disabled{opacity:.38;cursor:not-allowed}
+@media(max-width:560px){.signal-tour-actions{display:grid;grid-template-columns:1fr 1fr}.signal-tour-actions .primary-button{grid-column:1/-1}.signal-tour-body h3{font-size:19px}}
+
+
+/* =====================================================================
+   V13 — FINAL THEME / LANGUAGE / SETTINGS POLISH
+   Targeted additions only. No extra canvas or continuous animation loop.
+   ===================================================================== */
+
+/* Side quick utilities: keep Language readable instead of squeezing the label. */
+.side-utility-strip{grid-template-columns:minmax(0,.94fr) minmax(0,1.14fr) minmax(0,.92fr)!important;align-items:stretch!important}
+.side-utility-strip button{min-height:66px!important;padding:8px 5px!important;grid-template-rows:22px auto!important;align-content:center!important;line-height:1.12!important}
+.side-utility-strip button span{font-size:16px!important;line-height:1!important;display:grid!important;place-items:center!important;height:22px!important}
+.side-utility-strip button b{display:block!important;max-width:100%!important;white-space:nowrap!important;font-size:8.5px!important;line-height:1.05!important;letter-spacing:0!important;text-align:center!important;overflow:visible!important}
+#side-language-quick b{font-size:8.2px!important}
+@media (min-width:761px) and (max-width:1120px){.side-utility-strip button{min-height:62px!important}.side-utility-strip button b{font-size:8px!important}#side-language-quick b{font-size:7.7px!important}}
+
+/* Top Language control keeps icon and label aligned at desktop widths. */
+#language-quick-open{align-items:center!important;justify-content:center!important;gap:6px!important}
+#language-quick-open span{display:inline-grid!important;place-items:center!important;width:18px!important;line-height:1!important;font-size:17px!important}
+#language-quick-open b{line-height:1!important;white-space:nowrap!important}
+
+/* Sky Sync transitions registered colors instead of adding a visual effect loop. */
+@property --bg{syntax:'<color>';inherits:true;initial-value:#050b18}
+@property --panel{syntax:'<color>';inherits:true;initial-value:rgba(5,16,39,.84)}
+@property --panel-2{syntax:'<color>';inherits:true;initial-value:rgba(8,23,52,.88)}
+@property --panel-3{syntax:'<color>';inherits:true;initial-value:rgba(10,31,65,.76)}
+@property --line{syntax:'<color>';inherits:true;initial-value:rgba(132,178,255,.28)}
+@property --line-bright{syntax:'<color>';inherits:true;initial-value:rgba(154,255,82,.56)}
+@property --text{syntax:'<color>';inherits:true;initial-value:#f4f7ff}
+@property --muted{syntax:'<color>';inherits:true;initial-value:#b4bfd6}
+@property --dim{syntax:'<color>';inherits:true;initial-value:#7c8aa8}
+@property --lime{syntax:'<color>';inherits:true;initial-value:#9cff52}
+@property --lime-2{syntax:'<color>';inherits:true;initial-value:#d6ff73}
+@property --cyan{syntax:'<color>';inherits:true;initial-value:#55e8ff}
+@property --blue{syntax:'<color>';inherits:true;initial-value:#5a8cff}
+@property --purple{syntax:'<color>';inherits:true;initial-value:#a56cff}
+@property --pink{syntax:'<color>';inherits:true;initial-value:#ff78b8}
+@property --gold{syntax:'<color>';inherits:true;initial-value:#ffd46a}
+@property --theme-sidebar{syntax:'<color>';inherits:true;initial-value:rgba(3,12,31,.96)}
+@property --theme-topbar{syntax:'<color>';inherits:true;initial-value:rgba(4,12,30,.88)}
+@property --theme-card{syntax:'<color>';inherits:true;initial-value:rgba(7,20,48,.84)}
+@property --theme-card-strong{syntax:'<color>';inherits:true;initial-value:rgba(8,23,52,.94)}
+@property --theme-card-soft{syntax:'<color>';inherits:true;initial-value:rgba(5,15,36,.72)}
+@property --theme-input{syntax:'<color>';inherits:true;initial-value:rgba(5,16,38,.90)}
+html.sky-sync-active{transition:--bg 4.2s ease,--panel 4.2s ease,--panel-2 4.2s ease,--panel-3 4.2s ease,--line 4.2s ease,--line-bright 4.2s ease,--text 3.2s ease,--muted 3.2s ease,--dim 3.2s ease,--lime 4.2s ease,--lime-2 4.2s ease,--cyan 4.2s ease,--blue 4.2s ease,--purple 4.2s ease,--pink 4.2s ease,--gold 4.2s ease,--theme-sidebar 4.2s ease,--theme-topbar 4.2s ease,--theme-card 4.2s ease,--theme-card-strong 4.2s ease,--theme-card-soft 4.2s ease,--theme-input 4.2s ease}
+@media (prefers-reduced-motion:reduce){html.sky-sync-active{transition-duration:.01ms!important}}
+
+/* Theme categories + randomizer. */
+.theme-filter-random{border-style:dashed!important;color:var(--cyan)!important}
+.theme-popover-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.theme-popover-actions button{min-height:32px;padding:5px 8px!important;border:1px solid transparent!important;border-radius:8px!important;background:transparent!important}
+#theme-randomize{color:var(--cyan)!important;border-color:color-mix(in srgb,var(--cyan) 35%,transparent)!important}
+#theme-randomize:hover,#settings-theme-randomize:hover{border-color:var(--lime)!important;color:var(--lime)!important}
+.settings-theme-select-row{grid-template-columns:minmax(0,1fr) auto auto!important}
+#settings-theme-randomize{min-height:44px!important;padding-inline:13px!important;white-space:nowrap!important}
+@media (max-width:620px){.settings-theme-select-row{grid-template-columns:1fr 1fr!important}.settings-theme-select-row #setting-theme{grid-column:1/-1}.theme-popover-actions{width:100%;justify-content:space-between}.theme-popover-actions button{flex:1 1 auto;text-align:center}}
+
+/* Reading progress: off by default, event-driven only while the visitor scrolls. */
+.reading-progress{position:fixed;left:var(--sidebar);right:0;top:0;height:2px;z-index:1700;pointer-events:none;opacity:0;background:transparent;transition:opacity .18s ease}
+.reading-progress i{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left center;background:linear-gradient(90deg,var(--cyan),var(--lime),var(--pink));box-shadow:0 0 10px color-mix(in srgb,var(--cyan) 55%,transparent)}
+html[data-reading-progress="1"] .reading-progress{opacity:.9}
+@media(max-width:760px){.reading-progress{left:0}}
+
+/* Shortcut hints can be hidden without removing any keyboard behavior. */
+html[data-shortcut-hints="0"] .top-search kbd,html[data-shortcut-hints="0"] .theme-popover-foot kbd{display:none!important}
+
+
+/* =====================================================================
+   V14 — ZOOM-SAFE HEADER + OPTIONAL NEON EDGE SIGNAL
+   Override-only layer. Rendering quality is intentionally unchanged.
+   ===================================================================== */
+
+/* Desktop header: give clock/weather their own explicit grid areas so
+   temperature/date can never steal space from or clip the time. */
+@media (min-width:1280px){
+  .topbar{grid-template-columns:minmax(260px,1fr) minmax(220px,300px) max-content!important;gap:10px!important;overflow:visible!important}
+  .sky-readout{min-width:0!important;max-width:300px!important;width:100%!important;display:grid!important;grid-template-columns:max-content max-content max-content!important;grid-template-areas:"time date temp" "location location location"!important;column-gap:8px!important;row-gap:2px!important;align-items:center!important;justify-content:end!important;overflow:hidden!important}
+  .sky-readout #current-time{grid-area:time!important;display:block!important;min-width:max-content!important;overflow:visible!important;white-space:nowrap!important}
+  .sky-readout #current-date{grid-area:date!important;display:block!important;min-width:0!important;white-space:nowrap!important}
+  .sky-readout #local-temperature{grid-area:temp!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;margin:0!important}
+  .sky-readout #local-temperature[hidden]{display:none!important}
+  .sky-readout #location-label{grid-area:location!important;display:block!important;min-width:0!important;max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  .sky-controls{min-width:max-content!important;flex-shrink:0!important}
+}
+
+/* Medium desktop / browser zoom: keep one row but prioritize the search,
+   clock, quality controls, and core utilities. Theme/language labels collapse
+   to their icons before anything overlaps. */
+@media (min-width:1280px) and (max-width:1450px){
+  .topbar{grid-template-columns:minmax(230px,1fr) minmax(185px,225px) max-content!important;gap:8px!important;padding-inline:14px!important}
+  .sky-readout{grid-template-columns:max-content max-content!important;grid-template-areas:"time temp" "location location"!important;max-width:225px!important}
+  .sky-readout #current-date{display:none!important}
+  .sky-controls{gap:5px!important}
+  .sky-controls #theme-quick-open,.sky-controls #language-quick-open{width:40px!important;min-width:40px!important;height:40px!important;padding:0!important}
+  .sky-controls #theme-quick-open b,.sky-controls #language-quick-open b{display:none!important}
+  .sky-controls #theme-quick-open span,.sky-controls #language-quick-open span{font-size:16px!important;width:auto!important}
+  .sky-controls #location-sync,.sky-controls #sound-toggle,.sky-controls #replay-intro{width:40px!important;min-width:40px!important;height:40px!important}
+  .sky-controls .v17-quality-button,.sky-controls .v17-time-button{width:52px!important;min-width:52px!important;height:40px!important;padding-inline:7px!important;font-size:10px!important}
+}
+
+/* Small desktop / heavier zoom: use a compact two-row header instead of
+   squeezing or clipping the clock. All controls remain available. */
+@media (min-width:901px) and (max-width:1279px){
+  :root{--topbar:102px!important}
+  .app-shell{grid-template-rows:var(--topbar) 1fr!important}
+  .topbar{height:102px!important;min-height:102px!important;grid-template-columns:minmax(0,1fr) max-content!important;grid-template-rows:54px 30px!important;column-gap:8px!important;row-gap:4px!important;padding:7px 12px!important;align-items:center!important;overflow:hidden!important}
+  .top-search{grid-column:1!important;grid-row:1!important;width:100%!important;min-width:0!important;height:44px!important;margin:0!important}
+  .top-search>span:nth-child(2){min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  .top-search kbd{display:none!important}
+  .sky-controls{grid-column:2!important;grid-row:1!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:4px!important;min-width:max-content!important;margin:0!important}
+  .sky-controls button{display:flex!important;align-items:center!important;justify-content:center!important;width:38px!important;min-width:38px!important;height:38px!important;margin:0!important;padding:0!important;font-size:16px!important}
+  .sky-controls .v17-quality-button,.sky-controls .v17-time-button{width:48px!important;min-width:48px!important;padding-inline:5px!important;font-size:9px!important;font-weight:900!important}
+  .sky-controls #theme-quick-open,.sky-controls #language-quick-open{width:38px!important;min-width:38px!important;padding:0!important}
+  .sky-controls #theme-quick-open b,.sky-controls #language-quick-open b{display:none!important}
+  .sky-controls #theme-quick-open span,.sky-controls #language-quick-open span{font-size:15px!important;width:auto!important}
+  .sky-readout{grid-column:1/-1!important;grid-row:2!important;width:100%!important;max-width:none!important;min-width:0!important;height:30px!important;display:grid!important;grid-template-columns:max-content max-content minmax(0,1fr)!important;grid-template-areas:"time temp location"!important;align-items:center!important;justify-content:stretch!important;gap:7px!important;margin:0!important;padding:0 4px!important;overflow:hidden!important;text-align:left!important}
+  .sky-readout #current-time{grid-area:time!important;display:block!important;min-width:max-content!important;margin:0!important;font-size:13px!important;line-height:1!important;overflow:visible!important;white-space:nowrap!important}
+  .sky-readout #current-date{display:none!important}
+  .sky-readout #local-temperature{grid-area:temp!important;display:inline-flex!important;margin:0!important;font-size:8px!important;white-space:nowrap!important}
+  .sky-readout #local-temperature[hidden]{display:none!important}
+  .sky-readout #location-label{grid-area:location!important;display:block!important;min-width:0!important;max-width:none!important;margin:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;text-align:right!important;font-size:7.7px!important;line-height:1!important}
+}
+
+/* Optional professional edge treatment. Off by default. Static is virtually
+   free; Flow animates a single 1px transform on major panels and automatically
+   reduces to static presentation in ECO / reduced-motion contexts. */
+html[data-edge-signal="static"] .sf-hero,
+html[data-edge-signal="static"] .sf-profile,
+html[data-edge-signal="static"] .sf-robot,
+html[data-edge-signal="static"] .modal-panel,
+html[data-edge-signal="flow"] .sf-hero,
+html[data-edge-signal="flow"] .sf-profile,
+html[data-edge-signal="flow"] .sf-robot,
+html[data-edge-signal="flow"] .modal-panel{
+  outline:1px solid color-mix(in srgb,var(--cyan) 30%,var(--line))!important;
+  outline-offset:-1px!important;
+}
+html[data-edge-signal="flow"] .sf-hero,
+html[data-edge-signal="flow"] .sf-profile,
+html[data-edge-signal="flow"] .sf-robot,
+html[data-edge-signal="flow"] .modal-panel{position:relative!important;overflow:hidden!important}
+html[data-edge-signal="flow"] .sf-hero::after,
+html[data-edge-signal="flow"] .sf-profile::after,
+html[data-edge-signal="flow"] .sf-robot::after,
+html[data-edge-signal="flow"] .modal-panel::after{
+  content:"";position:absolute;z-index:8;left:-34%;top:0;width:28%;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--lime),var(--pink),transparent);
+  opacity:.82;transform:translateX(0);animation:sd-edge-signal 8s linear infinite;
+}
+@keyframes sd-edge-signal{to{transform:translateX(485%)}}
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-hero::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-profile::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-robot::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .modal-panel::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-hero::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-profile::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-robot::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .modal-panel::after{display:none!important;animation:none!important}
+@media (prefers-reduced-motion:reduce){
+  html[data-edge-signal="flow"] .sf-hero::after,html[data-edge-signal="flow"] .sf-profile::after,html[data-edge-signal="flow"] .sf-robot::after,html[data-edge-signal="flow"] .modal-panel::after{display:none!important;animation:none!important}
+}
+
+
+/* =====================================================================
+   V15 — FULL-READOUT DESKTOP HEADER + THEME-DRIVEN NEON FLOW
+   Targeted overrides only. Scene quality / render-resolution logic unchanged.
+   ===================================================================== */
+
+/* Academic lockup: remove the empty-center look and keep both credentials
+   left-aligned, evenly weighted, and readable at every desktop width. */
+.sf-academic-lockup{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  align-items:stretch!important;
+}
+.sf-school-badge,.sf-major-badge{
+  min-width:0!important;
+  min-height:60px!important;
+  padding:10px 14px!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  text-align:left!important;
+}
+.sf-school-badge{display:flex!important;gap:11px!important}
+.sf-school-badge>span{display:grid!important;gap:2px!important;min-width:0!important;align-content:center!important}
+.sf-school-badge b,.sf-school-badge small{display:block!important;min-width:0!important;text-align:left!important;white-space:normal!important;line-height:1.12!important}
+.sf-major-badge{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:3px!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+}
+.sf-major-badge b,.sf-major-badge small{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  text-align:left!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+.sf-major-badge b{line-height:1.08!important}
+.sf-major-badge small{line-height:1.15!important}
+
+/* Wide desktops keep the familiar single-row header. The sky block is large
+   enough to show its complete label instead of clipping sunrise/sunset. */
+@media (min-width:1680px){
+  :root{--topbar:66px!important}
+  .app-shell{grid-template-rows:var(--topbar) 1fr!important}
+  .topbar{
+    height:66px!important;min-height:66px!important;
+    grid-template-columns:minmax(360px,1fr) minmax(355px,430px) max-content!important;
+    grid-template-rows:1fr!important;
+    gap:12px!important;padding:8px 18px!important;overflow:visible!important;
+  }
+  .top-search{grid-column:1!important;grid-row:1!important;min-width:0!important;width:100%!important}
+  .sky-readout{
+    grid-column:2!important;grid-row:1!important;
+    width:100%!important;max-width:430px!important;min-width:355px!important;
+    display:grid!important;grid-template-columns:max-content max-content max-content!important;
+    grid-template-areas:"time date temp" "location location location"!important;
+    align-items:center!important;justify-content:end!important;justify-self:end!important;
+    column-gap:8px!important;row-gap:2px!important;overflow:visible!important;text-align:right!important;
+  }
+  .sky-readout #current-time{grid-area:time!important;white-space:nowrap!important;overflow:visible!important}
+  .sky-readout #current-date{grid-area:date!important;display:block!important;white-space:nowrap!important}
+  .sky-readout #local-temperature{grid-area:temp!important;white-space:nowrap!important}
+  .sky-readout #local-temperature[hidden]{display:none!important}
+  .sky-readout #location-label{
+    grid-area:location!important;display:block!important;width:100%!important;max-width:none!important;
+    white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;text-align:right!important;
+    font-size:7.8px!important;line-height:1.05!important;
+  }
+  .sky-controls{grid-column:3!important;grid-row:1!important;min-width:max-content!important;justify-self:end!important}
+}
+
+/* Normal laptops, smaller monitors, and zoomed desktop browsers: deliberately
+   use a two-row header BEFORE anything collides. Search + controls stay on row
+   one; complete time/date/temperature and sky text get a dedicated second row. */
+@media (min-width:901px) and (max-width:1679px){
+  :root{--topbar:108px!important}
+  .app-shell{grid-template-rows:var(--topbar) 1fr!important}
+  .topbar{
+    height:108px!important;min-height:108px!important;
+    grid-template-columns:minmax(240px,1fr) max-content!important;
+    grid-template-rows:54px 42px!important;
+    column-gap:10px!important;row-gap:4px!important;
+    padding:6px 14px 5px!important;align-items:center!important;overflow:visible!important;
+  }
+  .top-search{
+    grid-column:1!important;grid-row:1!important;width:100%!important;min-width:0!important;
+    height:44px!important;margin:0!important;
+  }
+  .top-search>span:nth-child(2){min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  .sky-controls{
+    grid-column:2!important;grid-row:1!important;display:flex!important;align-items:center!important;
+    justify-content:flex-end!important;gap:5px!important;min-width:max-content!important;margin:0!important;
+  }
+  .sky-readout{
+    grid-column:1/-1!important;grid-row:2!important;
+    width:100%!important;max-width:none!important;min-width:0!important;height:42px!important;
+    display:grid!important;grid-template-columns:max-content max-content max-content minmax(0,1fr)!important;
+    grid-template-areas:"time date temp location"!important;
+    align-items:center!important;justify-items:start!important;justify-content:stretch!important;
+    column-gap:9px!important;row-gap:0!important;margin:0!important;padding:0 4px!important;
+    overflow:visible!important;text-align:left!important;
+  }
+  .sky-readout #current-time{grid-area:time!important;display:block!important;min-width:max-content!important;font-size:14px!important;line-height:1!important;white-space:nowrap!important;overflow:visible!important}
+  .sky-readout #current-date{grid-area:date!important;display:block!important;margin:0!important;font-size:8px!important;line-height:1!important;white-space:nowrap!important}
+  .sky-readout #local-temperature{grid-area:temp!important;display:inline-flex!important;margin:0!important;font-size:8px!important;white-space:nowrap!important}
+  .sky-readout #local-temperature[hidden]{display:none!important}
+  .sky-readout #location-label{
+    grid-area:location!important;display:block!important;min-width:0!important;max-width:none!important;width:100%!important;
+    margin:0!important;overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important;
+    text-align:left!important;font-size:7.8px!important;line-height:1!important;
+  }
+}
+
+/* When zoom leaves very little horizontal room, shrink only labels/buttons —
+   never the actual sky information. */
+@media (min-width:901px) and (max-width:1240px){
+  .topbar{grid-template-columns:minmax(190px,1fr) max-content!important;padding-inline:10px!important}
+  .top-search kbd{display:none!important}
+  .sky-controls{gap:4px!important}
+  .sky-controls button{width:38px!important;min-width:38px!important;height:38px!important;padding:0!important}
+  .sky-controls .v17-quality-button,.sky-controls .v17-time-button{width:48px!important;min-width:48px!important;font-size:9px!important}
+  .sky-controls #theme-quick-open,.sky-controls #language-quick-open{width:38px!important;min-width:38px!important}
+  .sky-controls #theme-quick-open b,.sky-controls #language-quick-open b{display:none!important}
+  .sky-readout{grid-template-columns:max-content max-content max-content minmax(0,1fr)!important;column-gap:7px!important}
+  .sky-readout #location-label{font-size:7.2px!important}
+}
+
+/* The existing <=900px phone layout remains the mobile system. Tighten the
+   credential lockup there without changing its content. */
+@media (max-width:900px){
+  .sf-academic-lockup{gap:8px!important}
+  .sf-school-badge,.sf-major-badge{min-height:50px!important;padding:9px 10px!important}
+  .sf-school-badge{gap:8px!important}
+  .sf-school-badge>i{flex:0 0 30px!important}
+  .sf-major-badge{gap:2px!important}
+  .sf-school-badge b,.sf-major-badge b{font-size:10.5px!important;line-height:1.08!important}
+  .sf-school-badge small,.sf-major-badge small{font-size:7.8px!important;line-height:1.12!important}
+}
+@media (max-width:560px){
+  .sf-academic-lockup{grid-template-columns:1fr!important}
+  .sf-school-badge,.sf-major-badge{min-height:48px!important}
+}
+
+/* ---------------------------------------------------------------------
+   Theme-driven Neon Edge Signal
+   Static = clean themed outline.
+   Flow = same outline + a slow ambient runner around selected major cards.
+   No overflow is changed, so Settings and every modal keep scrolling normally.
+   --------------------------------------------------------------------- */
+html[data-edge-signal="static"] .sf-hero,
+html[data-edge-signal="static"] .sf-profile,
+html[data-edge-signal="static"] .sf-robot,
+html[data-edge-signal="static"] .home-search,
+html[data-edge-signal="static"] .channel-shelf,
+html[data-edge-signal="static"] .page-header,
+html[data-edge-signal="static"] .modal-panel,
+html[data-edge-signal="flow"] .sf-hero,
+html[data-edge-signal="flow"] .sf-profile,
+html[data-edge-signal="flow"] .sf-robot,
+html[data-edge-signal="flow"] .home-search,
+html[data-edge-signal="flow"] .channel-shelf,
+html[data-edge-signal="flow"] .page-header,
+html[data-edge-signal="flow"] .modal-panel{
+  outline:1px solid color-mix(in srgb,var(--cyan) 46%,var(--line))!important;
+  outline-offset:-1px!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--lime) 10%,transparent),0 0 15px color-mix(in srgb,var(--cyan) 9%,transparent),var(--shadow)!important;
+}
+
+/* Undo V14's overflow:hidden regression on Flow. Modal panels remain the
+   original scroll containers. */
+html[data-edge-signal="flow"] .modal-panel{position:relative!important;overflow:auto!important}
+html[data-edge-signal="flow"] .sf-hero,
+html[data-edge-signal="flow"] .sf-profile,
+html[data-edge-signal="flow"] .sf-robot,
+html[data-edge-signal="flow"] .home-search,
+html[data-edge-signal="flow"] .channel-shelf,
+html[data-edge-signal="flow"] .page-header{position:relative!important}
+
+/* Disable the older top-edge sweep so only the V15 ambient runner is active. */
+html[data-edge-signal="flow"] .sf-hero::after,
+html[data-edge-signal="flow"] .sf-profile::after,
+html[data-edge-signal="flow"] .sf-robot::after,
+html[data-edge-signal="flow"] .modal-panel::after{display:none!important;animation:none!important}
+
+/* One tiny runner per major surface. It follows the active theme through
+   --cyan / --lime / --pink, so Manual, Random, and Sky Sync all recolor it. */
+@supports (offset-path: inset(2px round 18px)){
+  html[data-edge-signal="flow"] .sf-hero::before,
+  html[data-edge-signal="flow"] .sf-profile::before,
+  html[data-edge-signal="flow"] .sf-robot::before,
+  html[data-edge-signal="flow"] .home-search::before,
+  html[data-edge-signal="flow"] .channel-shelf::before,
+  html[data-edge-signal="flow"] .page-header::before{
+    content:""!important;
+    position:absolute!important;z-index:12!important;left:0!important;top:0!important;
+    width:72px!important;height:2px!important;border-radius:999px!important;
+    pointer-events:none!important;
+    background:linear-gradient(90deg,transparent,var(--cyan) 28%,var(--lime) 56%,var(--pink) 78%,transparent)!important;
+    box-shadow:0 0 7px color-mix(in srgb,var(--cyan) 58%,transparent),0 0 13px color-mix(in srgb,var(--pink) 28%,transparent)!important;
+    opacity:.78!important;
+    offset-path:inset(2px round 18px)!important;
+    offset-distance:0%!important;
+    offset-rotate:0deg!important;
+    animation:sd-neon-edge-runner 16s linear infinite!important;
+    will-change:offset-distance!important;
+  }
+  html[data-edge-signal="flow"] .sf-profile::before{animation-delay:-3s!important}
+  html[data-edge-signal="flow"] .sf-robot::before{animation-delay:-6s!important}
+  html[data-edge-signal="flow"] .home-search::before{animation-delay:-8s!important}
+  html[data-edge-signal="flow"] .channel-shelf::before{animation-delay:-10s!important}
+  html[data-edge-signal="flow"] .page-header::before{animation-delay:-12s!important}
+}
+@keyframes sd-neon-edge-runner{to{offset-distance:100%}}
+
+/* Keep Flow visible in ECO, but gentler. Reduced-motion remains static only. */
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-hero::before,
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-profile::before,
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-robot::before,
+html[data-render-quality="eco"][data-edge-signal="flow"] .home-search::before,
+html[data-render-quality="eco"][data-edge-signal="flow"] .channel-shelf::before,
+html[data-render-quality="eco"][data-edge-signal="flow"] .page-header::before{
+  opacity:.55!important;animation-duration:20s!important;box-shadow:0 0 6px color-mix(in srgb,var(--cyan) 42%,transparent)!important;
+}
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-hero::before,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-profile::before,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-robot::before,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .home-search::before,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .channel-shelf::before,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .page-header::before{display:none!important;animation:none!important}
+@media(prefers-reduced-motion:reduce){
+  html[data-edge-signal="flow"] .sf-hero::before,html[data-edge-signal="flow"] .sf-profile::before,html[data-edge-signal="flow"] .sf-robot::before,html[data-edge-signal="flow"] .home-search::before,html[data-edge-signal="flow"] .channel-shelf::before,html[data-edge-signal="flow"] .page-header::before{display:none!important;animation:none!important}
+}
+
+/* Mobile keeps the same themed neon language with only the two most important
+   home cards animated to protect battery/GPU headroom. */
+@media (max-width:900px){
+  html[data-edge-signal="flow"] .sf-robot::before,
+  html[data-edge-signal="flow"] .home-search::before,
+  html[data-edge-signal="flow"] .channel-shelf::before,
+  html[data-edge-signal="flow"] .page-header::before{display:none!important;animation:none!important}
+  html[data-edge-signal="flow"] .sf-hero::before,
+  html[data-edge-signal="flow"] .sf-profile::before{animation-duration:22s!important;opacity:.48!important}
+}
+
+/* =====================================================================
+   V16 — HEADER COMPOSITION + TRUE NEON BORDER FLOW
+   Final override only: no content, theme, astronomy, or render-quality logic
+   is changed. This layer fixes the crowded desktop/zoom header and replaces
+   the unreliable Motion Path runner with a compositor-light masked border
+   sweep that visibly travels around the card edge.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   A. Academic lockup — balanced, left-aligned, no hollow center space.
+   --------------------------------------------------------------------- */
+.sf-hero-identity{
+  grid-template-columns:minmax(82px,max-content) minmax(0,1fr)!important;
+  gap:16px!important;
+  align-items:center!important;
+}
+.sf-academic-lockup{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  width:100%!important;
+  margin:0!important;
+  align-items:stretch!important;
+}
+.sf-school-badge,.sf-major-badge{
+  min-height:56px!important;
+  height:auto!important;
+  padding:10px 14px!important;
+  align-self:stretch!important;
+  justify-content:flex-start!important;
+  align-items:center!important;
+  text-align:left!important;
+  overflow:hidden!important;
+}
+.sf-school-badge{display:flex!important;gap:11px!important}
+.sf-school-badge>span{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:3px!important;
+  min-width:0!important;
+  align-content:center!important;
+}
+.sf-major-badge{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  grid-auto-rows:max-content!important;
+  gap:4px!important;
+  align-content:center!important;
+}
+.sf-school-badge b,.sf-school-badge small,.sf-major-badge b,.sf-major-badge small{
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  text-align:left!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+.sf-school-badge b,.sf-major-badge b{line-height:1.08!important}
+.sf-school-badge small,.sf-major-badge small{line-height:1.15!important}
+
+/* ---------------------------------------------------------------------
+   B. Desktop header — never let clock/temperature/sky text collide.
+      1) Wide desktop: one row with a deliberately shorter Search field.
+      2) Normal/zoomed desktop: Search + controls row, full sky readout row.
+      Pointer=fine keeps desktop zoom from accidentally inheriting phone-only
+      collision rules simply because the CSS viewport became narrower.
+   --------------------------------------------------------------------- */
+@media (pointer:fine) and (min-width:1480px){
+  :root{--topbar:72px!important}
+  .app-shell{grid-template-rows:var(--topbar) 1fr!important}
+  .topbar{
+    height:72px!important;
+    min-height:72px!important;
+    display:grid!important;
+    grid-template-columns:minmax(270px,1fr) minmax(330px,410px) max-content!important;
+    grid-template-rows:1fr!important;
+    gap:12px!important;
+    padding:8px 16px!important;
+    align-items:center!important;
+    overflow:visible!important;
+  }
+  .top-search{
+    grid-column:1!important;grid-row:1!important;
+    width:min(100%,520px)!important;
+    max-width:520px!important;
+    min-width:0!important;
+    height:46px!important;
+    justify-self:start!important;
+    margin:0!important;
+  }
+  .sky-readout{
+    grid-column:2!important;grid-row:1!important;
+    width:100%!important;min-width:0!important;max-width:410px!important;
+    display:grid!important;
+    grid-template-columns:max-content max-content max-content!important;
+    grid-template-areas:"time date temp" "location location location"!important;
+    justify-content:start!important;
+    justify-items:start!important;
+    align-content:center!important;
+    align-items:center!important;
+    column-gap:9px!important;row-gap:4px!important;
+    margin:0!important;padding:0!important;
+    overflow:visible!important;text-align:left!important;
+  }
+  .sky-readout #current-time{
+    grid-area:time!important;display:block!important;min-width:max-content!important;
+    margin:0!important;font-size:17px!important;line-height:1!important;
+    white-space:nowrap!important;overflow:visible!important;
+  }
+  .sky-readout #current-date{
+    grid-area:date!important;display:block!important;margin:0!important;
+    font-size:8.6px!important;line-height:1!important;white-space:nowrap!important;
+  }
+  .sky-readout #local-temperature{
+    grid-area:temp!important;display:inline-flex!important;margin:0!important;
+    font-size:9px!important;line-height:1!important;white-space:nowrap!important;
+  }
+  .sky-readout #local-temperature[hidden]{display:none!important}
+  .sky-readout #location-label{
+    grid-area:location!important;display:block!important;width:100%!important;
+    min-width:0!important;max-width:none!important;margin:0!important;
+    font-size:8.2px!important;line-height:1.05!important;text-align:left!important;
+    white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;
+  }
+  .sky-controls{
+    grid-column:3!important;grid-row:1!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    min-width:max-content!important;gap:6px!important;margin:0!important;
+  }
+}
+
+@media (pointer:fine) and (min-width:901px) and (max-width:1479px){
+  :root{--topbar:116px!important}
+  .app-shell{grid-template-rows:var(--topbar) 1fr!important}
+  .topbar{
+    height:116px!important;min-height:116px!important;
+    display:grid!important;
+    grid-template-columns:minmax(210px,1fr) max-content!important;
+    grid-template-rows:54px 50px!important;
+    column-gap:10px!important;row-gap:4px!important;
+    padding:6px 12px!important;
+    align-items:center!important;
+    overflow:visible!important;
+  }
+  .top-search{
+    grid-column:1!important;grid-row:1!important;
+    width:min(100%,560px)!important;max-width:560px!important;min-width:0!important;
+    height:44px!important;margin:0!important;justify-self:start!important;
+  }
+  .top-search>span:nth-child(2){min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  .sky-controls{
+    grid-column:2!important;grid-row:1!important;
+    display:flex!important;align-items:center!important;justify-content:flex-end!important;
+    gap:5px!important;min-width:max-content!important;margin:0!important;
+  }
+  .sky-readout{
+    grid-column:1/-1!important;grid-row:2!important;
+    width:100%!important;max-width:none!important;min-width:0!important;height:50px!important;
+    display:grid!important;
+    grid-template-columns:max-content max-content max-content minmax(0,1fr)!important;
+    grid-template-areas:"time date temp filler" "location location location location"!important;
+    justify-content:stretch!important;justify-items:start!important;
+    align-content:center!important;align-items:center!important;
+    column-gap:9px!important;row-gap:5px!important;
+    margin:0!important;padding:0 2px!important;
+    overflow:visible!important;text-align:left!important;
+  }
+  .sky-readout #current-time{
+    grid-area:time!important;display:block!important;min-width:max-content!important;
+    margin:0!important;font-size:16px!important;line-height:1!important;
+    white-space:nowrap!important;overflow:visible!important;
+  }
+  .sky-readout #current-date{
+    grid-area:date!important;display:block!important;margin:0!important;
+    font-size:8.5px!important;line-height:1!important;white-space:nowrap!important;
+  }
+  .sky-readout #local-temperature{
+    grid-area:temp!important;display:inline-flex!important;margin:0!important;
+    font-size:8.5px!important;line-height:1!important;white-space:nowrap!important;
+  }
+  .sky-readout #local-temperature[hidden]{display:none!important}
+  .sky-readout #location-label{
+    grid-area:location!important;display:block!important;width:100%!important;min-width:0!important;
+    max-width:none!important;margin:0!important;font-size:8.2px!important;line-height:1.05!important;
+    white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;text-align:left!important;
+  }
+}
+
+/* Tight desktop / heavy browser zoom: keep all information, collapse only
+   decorative labels and the Search shortcut hint. */
+@media (pointer:fine) and (min-width:901px) and (max-width:1180px){
+  .topbar{grid-template-columns:minmax(175px,1fr) max-content!important;padding-inline:9px!important}
+  .top-search{max-width:430px!important}
+  .top-search kbd{display:none!important}
+  .sky-controls{gap:4px!important}
+  .sky-controls button{width:38px!important;min-width:38px!important;height:38px!important;padding:0!important}
+  .sky-controls .v17-quality-button,.sky-controls .v17-time-button{width:47px!important;min-width:47px!important;font-size:9px!important}
+  .sky-controls #theme-quick-open,.sky-controls #language-quick-open{width:38px!important;min-width:38px!important;padding:0!important}
+  .sky-controls #theme-quick-open b,.sky-controls #language-quick-open b{display:none!important}
+  .sky-readout #location-label{font-size:7.8px!important}
+}
+
+/* True desktop zoom can fall below the conventional 900px breakpoint while
+   still using a mouse/trackpad. Keep the header deliberate instead of letting
+   phone rules crush the clock into the controls. */
+@media (pointer:fine) and (max-width:900px){
+  :root{--topbar:122px!important}
+  .topbar{
+    height:122px!important;min-height:122px!important;
+    display:grid!important;
+    grid-template-columns:48px minmax(0,1fr) max-content!important;
+    grid-template-rows:56px 54px!important;
+    gap:5px 7px!important;padding:6px 8px!important;overflow:visible!important;
+  }
+  .mobile-menu{grid-column:1!important;grid-row:1!important;display:grid!important;place-items:center!important}
+  .top-search{grid-column:2!important;grid-row:1!important;width:100%!important;max-width:none!important;min-width:0!important;height:44px!important}
+  .top-search kbd{display:none!important}
+  .sky-controls{grid-column:3!important;grid-row:1!important;display:flex!important;gap:4px!important;min-width:max-content!important}
+  .sky-controls button{width:36px!important;min-width:36px!important;height:36px!important;padding:0!important}
+  .sky-controls .v17-quality-button,.sky-controls .v17-time-button{display:none!important}
+  .sky-controls #theme-quick-open b,.sky-controls #language-quick-open b{display:none!important}
+  .sky-readout{
+    grid-column:1/-1!important;grid-row:2!important;height:54px!important;width:100%!important;
+    display:grid!important;grid-template-columns:max-content max-content max-content minmax(0,1fr)!important;
+    grid-template-areas:"time date temp filler" "location location location location"!important;
+    align-content:center!important;align-items:center!important;justify-items:start!important;
+    gap:5px 8px!important;padding:0 3px!important;overflow:visible!important;text-align:left!important;
+  }
+  .sky-readout #current-time{grid-area:time!important;display:block!important;font-size:14px!important;white-space:nowrap!important;overflow:visible!important}
+  .sky-readout #current-date{grid-area:date!important;display:block!important;font-size:7.8px!important;white-space:nowrap!important}
+  .sky-readout #local-temperature{grid-area:temp!important;display:inline-flex!important;font-size:8px!important;white-space:nowrap!important}
+  .sky-readout #local-temperature[hidden]{display:none!important}
+  .sky-readout #location-label{grid-area:location!important;display:block!important;width:100%!important;max-width:none!important;font-size:7.5px!important;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;text-align:left!important}
+}
+
+/* Phone academic lockup keeps the same content but gives each credential a
+   clean reading block instead of squeezing text toward the portrait. */
+@media (pointer:coarse) and (max-width:900px){
+  .sf-hero-identity{grid-template-columns:1fr!important;gap:9px!important;align-items:start!important}
+  .sf-academic-lockup{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .sf-school-badge,.sf-major-badge{min-height:48px!important;padding:8px 10px!important}
+}
+@media (pointer:coarse) and (max-width:560px){
+  .sf-academic-lockup{grid-template-columns:1fr!important}
+}
+
+/* ---------------------------------------------------------------------
+   C. Neon Edge Signal — visible perimeter travel, theme-aware, scroll-safe.
+      Static = stable outline/glow.
+      Flow   = same outline + a bright segment that visibly travels along the
+               masked border. The animation is background-position only, so
+               there is no Canvas/WebGL work and no layout/scroll mutation.
+   --------------------------------------------------------------------- */
+html[data-edge-signal="static"] .sf-hero,
+html[data-edge-signal="static"] .sf-profile,
+html[data-edge-signal="static"] .sf-robot,
+html[data-edge-signal="static"] .home-search,
+html[data-edge-signal="static"] .channel-shelf,
+html[data-edge-signal="static"] .page-header,
+html[data-edge-signal="static"] .modal-panel,
+html[data-edge-signal="flow"] .sf-hero,
+html[data-edge-signal="flow"] .sf-profile,
+html[data-edge-signal="flow"] .sf-robot,
+html[data-edge-signal="flow"] .home-search,
+html[data-edge-signal="flow"] .channel-shelf,
+html[data-edge-signal="flow"] .page-header,
+html[data-edge-signal="flow"] .modal-panel{
+  outline:1px solid color-mix(in srgb,var(--cyan) 48%,var(--line))!important;
+  outline-offset:-1px!important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--lime) 12%,transparent),
+    0 0 12px color-mix(in srgb,var(--cyan) 12%,transparent),
+    0 0 22px color-mix(in srgb,var(--pink) 5%,transparent),
+    var(--shadow)!important;
+}
+
+/* Settings/modal scrolling is sacred: Flow never changes overflow, position,
+   overscroll, touch-action, or the modal scroll container. */
+html[data-edge-signal="flow"] .modal-panel{
+  overflow:auto!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+
+/* Shut off both earlier experimental runners so there is only one animation. */
+html[data-edge-signal="flow"] .sf-hero::before,
+html[data-edge-signal="flow"] .sf-profile::before,
+html[data-edge-signal="flow"] .sf-robot::before,
+html[data-edge-signal="flow"] .home-search::before,
+html[data-edge-signal="flow"] .channel-shelf::before,
+html[data-edge-signal="flow"] .page-header::before{
+  display:none!important;animation:none!important;
+}
+
+/* The real flow: a theme-colored luminous band slides across a 1.5px masked
+   border ring. On long cards this reads as a travelling hi-fi signal rather
+   than a static glow. */
+html[data-edge-signal="flow"] .sf-hero,
+html[data-edge-signal="flow"] .sf-profile,
+html[data-edge-signal="flow"] .sf-robot,
+html[data-edge-signal="flow"] .home-search,
+html[data-edge-signal="flow"] .channel-shelf,
+html[data-edge-signal="flow"] .page-header{
+  position:relative!important;
+}
+html[data-edge-signal="flow"] .sf-hero::after,
+html[data-edge-signal="flow"] .sf-profile::after,
+html[data-edge-signal="flow"] .sf-robot::after,
+html[data-edge-signal="flow"] .home-search::after,
+html[data-edge-signal="flow"] .channel-shelf::after,
+html[data-edge-signal="flow"] .page-header::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:-1px!important;
+  z-index:20!important;
+  border-radius:inherit!important;
+  padding:1.5px!important;
+  pointer-events:none!important;
+  opacity:.92!important;
+  background:
+    linear-gradient(110deg,
+      transparent 0%,
+      transparent 37%,
+      color-mix(in srgb,var(--cyan) 30%,transparent) 42%,
+      var(--cyan) 46%,
+      var(--lime) 50%,
+      var(--pink) 54%,
+      color-mix(in srgb,var(--pink) 30%,transparent) 58%,
+      transparent 63%,
+      transparent 100%)!important;
+  background-size:360% 360%!important;
+  background-position:160% 0%!important;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;
+  -webkit-mask-composite:xor!important;
+  mask-composite:exclude!important;
+  filter:drop-shadow(0 0 3px color-mix(in srgb,var(--cyan) 72%,transparent)) drop-shadow(0 0 7px color-mix(in srgb,var(--pink) 34%,transparent))!important;
+  animation:sd-v16-neon-perimeter 8.8s linear infinite!important;
+  will-change:background-position!important;
+}
+html[data-edge-signal="flow"] .sf-profile::after{animation-delay:-1.6s!important}
+html[data-edge-signal="flow"] .sf-robot::after{animation-delay:-3.2s!important}
+html[data-edge-signal="flow"] .home-search::after{animation-delay:-4.5s!important}
+html[data-edge-signal="flow"] .channel-shelf::after{animation-delay:-6s!important}
+html[data-edge-signal="flow"] .page-header::after{animation-delay:-7.2s!important}
+@keyframes sd-v16-neon-perimeter{
+  0%{background-position:165% -20%}
+  25%{background-position:90% 145%}
+  50%{background-position:-35% 170%}
+  75%{background-position:-120% 35%}
+  100%{background-position:-205% -45%}
+}
+
+/* Keep the flow clearly visible in ECO without making it computationally
+   expensive. The same single background-position animation simply runs slower
+   and with slightly less bloom. */
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-hero::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-profile::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-robot::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .home-search::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .channel-shelf::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .page-header::after{
+  animation-duration:11.5s!important;
+  opacity:.78!important;
+  filter:drop-shadow(0 0 3px color-mix(in srgb,var(--cyan) 58%,transparent))!important;
+}
+
+/* Never animate modal borders: Settings remains completely smooth and scrollable.
+   It still inherits the static theme-colored outline/glow above. */
+html[data-edge-signal="flow"] .modal-panel::before,
+html[data-edge-signal="flow"] .modal-panel::after{display:none!important;animation:none!important}
+
+/* Respect motion accessibility. */
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-hero::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-profile::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-robot::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .home-search::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .channel-shelf::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .page-header::after{display:none!important;animation:none!important}
+@media(prefers-reduced-motion:reduce){
+  html[data-edge-signal="flow"] .sf-hero::after,
+  html[data-edge-signal="flow"] .sf-profile::after,
+  html[data-edge-signal="flow"] .sf-robot::after,
+  html[data-edge-signal="flow"] .home-search::after,
+  html[data-edge-signal="flow"] .channel-shelf::after,
+  html[data-edge-signal="flow"] .page-header::after{display:none!important;animation:none!important}
+}
+
+/* Phones keep the visual language but animate only the hero/profile surfaces.
+   Everything else remains static to preserve battery and smooth scrolling. */
+@media (pointer:coarse) and (max-width:900px){
+  html[data-edge-signal="flow"] .sf-robot::after,
+  html[data-edge-signal="flow"] .home-search::after,
+  html[data-edge-signal="flow"] .channel-shelf::after,
+  html[data-edge-signal="flow"] .page-header::after{display:none!important;animation:none!important}
+  html[data-edge-signal="flow"] .sf-hero::after,
+  html[data-edge-signal="flow"] .sf-profile::after{animation-duration:13.5s!important;opacity:.72!important}
+}
+
+/* Chrome/Edge/Opera progressive enhancement: rotate the gradient itself while
+   the border mask stays fixed. This produces the cleanest "signal orbit"
+   around rectangular cards, similar to the moving accent around the SD mark. */
+@property --sd-v16-flow-angle{
+  syntax:"<angle>";
+  inherits:false;
+  initial-value:0deg;
+}
+@supports (background:conic-gradient(from 0deg, #fff, transparent)){
+  html[data-edge-signal="flow"] .sf-hero::after,
+  html[data-edge-signal="flow"] .sf-profile::after,
+  html[data-edge-signal="flow"] .sf-robot::after,
+  html[data-edge-signal="flow"] .home-search::after,
+  html[data-edge-signal="flow"] .channel-shelf::after,
+  html[data-edge-signal="flow"] .page-header::after{
+    --sd-v16-flow-angle:0deg;
+    background:conic-gradient(
+      from var(--sd-v16-flow-angle),
+      transparent 0deg 248deg,
+      color-mix(in srgb,var(--cyan) 28%,transparent) 260deg,
+      var(--cyan) 274deg,
+      var(--lime) 288deg,
+      var(--pink) 302deg,
+      color-mix(in srgb,var(--pink) 26%,transparent) 316deg,
+      transparent 330deg 360deg
+    )!important;
+    background-size:100% 100%!important;
+    background-position:center!important;
+    animation:sd-v16-neon-angle 9.6s linear infinite!important;
+    will-change:auto!important;
+  }
+  html[data-render-quality="eco"][data-edge-signal="flow"] .sf-hero::after,
+  html[data-render-quality="eco"][data-edge-signal="flow"] .sf-profile::after,
+  html[data-render-quality="eco"][data-edge-signal="flow"] .sf-robot::after,
+  html[data-render-quality="eco"][data-edge-signal="flow"] .home-search::after,
+  html[data-render-quality="eco"][data-edge-signal="flow"] .channel-shelf::after,
+  html[data-render-quality="eco"][data-edge-signal="flow"] .page-header::after{animation-duration:12.5s!important}
+  @keyframes sd-v16-neon-angle{to{--sd-v16-flow-angle:360deg}}
+}
+
+/* =====================================================================
+   V17 — SINGLE-ROW DESKTOP SIGNAL HEADER + VISIBLE NEON TRACE
+   This final override deliberately undoes V16's tall two-row desktop header.
+   Desktop/zoom keeps Search + full sky information + controls in one polished
+   row. Flow uses a narrow, bright theme-colored tracer rather than a broad
+   rotating wash, so the motion is unmistakable while remaining lightweight.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   A. DESKTOP HEADER: ALWAYS ONE COMPACT ROW ON MOUSE/TRACKPAD DEVICES
+   --------------------------------------------------------------------- */
+@media (pointer:fine) and (min-width:901px){
+  :root{--topbar:72px!important}
+  .app-shell{grid-template-rows:var(--topbar) 1fr!important}
+  .topbar{
+    height:72px!important;
+    min-height:72px!important;
+    display:grid!important;
+    grid-template-columns:minmax(210px,1fr) minmax(300px,360px) max-content!important;
+    grid-template-rows:1fr!important;
+    column-gap:10px!important;
+    row-gap:0!important;
+    align-items:center!important;
+    padding:8px 14px!important;
+    overflow:visible!important;
+  }
+  .mobile-menu{display:none!important}
+  .top-search{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:min(100%,520px)!important;
+    max-width:520px!important;
+    min-width:0!important;
+    height:46px!important;
+    margin:0!important;
+    justify-self:start!important;
+  }
+  .top-search>span:nth-child(2){
+    min-width:0!important;
+    overflow:hidden!important;
+    white-space:nowrap!important;
+    text-overflow:ellipsis!important;
+  }
+  .sky-readout{
+    grid-column:2!important;
+    grid-row:1!important;
+    width:100%!important;
+    min-width:0!important;
+    max-width:360px!important;
+    height:50px!important;
+    margin:0!important;
+    padding:0!important;
+    display:grid!important;
+    grid-template-columns:max-content max-content max-content!important;
+    grid-template-areas:"time date temp" "location location location"!important;
+    justify-content:start!important;
+    justify-items:start!important;
+    align-content:center!important;
+    align-items:center!important;
+    column-gap:9px!important;
+    row-gap:5px!important;
+    text-align:left!important;
+    line-height:1!important;
+    overflow:visible!important;
+  }
+  .sky-readout #current-time{
+    grid-area:time!important;
+    display:block!important;
+    min-width:max-content!important;
+    margin:0!important;
+    font-size:18px!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+  }
+  .sky-readout #current-date{
+    grid-area:date!important;
+    display:block!important;
+    min-width:max-content!important;
+    margin:0!important;
+    font-size:8.8px!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+  }
+  .sky-readout #local-temperature{
+    grid-area:temp!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    min-width:max-content!important;
+    margin:0!important;
+    font-size:9px!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+  }
+  .sky-readout #local-temperature[hidden]{display:none!important}
+  .sky-readout #location-label{
+    grid-area:location!important;
+    display:block!important;
+    width:max-content!important;
+    min-width:0!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    font-size:8.2px!important;
+    line-height:1.1!important;
+    white-space:nowrap!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    text-align:left!important;
+  }
+  .sky-controls{
+    grid-column:3!important;
+    grid-row:1!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    min-width:max-content!important;
+    gap:6px!important;
+    margin:0!important;
+  }
+}
+
+/* Normal laptops / 110–150% zoom: shorten Search before touching the sky data. */
+@media (pointer:fine) and (min-width:901px) and (max-width:1320px){
+  .topbar{
+    grid-template-columns:minmax(185px,1fr) minmax(282px,325px) max-content!important;
+    column-gap:8px!important;
+    padding-inline:10px!important;
+  }
+  .top-search{width:min(100%,430px)!important;max-width:430px!important}
+  .top-search kbd{display:none!important}
+  .sky-readout{max-width:325px!important;column-gap:7px!important}
+  .sky-readout #current-time{font-size:17px!important}
+  .sky-readout #current-date{font-size:8px!important}
+  .sky-readout #local-temperature{font-size:8.5px!important}
+  .sky-readout #location-label{font-size:7.6px!important}
+  .sky-controls{gap:4px!important}
+}
+
+/* Tight desktop / heavy zoom: preserve the single row by compacting controls,
+   not by creating a giant second header band. */
+@media (pointer:fine) and (min-width:901px) and (max-width:1110px){
+  .topbar{
+    grid-template-columns:minmax(150px,1fr) minmax(248px,282px) max-content!important;
+    column-gap:6px!important;
+    padding-inline:8px!important;
+  }
+  .top-search{width:min(100%,320px)!important;max-width:320px!important;height:42px!important;padding-inline:10px!important}
+  .top-search>span:first-child{font-size:16px!important}
+  .top-search>span:nth-child(2){font-size:12px!important}
+  .sky-readout{max-width:282px!important;column-gap:6px!important;row-gap:4px!important}
+  .sky-readout #current-time{font-size:15.5px!important}
+  .sky-readout #current-date{font-size:7.3px!important}
+  .sky-readout #local-temperature{font-size:8px!important}
+  .sky-readout #location-label{font-size:6.9px!important}
+  .sky-controls{gap:3px!important}
+  .sky-controls button{width:36px!important;min-width:36px!important;height:36px!important;padding:0!important;border-radius:10px!important}
+  .sky-controls .v17-quality-button,.sky-controls .v17-time-button{width:44px!important;min-width:44px!important;font-size:8.5px!important}
+  .sky-controls #theme-quick-open,.sky-controls #language-quick-open{width:36px!important;min-width:36px!important;padding:0!important}
+  .sky-controls #theme-quick-open b,.sky-controls #language-quick-open b{display:none!important}
+}
+
+/* Browser zoom can push a real computer below 900 CSS pixels. Keep a compact
+   desktop one-row signal bar as long as a fine pointer is present. */
+@media (pointer:fine) and (max-width:900px){
+  :root{--topbar:72px!important}
+  .app-shell{display:grid!important;grid-template-columns:0 minmax(0,1fr)!important;grid-template-rows:var(--topbar) 1fr!important}
+  .sidebar{display:none!important}
+  .topbar{
+    grid-column:2!important;
+    position:sticky!important;
+    top:0!important;
+    height:72px!important;
+    min-height:72px!important;
+    display:grid!important;
+    grid-template-columns:42px minmax(125px,1fr) minmax(225px,260px) max-content!important;
+    grid-template-rows:1fr!important;
+    column-gap:5px!important;
+    padding:7px!important;
+    align-items:center!important;
+    overflow:visible!important;
+  }
+  .mobile-menu{display:grid!important;grid-column:1!important;grid-row:1!important;width:38px!important;height:38px!important;place-items:center!important}
+  .top-search{grid-column:2!important;grid-row:1!important;width:100%!important;max-width:none!important;min-width:0!important;height:40px!important;padding-inline:9px!important}
+  .top-search kbd{display:none!important}
+  .top-search>span:nth-child(2){display:block!important;font-size:11px!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  .sky-readout{
+    position:static!important;
+    grid-column:3!important;grid-row:1!important;
+    width:100%!important;max-width:260px!important;height:46px!important;
+    padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;backdrop-filter:none!important;
+    display:grid!important;grid-template-columns:max-content max-content!important;grid-template-areas:"time temp" "location location"!important;
+    justify-content:start!important;align-content:center!important;column-gap:6px!important;row-gap:4px!important;text-align:left!important;
+  }
+  .sky-readout #current-time{grid-area:time!important;display:block!important;font-size:14px!important;white-space:nowrap!important}
+  .sky-readout #current-date{display:none!important}
+  .sky-readout #local-temperature{grid-area:temp!important;display:inline-flex!important;font-size:7.5px!important;white-space:nowrap!important}
+  .sky-readout #local-temperature[hidden]{display:none!important}
+  .sky-readout #location-label{grid-area:location!important;display:block!important;width:max-content!important;max-width:100%!important;font-size:6.5px!important;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important}
+  .sky-controls{grid-column:4!important;grid-row:1!important;display:flex!important;gap:3px!important;min-width:max-content!important;align-items:center!important}
+  .sky-controls button{display:grid!important;width:34px!important;min-width:34px!important;height:34px!important;padding:0!important;place-items:center!important;border-radius:10px!important}
+  .sky-controls .v17-quality-button,.sky-controls .v17-time-button{width:42px!important;min-width:42px!important;font-size:8px!important}
+  .sky-controls #theme-quick-open,.sky-controls #language-quick-open{width:34px!important;min-width:34px!important}
+  .sky-controls #theme-quick-open b,.sky-controls #language-quick-open b{display:none!important}
+  .main{grid-column:2!important}
+}
+
+/* ---------------------------------------------------------------------
+   B. NEON EDGE: STATIC = OUTLINE, FLOW = ONE BRIGHT TRACER PER PANEL
+   --------------------------------------------------------------------- */
+@property --sd-v17-trace-angle{
+  syntax:"<angle>";
+  inherits:false;
+  initial-value:0deg;
+}
+
+/* Keep the default/off state completely clean. */
+html:not([data-edge-signal]),html[data-edge-signal="off"]{--sd-edge-active:0}
+
+/* Both Static and Flow get the subtle theme-colored hi-fi outline. */
+html[data-edge-signal="static"] .sf-hero,
+html[data-edge-signal="static"] .sf-profile,
+html[data-edge-signal="static"] .sf-robot,
+html[data-edge-signal="static"] .home-search,
+html[data-edge-signal="static"] .channel-shelf,
+html[data-edge-signal="static"] .page-header,
+html[data-edge-signal="flow"] .sf-hero,
+html[data-edge-signal="flow"] .sf-profile,
+html[data-edge-signal="flow"] .sf-robot,
+html[data-edge-signal="flow"] .home-search,
+html[data-edge-signal="flow"] .channel-shelf,
+html[data-edge-signal="flow"] .page-header{
+  position:relative!important;
+  isolation:isolate!important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--cyan) 28%,transparent),
+    0 0 14px -9px color-mix(in srgb,var(--cyan) 58%,transparent),
+    0 0 22px -15px color-mix(in srgb,var(--pink) 40%,transparent)!important;
+}
+
+/* Flow's tracer is intentionally narrow and bright: a single luminous signal
+   moves around the perimeter instead of the whole border looking animated. */
+html[data-edge-signal="flow"] .sf-hero::after,
+html[data-edge-signal="flow"] .sf-profile::after,
+html[data-edge-signal="flow"] .sf-robot::after,
+html[data-edge-signal="flow"] .home-search::after,
+html[data-edge-signal="flow"] .channel-shelf::after,
+html[data-edge-signal="flow"] .page-header::after{
+  --sd-v17-trace-angle:0deg;
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:30!important;
+  border-radius:inherit!important;
+  padding:2px!important;
+  pointer-events:none!important;
+  opacity:.98!important;
+  background:conic-gradient(
+    from var(--sd-v17-trace-angle),
+    transparent 0deg 326deg,
+    color-mix(in srgb,var(--cyan) 20%,transparent) 330deg,
+    var(--cyan) 334deg,
+    #ffffff 338deg,
+    var(--lime) 342deg,
+    var(--pink) 346deg,
+    color-mix(in srgb,var(--pink) 22%,transparent) 351deg,
+    transparent 356deg 360deg
+  )!important;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;
+  -webkit-mask-composite:xor!important;
+  mask-composite:exclude!important;
+  filter:
+    drop-shadow(0 0 3px color-mix(in srgb,var(--cyan) 95%,transparent))
+    drop-shadow(0 0 7px color-mix(in srgb,var(--lime) 72%,transparent))
+    drop-shadow(0 0 13px color-mix(in srgb,var(--pink) 46%,transparent))!important;
+  animation:sd-v17-trace-orbit 7.4s linear infinite!important;
+  will-change:auto!important;
+}
+@keyframes sd-v17-trace-orbit{to{--sd-v17-trace-angle:360deg}}
+
+/* Stagger the runners so the page feels alive rather than synchronized. */
+html[data-edge-signal="flow"] .sf-profile::after{animation-delay:-1.35s!important;animation-duration:8.1s!important}
+html[data-edge-signal="flow"] .sf-robot::after{animation-delay:-3.8s!important;animation-duration:7.7s!important}
+html[data-edge-signal="flow"] .home-search::after{animation-delay:-5.25s!important;animation-duration:8.8s!important}
+html[data-edge-signal="flow"] .channel-shelf::after{animation-delay:-2.15s!important;animation-duration:9.3s!important}
+html[data-edge-signal="flow"] .page-header::after{animation-delay:-6.1s!important;animation-duration:8.5s!important}
+
+/* A few content cards get occasional single tracers too. This is deliberately
+   limited so Flow reads as technology ambience without creating dozens of
+   simultaneous animations. */
+html[data-edge-signal="flow"] .channel-card:nth-child(3n+1){
+  position:relative!important;
+  isolation:isolate!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--cyan) 19%,transparent)!important;
+}
+html[data-edge-signal="flow"] .channel-card:nth-child(3n+1)::after{
+  --sd-v17-trace-angle:0deg;
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:8!important;
+  border-radius:inherit!important;
+  padding:1.5px!important;
+  pointer-events:none!important;
+  background:conic-gradient(from var(--sd-v17-trace-angle),transparent 0deg 334deg,var(--cyan) 339deg,#fff 343deg,var(--lime) 347deg,var(--pink) 351deg,transparent 357deg 360deg)!important;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0)!important;
+  -webkit-mask-composite:xor!important;
+  mask-composite:exclude!important;
+  filter:drop-shadow(0 0 5px color-mix(in srgb,var(--cyan) 72%,transparent))!important;
+  animation:sd-v17-trace-orbit 10.5s linear infinite!important;
+}
+html[data-edge-signal="flow"] .channel-card:nth-child(4)::after{animation-delay:-3.2s!important}
+html[data-edge-signal="flow"] .channel-card:nth-child(7)::after{animation-delay:-7.1s!important}
+
+/* ECO keeps the tracer visible, but reduces bloom and pace. */
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-hero::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-profile::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .sf-robot::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .home-search::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .channel-shelf::after,
+html[data-render-quality="eco"][data-edge-signal="flow"] .page-header::after{
+  opacity:.92!important;
+  filter:drop-shadow(0 0 4px color-mix(in srgb,var(--cyan) 78%,transparent)) drop-shadow(0 0 8px color-mix(in srgb,var(--lime) 42%,transparent))!important;
+}
+
+/* Never let neon styling own the modal scroll container. Settings and every
+   modal keep their existing scrolling/touch behavior. */
+html[data-edge-signal="flow"] .modal-panel,
+html[data-edge-signal="static"] .modal-panel{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  touch-action:pan-y!important;
+}
+html[data-edge-signal="flow"] .modal-panel::before,
+html[data-edge-signal="flow"] .modal-panel::after{display:none!important;animation:none!important}
+
+/* Reduced-motion remains authoritative. */
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-hero::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-profile::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .sf-robot::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .home-search::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .channel-shelf::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .page-header::after,
+html[data-reduced-motion="1"][data-edge-signal="flow"] .channel-card::after{display:none!important;animation:none!important}
+@media(prefers-reduced-motion:reduce){
+  html[data-edge-signal="flow"] .sf-hero::after,
+  html[data-edge-signal="flow"] .sf-profile::after,
+  html[data-edge-signal="flow"] .sf-robot::after,
+  html[data-edge-signal="flow"] .home-search::after,
+  html[data-edge-signal="flow"] .channel-shelf::after,
+  html[data-edge-signal="flow"] .page-header::after,
+  html[data-edge-signal="flow"] .channel-card::after{display:none!important;animation:none!important}
+}
+
+/* Touch devices keep the same look with fewer simultaneous runners. */
+@media (pointer:coarse) and (max-width:900px){
+  html[data-edge-signal="flow"] .sf-robot::after,
+  html[data-edge-signal="flow"] .home-search::after,
+  html[data-edge-signal="flow"] .channel-shelf::after,
+  html[data-edge-signal="flow"] .page-header::after,
+  html[data-edge-signal="flow"] .channel-card::after{display:none!important;animation:none!important}
+  html[data-edge-signal="flow"] .sf-hero::after{animation-duration:10.5s!important}
+  html[data-edge-signal="flow"] .sf-profile::after{animation-duration:12s!important}
+}
