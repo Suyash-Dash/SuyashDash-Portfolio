@@ -537,7 +537,7 @@ function __sakuraApproxCoordsForZone(zone) {
   $$('[data-route]').forEach(el=>el.addEventListener('click',()=>routeTo(el.dataset.route,el.dataset.anchor||'')));
   addEventListener('hashchange',syncRouteFromHash);
   $('#mobile-menu').addEventListener('click',()=>{const sheet=$('#mobile-sheet');sheet.hidden=!sheet.hidden;$('#mobile-menu').setAttribute('aria-expanded',String(!sheet.hidden))});
-  $('[data-close-sheet]').addEventListener('click',()=>$('#mobile-sheet').hidden=true);
+  $('[data-close-sheet]').addEventListener('click',()=>{const sheet=$('#mobile-sheet');if(sheet)sheet.hidden=true;$('#mobile-menu')?.setAttribute('aria-expanded','false')});
 
   /* -------------------------------------------------------------------
      07. Search — broad index and fuzzy keyword scoring
@@ -606,6 +606,55 @@ function __sakuraApproxCoordsForZone(zone) {
   addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();showSearch()}if(e.key==='Escape')$$('.modal').forEach(closeModal)});
   $$('[data-close-modal]').forEach(b=>b.addEventListener('click',()=>closeModal(b.closest('.modal'))));
   $$('.modal').forEach(m=>m.addEventListener('mousedown',e=>{if(e.target===m)closeModal(m)}));
+
+
+  // V22 — universal touch-safe close system.
+  // Existing click handlers remain for desktop. This capture-phase pointer layer
+  // guarantees that X buttons and backdrops dismiss reliably on mobile Safari,
+  // Chrome/Android, translated views, and coarse-pointer devices.
+  function closeMobileSheet(){
+    const sheet=$('#mobile-sheet');
+    if(sheet)sheet.hidden=true;
+    $('#mobile-menu')?.setAttribute('aria-expanded','false');
+  }
+  function runExplicitCloseControl(control,event){
+    if(!control)return false;
+    if(control.matches('[data-close-sheet]')){
+      closeMobileSheet();
+    }else if(control.id==='theme-quick-close'){
+      closeThemePicker();
+    }else if(control.id==='ai-agent-close'){
+      closeAgent();
+    }else if(control.matches('button[data-close-modal][aria-label="Close"]')){
+      closeModal(control.closest('.modal'));
+    }else{
+      return false;
+    }
+    event?.preventDefault?.();
+    event?.stopPropagation?.();
+    return true;
+  }
+  function touchSafeDismiss(event){
+    const target=event.target instanceof Element?event.target:event.target?.parentElement;
+    if(!target)return;
+    const explicit=target.closest?.('#theme-quick-close,#ai-agent-close,[data-close-sheet],button[data-close-modal][aria-label="Close"]');
+    if(explicit&&runExplicitCloseControl(explicit,event))return;
+    const modal=target.classList?.contains('modal')?target:null;
+    if(modal){
+      closeModal(modal);
+      event.preventDefault?.();
+      event.stopPropagation?.();
+      return;
+    }
+    const sheet=target.id==='mobile-sheet'?target:null;
+    if(sheet){
+      closeMobileSheet();
+      event.preventDefault?.();
+      event.stopPropagation?.();
+    }
+  }
+  document.addEventListener('pointerup',touchSafeDismiss,true);
+  if(!window.PointerEvent)document.addEventListener('touchend',touchSafeDismiss,true);
 
   /* -------------------------------------------------------------------
      08. Project filters, detail modals, videos, and animated mini-scenes
@@ -957,36 +1006,137 @@ I understand this time is not confirmed until you reply. I am also creating a ca
     ['ru','Русский','Russian'],['tr','Türkçe','Turkish'],['vi','Tiếng Việt','Vietnamese']
   ];
   const translationOriginals=new Map();let pageTranslator=null,pageTranslatorTarget='';
+  const translationCache=new Map();
   function translationNodes(scope){
     if(!scope)return[];const nodes=[],walker=document.createTreeWalker(scope,NodeFilter.SHOW_TEXT,{acceptNode(node){const text=node.nodeValue?.trim();if(!text||text.length<2)return NodeFilter.FILTER_REJECT;const parent=node.parentElement;if(!parent||parent.closest('script,style,code,pre,kbd,textarea,input,select,option,canvas,svg,[translate="no"],.theme-popover,.modal,.social-row,.logo-orbit')||parent.matches('.nav-item span,.mobile-dock span,.side-utility-strip span,.sky-controls span,.ai-fab-core'))return NodeFilter.FILTER_REJECT;if(/^[-–—•·→↗＋×✓⌂▣⚙▤✉☆⌘✪✦♟◫文⌁↻♫◎]+$/.test(text))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT}});let node;while((node=walker.nextNode()))nodes.push(node);return nodes}
   function restoreEnglish(){for(const [node,original] of translationOriginals.entries()){if(node?.isConnected&&original!=null)node.nodeValue=original}document.querySelectorAll('[data-sakura-translated]').forEach(el=>el.removeAttribute('data-sakura-translated'));state.language='en';pageTranslatorTarget='';try{localStorage.setItem('sd-language','en')}catch{}const status=$('#language-status');if(status)status.textContent='English restored.'}
   const protectedTranslationTerms=['Suyash Dash','Purdue University','John Martinson Honors College','Robotics Engineering Technology','FANUC','YAMAHA','RoBoat','LifeOS','Build@Scale','AWS EC2','Supabase','PostgreSQL','LangGraph','FastAPI','Next.js','CopilotKit','YOLO','OpenCV','PyTorch','ROS 2','SLAM','NVIDIA Isaac Sim','NVIDIA Isaac Lab'];
   function languageEnglishName(id){return LANGUAGE_META.find(x=>x[0]===id)?.[2]||id}
+  function translationCacheKey(target,source){return `${target}\u0000${source}`}
+  function splitTranslationSource(text,maxChars=520){
+    const raw=String(text??''),lead=raw.match(/^\s*/)?.[0]||'',trail=raw.match(/\s*$/)?.[0]||'',core=raw.trim();
+    if(!core)return[{text:'',lead,trail}];
+    if(core.length<=maxChars)return[{text:core,lead,trail}];
+    const parts=[];let rest=core;
+    while(rest.length>maxChars){
+      let cut=-1;
+      for(const mark of ['. ','! ','? ','; ',': ', ', ',' ']){const i=rest.lastIndexOf(mark,maxChars);if(i>Math.max(120,cut))cut=i+mark.length}
+      if(cut<120)cut=rest.lastIndexOf(' ',maxChars);
+      if(cut<120)cut=maxChars;
+      parts.push({text:rest.slice(0,cut).trim(),lead:parts.length?'':lead,trail:''});rest=rest.slice(cut).trimStart();
+    }
+    if(rest)parts.push({text:rest,lead:parts.length?'':lead,trail});
+    else if(parts.length)parts[parts.length-1].trail=trail;
+    return parts;
+  }
+  function buildTranslationPrompt(strings,target){
+    const keep=protectedTranslationTerms.join(', ');
+    return `Translate this JSON array from English to ${languageEnglishName(target)}. Return ONLY a JSON array, same item count/order. Keep names/technical terms unchanged when appropriate: ${keep}. Keep numbers, symbols, URLs and model names. JSON:${JSON.stringify(strings)}`;
+  }
+  function buildTranslationBatches(units,target){
+    const batches=[];let current=[];
+    for(const unit of units){
+      const candidate=[...current,unit];const question=buildTranslationPrompt(candidate.map(x=>x.text),target);
+      if(current.length&&(candidate.length>8||question.length>1450)){batches.push(current);current=[unit]}
+      else current=candidate;
+    }
+    if(current.length)batches.push(current);
+    return batches;
+  }
+  async function requestDashTranslation(strings,target){
+    const prompt=buildTranslationPrompt(strings,target);
+    if(prompt.length>1540)throw new Error('Translation batch exceeded the private server request budget.');
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),35000);
+    try{
+      const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:prompt,history:[]}),signal:controller.signal});
+      const data=await response.json().catch(()=>({}));
+      if(!response.ok||!data?.text)throw new Error(data?.error||`Translation HTTP ${response.status}`);
+      if(data.mode==='local')throw new Error('Live translation provider is temporarily unavailable.');
+      let raw=String(data.text).trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'');const a=raw.indexOf('['),b=raw.lastIndexOf(']');if(a>=0&&b>a)raw=raw.slice(a,b+1);
+      try{const parsed=JSON.parse(raw);if(Array.isArray(parsed)&&parsed.length===strings.length)return parsed.map(x=>String(x))}catch{}
+      if(strings.length===1){const cleaned=raw.replace(/^['"]|['"]$/g,'').trim();if(cleaned)return[cleaned]}
+      throw new Error('Translation response shape mismatch');
+    }finally{clearTimeout(timer)}
+  }
   async function translateBatchWithDashAI(strings,target){
-    if(location.protocol==='file:')throw new Error('In-page translation needs the portfolio server.');
-    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),22000);
-    const prompt=`Translate the JSON array below from English into ${languageEnglishName(target)} for a professional robotics portfolio. Return ONLY a valid JSON array of translated strings, same length and order, with no markdown or explanation. Preserve these exact proper nouns/technical identifiers when they appear: ${protectedTranslationTerms.join(', ')}. Keep numbers, symbols, model names, and URLs unchanged. INPUT: ${JSON.stringify(strings)}`;
-    try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:prompt,history:[]}),signal:controller.signal});const data=await response.json().catch(()=>({}));if(!response.ok||!data?.text)throw new Error(data?.error||`Translation HTTP ${response.status}`);let raw=String(data.text).trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'');const a=raw.indexOf('['),b=raw.lastIndexOf(']');if(a>=0&&b>a)raw=raw.slice(a,b+1);const parsed=JSON.parse(raw);if(!Array.isArray(parsed)||parsed.length!==strings.length)throw new Error('Translation response shape mismatch');return parsed.map(x=>String(x))}finally{clearTimeout(timer)}
+    const results=new Array(strings.length),missing=[];
+    strings.forEach((source,index)=>{const key=translationCacheKey(target,source);if(translationCache.has(key))results[index]=translationCache.get(key);else missing.push({index,source})});
+    if(!missing.length)return results;
+    try{
+      const translated=await requestDashTranslation(missing.map(x=>x.source),target);
+      missing.forEach((item,j)=>{results[item.index]=translated[j];translationCache.set(translationCacheKey(target,item.source),translated[j])});return results;
+    }catch(error){
+      if(missing.length===1)throw error;
+      // Provider output can occasionally be malformed for a multi-item JSON batch.
+      // Retry each item separately instead of failing the whole mobile translation.
+      for(const item of missing){const one=await requestDashTranslation([item.source],target);results[item.index]=one[0];translationCache.set(translationCacheKey(target,item.source),one[0])}
+      return results;
+    }
   }
   async function translateViaDashAI(target,{silent=false}={}){
-    const status=$('#language-status');if(status&&!silent)status.textContent='Translating this view in place…';
-    const nodes=[];for(const scope of [$('.sidebar'),$('.topbar'),$('.view.is-active'),$('.mobile-dock')])translationNodes(scope).forEach(n=>nodes.push(n));const unique=[...new Set(nodes)].slice(0,150);unique.forEach(node=>{if(!translationOriginals.has(node))translationOriginals.set(node,node.nodeValue)});let done=0;
-    try{for(let i=0;i<unique.length;i+=28){const batch=unique.slice(i,i+28),source=batch.map(node=>translationOriginals.get(node)??node.nodeValue),translated=await translateBatchWithDashAI(source,target);batch.forEach((node,j)=>{node.nodeValue=translated[j];node.parentElement?.setAttribute('data-sakura-translated','1')});done+=batch.length;if(status&&!silent)status.textContent=`Translating… ${Math.round(done/unique.length*100)}%`;await new Promise(r=>setTimeout(r,0))}state.language=target;try{localStorage.setItem('sd-language',target)}catch{};if(status)status.textContent='Translated inside the portfolio. Choose another language or English anytime.';return true}catch(error){console.warn('Dash AI translation unavailable',error);for(const node of unique){const original=translationOriginals.get(node);if(original!=null)node.nodeValue=original}if(status)status.textContent='In-page translation is temporarily unavailable. The portfolio stayed in English so navigation remains stable.';if(!silent)showToast('Translation service is temporarily unavailable.');return false}
+    if(location.protocol==='file:'){const status=$('#language-status');if(status)status.textContent='Open the portfolio through its normal server to use translation.';if(!silent)showToast('Translation needs the live portfolio server.');return false}
+    const status=$('#language-status');if(status&&!silent)status.textContent='Preparing in-page translation…';
+    const nodes=[];for(const scope of [$('.sidebar'),$('.topbar'),$('.view.is-active'),$('.mobile-dock')])translationNodes(scope).forEach(n=>nodes.push(n));
+    const unique=[...new Set(nodes)].slice(0,180);unique.forEach(node=>{if(!translationOriginals.has(node))translationOriginals.set(node,node.nodeValue)});
+    const unitGroups=unique.map((node,nodeIndex)=>{const source=translationOriginals.get(node)??node.nodeValue;return{node,nodeIndex,source,parts:splitTranslationSource(source)}});
+    const units=[];for(const group of unitGroups)group.parts.forEach((part,partIndex)=>units.push({nodeIndex:group.nodeIndex,partIndex,text:part.text}));
+    const batches=buildTranslationBatches(units,target),translatedParts=unitGroups.map(group=>new Array(group.parts.length));let finished=0;
+    try{
+      for(const batch of batches){
+        const translated=await translateBatchWithDashAI(batch.map(x=>x.text),target);
+        batch.forEach((unit,j)=>{translatedParts[unit.nodeIndex][unit.partIndex]=translated[j]});finished+=batch.length;
+        if(status&&!silent)status.textContent=`Translating… ${Math.min(100,Math.round(finished/Math.max(1,units.length)*100))}%`;
+        await new Promise(r=>setTimeout(r,0));
+      }
+      unitGroups.forEach((group,nodeIndex)=>{const pieces=translatedParts[nodeIndex];const leading=group.parts[0]?.lead||'',trailing=group.parts[group.parts.length-1]?.trail||'';const body=pieces.filter(x=>x!=null).join(' ').replace(/\s+([,.;!?])/g,'$1');group.node.nodeValue=leading+body+trailing;group.node.parentElement?.setAttribute('data-sakura-translated','1')});
+      state.language=target;try{localStorage.setItem('sd-language',target)}catch{};if(status)status.textContent='Translated inside the portfolio. Choose another language or English anytime.';return true;
+    }catch(error){
+      console.warn('In-page translation unavailable',error);for(const group of unitGroups){const original=translationOriginals.get(group.node);if(original!=null)group.node.nodeValue=original}
+      if(status)status.textContent='Translation could not connect right now. The portfolio stayed in English so navigation remains stable.';if(!silent)showToast('Translation could not connect. Try again in a moment.');return false;
+    }
+  }
+  async function translateWithBrowser(target,{silent=false}={}){
+    if(!('Translator' in self))return false;
+    const status=$('#language-status');if(status&&!silent)status.textContent='Preparing in-page translation…';
+    try{
+      const options={sourceLanguage:'en',targetLanguage:target};const availability=await Translator.availability(options);if(availability==='unavailable')return false;
+      if(!pageTranslator||pageTranslatorTarget!==target){pageTranslator=await Translator.create(options);pageTranslatorTarget=target}
+      const nodes=[];for(const scope of [$('.sidebar'),$('.topbar'),$('.view.is-active'),$('.mobile-dock')])translationNodes(scope).forEach(n=>nodes.push(n));const unique=[...new Set(nodes)].slice(0,180);let done=0;
+      for(let i=0;i<unique.length;i+=4){await Promise.all(unique.slice(i,i+4).map(async node=>{const original=translationOriginals.get(node)??node.nodeValue;translationOriginals.set(node,original);try{node.nodeValue=await pageTranslator.translate(original);node.parentElement?.setAttribute('data-sakura-translated','1')}catch{node.nodeValue=original}done++}));if(status&&!silent)status.textContent=`Translating… ${Math.round(done/unique.length*100)}%`;await new Promise(r=>setTimeout(r,0))}
+      state.language=target;try{localStorage.setItem('sd-language',target)}catch{};if(status)status.textContent='Translated inside the portfolio. Choose another language or English anytime.';return true;
+    }catch(error){console.warn('Browser Translator unavailable; using the private AI translation fallback.',error);return false}
   }
   async function translateVisibleRoute(target,{silent=false}={}){
     if(target==='en'){restoreEnglish();return true}
-    const mobileInPage=matchMedia('(max-width: 900px)').matches||matchMedia('(pointer: coarse)').matches;
-    if(mobileInPage)return translateViaDashAI(target,{silent});
-    const status=$('#language-status');
-    if('Translator' in self){
-      if(status&&!silent)status.textContent='Preparing in-page translation…';
-      try{const options={sourceLanguage:'en',targetLanguage:target};const availability=await Translator.availability(options);if(availability!=='unavailable'){if(!pageTranslator||pageTranslatorTarget!==target){pageTranslator=await Translator.create(options);pageTranslatorTarget=target}const nodes=[];for(const scope of [$('.sidebar'),$('.topbar'),$('.view.is-active'),$('.mobile-dock')])translationNodes(scope).forEach(n=>nodes.push(n));const unique=[...new Set(nodes)].slice(0,180);let done=0;for(let i=0;i<unique.length;i+=4){await Promise.all(unique.slice(i,i+4).map(async node=>{const original=translationOriginals.get(node)??node.nodeValue;translationOriginals.set(node,original);try{node.nodeValue=await pageTranslator.translate(original);node.parentElement?.setAttribute('data-sakura-translated','1')}catch{node.nodeValue=original}done++}));if(status&&!silent)status.textContent=`Translating… ${Math.round(done/unique.length*100)}%`;await new Promise(r=>setTimeout(r,0))}state.language=target;try{localStorage.setItem('sd-language',target)}catch{};if(status)status.textContent='Translated inside the portfolio. Choose another language or English anytime.';return true}}catch(error){console.warn('Browser Translator unavailable; trying Dash AI fallback.',error)}
-    }
+    // Same in-page behavior on computer and phone: use the browser translator when
+    // available, otherwise use the portfolio's private AI failover. No external tab/app.
+    if(await translateWithBrowser(target,{silent}))return true;
     return translateViaDashAI(target,{silent});
   }
+
   function openExternalTranslation(){const status=$('#language-status');if(status)status.textContent='Translation stays inside Sakura Signal; no external translation tab is opened.'}
   function renderLanguageGrid(){const root=$('#language-grid');if(!root)return;root.innerHTML=LANGUAGE_META.map(([id,label,english])=>`<button type="button" data-language-choice="${id}" role="listitem" aria-pressed="${id===state.language}"><b>${label}</b><small>${english}</small></button>`).join('');$$('[data-language-choice]',root).forEach(button=>button.addEventListener('click',async()=>{const target=button.dataset.languageChoice;if(target==='en'){restoreEnglish();renderLanguageGrid();showToast('English restored.');return}const translated=await translateVisibleRoute(target);if(translated)renderLanguageGrid()}))}
   function openLanguage(){renderLanguageGrid();closeThemePicker();openModal('#language-modal')}
+
+  // V21 — robust language-dialog dismissal across touch + pointer browsers.
+  // Capture-phase handling survives translated text-node updates and ensures the
+  // close control/backdrop behave the same on desktop and mobile.
+  (()=>{
+    const modal=$('#language-modal');
+    if(!modal)return;
+    const dismiss=(event)=>{
+      if(modal.hidden)return;
+      const target=event.target;
+      const closeButton=target?.closest?.('[data-close-modal]');
+      const insidePanel=target?.closest?.('.language-panel');
+      if(closeButton || !insidePanel){
+        if(closeButton){event.preventDefault();event.stopPropagation()}
+        closeModal(modal);
+      }
+    };
+    modal.addEventListener('pointerup',dismiss,true);
+    if(!window.PointerEvent)modal.addEventListener('touchend',dismiss,true);
+  })();
   function setFocusMode(enabled,{silent=false}={}){state.focusMode=Boolean(enabled);document.documentElement.dataset.focusMode=state.focusMode?'1':'0';try{localStorage.setItem('sd-focus-mode',state.focusMode?'1':'0')}catch{};for(const id of ['focus-toggle','settings-focus-toggle']){const b=$('#'+id);if(b)b.classList.toggle('is-active',state.focusMode)}if(!silent)showToast(state.focusMode?'Focus view enabled.':'Full visual view restored.')}
   function setDensity(value,{silent=false}={}){
     const next=['compact','balanced','comfortable'].includes(value)?value:'balanced';state.density=next;document.documentElement.dataset.density=next;try{localStorage.setItem('sd-density',next)}catch{};$$('[data-density-choice]').forEach(b=>{const active=b.dataset.densityChoice===next;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active))});if(!silent)showToast(`Layout density: ${next}.`);
