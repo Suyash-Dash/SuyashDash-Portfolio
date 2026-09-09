@@ -438,7 +438,7 @@ function __sakuraApproxCoordsForZone(zone) {
     const perf=window.__SAKURA_PERF_PROFILE__||{threeDpr:.86,threeFps:24,constrained:false};const renderer=new THREE.WebGLRenderer({canvas,antialias:!perf.constrained,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,perf.threeDpr));if('outputColorSpace' in renderer)renderer.outputColorSpace=THREE.SRGBColorSpace;else renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(home?34:40,1,.1,160);scene.add(new THREE.HemisphereLight(0xb9dcff,0x071020,1.25));const key=new THREE.DirectionalLight(0xffffff,2.4);key.position.set(4,8,7);scene.add(key);const cyan=new THREE.PointLight(0x55e8ff,5,18);cyan.position.set(-4,3,4);scene.add(cyan);const lime=new THREE.PointLight(0x9cff52,4,18);lime.position.set(4,1,4);scene.add(lime);const object=model==='arm'?createIndustrialArm():createHumanoidRobot(home?.78:1);scene.add(object);if(model==='arm')object.position.y=-.05;object.updateMatrixWorld(true);const fitBox=new THREE.Box3().setFromObject(object),fitSize=new THREE.Vector3(),fitCenter=new THREE.Vector3();fitBox.getSize(fitSize);fitBox.getCenter(fitCenter);function fitCameraToObject(){const rect=canvas.getBoundingClientRect(),w=Math.max(2,rect.width),h=Math.max(2,rect.height),aspect=w/h;camera.aspect=aspect;const vFov=THREE.MathUtils.degToRad(camera.fov),hFov=2*Math.atan(Math.tan(vFov/2)*aspect);const vertical=Math.max(.1,fitSize.y/2)/Math.tan(vFov/2),horizontal=Math.max(.1,fitSize.x/2)/Math.tan(hFov/2),depth=Math.max(.1,fitSize.z/2);const distance=Math.max(vertical,horizontal,depth*1.45)*(home?1.24:1.34);if(model==='arm'){camera.position.set(fitCenter.x+distance*.46,fitCenter.y+distance*.2,fitCenter.z+distance);camera.lookAt(fitCenter.x,fitCenter.y+.08,fitCenter.z)}else{camera.position.set(fitCenter.x,fitCenter.y+.08,fitCenter.z+distance);camera.lookAt(fitCenter.x,fitCenter.y+.04,fitCenter.z)}camera.near=Math.max(.02,distance/100);camera.far=Math.max(100,distance*8);camera.updateProjectionMatrix()}
     const platform=new THREE.Mesh(new THREE.CylinderGeometry(model==='arm'?4.2:2.5,model==='arm'?4.45:2.7,.28,64),new THREE.MeshPhysicalMaterial({color:0x071427,metalness:.78,roughness:.25}));platform.position.y=model==='arm'?-1.45:-.82;scene.add(platform);const ring=new THREE.Mesh(new THREE.TorusGeometry(model==='arm'?3.7:2.2,.055,12,96),new THREE.MeshBasicMaterial({color:0x9cff52,transparent:true,opacity:.65}));ring.rotation.x=Math.PI/2;ring.position.y=platform.position.y+.16;scene.add(ring);const grid=new THREE.GridHelper(model==='arm'?14:8,24,0x2c8bac,0x13324c);grid.position.y=platform.position.y+.17;scene.add(grid);
     let dragging=false,lastX=0,rotY=model==='arm'?-.45:0,rotX=0,auto=!(perf.mobile||state.reducedMotion);const onDown=e=>{dragging=true;lastX=e.clientX??e.touches?.[0]?.clientX??0;canvas.setPointerCapture?.(e.pointerId)};const onMove=e=>{if(!dragging)return;const x=e.clientX??e.touches?.[0]?.clientX??lastX;rotY+=(x-lastX)*.008;lastX=x};const onUp=()=>dragging=false;if(interactive){canvas.addEventListener('pointerdown',onDown);canvas.addEventListener('pointermove',onMove);canvas.addEventListener('pointerup',onUp);canvas.addEventListener('pointercancel',onUp)}
-    function resize(){const rect=canvas.getBoundingClientRect(),w=Math.max(2,Math.round(rect.width)),h=Math.max(2,Math.round(rect.height));if(canvas.dataset.lastSize===`${w}x${h}`)return;canvas.dataset.lastSize=`${w}x${h}`;renderer.setPixelRatio(Math.min(devicePixelRatio,w<520?Math.min(.76,perf.threeDpr):perf.threeDpr));renderer.setSize(w,h,false);fitCameraToObject()}const ro=new ResizeObserver(resize);ro.observe(canvas);resize();let inViewport=true;const io='IntersectionObserver'in window?new IntersectionObserver(entries=>{inViewport=entries[0]?.isIntersecting!==false},{rootMargin:'120px'}):null;io?.observe(canvas);let id=0;const clock=new THREE.Clock();let lastRender=0;function frame(now=0){id=requestAnimationFrame(frame);const active=canvas.closest('.view')?.classList.contains('is-active')&&!document.hidden&&inViewport;if(!active||now-lastRender<(1000/perf.threeFps))return;lastRender=now;const t=clock.getElapsedTime();if(auto&&!dragging&&!perf.constrained)rotY+=home?.0042:.0048;object.rotation.y=rotY;object.rotation.x=rotX;if(model==='humanoid'&&!perf.veryConstrained){object.position.y=Math.sin(t*1.4)*.045;object.userData.arms[0].rotation.z=Math.sin(t*1.2)*.05;object.userData.arms[1].rotation.z=-Math.sin(t*1.2)*.05}ring.rotation.z+=perf.constrained?.0025:.004;renderer.render(scene,camera)}frame();return{setAuto:v=>auto=v,reset:()=>{rotY=model==='arm'?-.45:0;rotX=0},dispose:()=>{cancelAnimationFrame(id);ro.disconnect();io?.disconnect();renderer.dispose()}};
+    function resize(){const rect=canvas.getBoundingClientRect(),w=Math.max(2,Math.round(rect.width)),h=Math.max(2,Math.round(rect.height));if(canvas.dataset.lastSize===`${w}x${h}`)return;canvas.dataset.lastSize=`${w}x${h}`;renderer.setPixelRatio(Math.min(devicePixelRatio,w<520?Math.min(.76,perf.threeDpr):perf.threeDpr));renderer.setSize(w,h,false);fitCameraToObject()}const ro=new ResizeObserver(resize);ro.observe(canvas);resize();let inViewport=true;const io='IntersectionObserver'in window?new IntersectionObserver(entries=>{inViewport=entries[0]?.isIntersecting!==false},{rootMargin:'120px'}):null;io?.observe(canvas);let id=0,idleTimer=0;const clock=new THREE.Clock();let lastRender=0;function scheduleActive(){id=requestAnimationFrame(frame)}function frame(now=0){const active=canvas.closest('.view')?.classList.contains('is-active')&&!document.hidden&&inViewport;if(!active){idleTimer=setTimeout(scheduleActive,220);return}id=requestAnimationFrame(frame);if(now-lastRender<(1000/perf.threeFps))return;lastRender=now;const t=clock.getElapsedTime();if(auto&&!dragging&&!perf.constrained)rotY+=home?.0042:.0048;object.rotation.y=rotY;object.rotation.x=rotX;if(model==='humanoid'&&!perf.veryConstrained){object.position.y=Math.sin(t*1.4)*.045;object.userData.arms[0].rotation.z=Math.sin(t*1.2)*.05;object.userData.arms[1].rotation.z=-Math.sin(t*1.2)*.05}ring.rotation.z+=perf.constrained?.0025:.004;renderer.render(scene,camera)}frame();return{setAuto:v=>auto=v,reset:()=>{rotY=model==='arm'?-.45:0;rotX=0},dispose:()=>{cancelAnimationFrame(id);clearTimeout(idleTimer);ro.disconnect();io?.disconnect();renderer.dispose()}};
   }
 
   /* -------------------------------------------------------------------
@@ -623,7 +623,7 @@ function __sakuraApproxCoordsForZone(zone) {
   // V26 owns video-card clicks so one player URL and one modal handler are used.
   function animateLifeOS(){
     const canvas=$('#lifeos-canvas');if(!canvas)return;const ctx=canvas.getContext('2d');let t=0,last=0,inViewport=true;const observer='IntersectionObserver'in window?new IntersectionObserver(entries=>{inViewport=entries[0]?.isIntersecting!==false},{rootMargin:'100px'}):null;observer?.observe(canvas);
-    function frame(now=0){requestAnimationFrame(frame);if(document.hidden||!inViewport||!canvas.closest('.view')?.classList.contains('is-active')||now-last<50)return;last=now;
+    function frame(now=0){const active=!document.hidden&&inViewport&&canvas.closest('.view')?.classList.contains('is-active');if(!active){setTimeout(()=>requestAnimationFrame(frame),240);return}requestAnimationFrame(frame);if(now-last<50)return;last=now;
       const r=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio,1.15);if(canvas.width!==Math.round(r.width*dpr)||canvas.height!==Math.round(r.height*dpr)){canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
       const w=r.width,h=r.height;ctx.clearRect(0,0,w,h);const cx=w/2,cy=h/2,nodes=6;
       for(let i=0;i<nodes;i++){const a=t*.00025+i*Math.PI*2/nodes,x=cx+Math.cos(a)*Math.min(w,h)*.3,y=cy+Math.sin(a)*Math.min(w,h)*.28;ctx.strokeStyle='rgba(85,232,255,.32)';ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.stroke();ctx.fillStyle=i%2?'#9cff52':'#a56cff';ctx.beginPath();ctx.arc(x,y,8+Math.sin(t*.003+i)*2,0,Math.PI*2);ctx.fill()}
@@ -632,7 +632,7 @@ function __sakuraApproxCoordsForZone(zone) {
   }
   function animateAutonomy(){
     const canvas=$('#autonomy-canvas');if(!canvas)return;const ctx=canvas.getContext('2d');let t=0,last=0,inViewport=true;const observer='IntersectionObserver'in window?new IntersectionObserver(entries=>{inViewport=entries[0]?.isIntersecting!==false},{rootMargin:'100px'}):null;observer?.observe(canvas);
-    function frame(now=0){requestAnimationFrame(frame);if(document.hidden||!inViewport||!canvas.closest('.view')?.classList.contains('is-active')||now-last<50)return;last=now;
+    function frame(now=0){const active=!document.hidden&&inViewport&&canvas.closest('.view')?.classList.contains('is-active');if(!active){setTimeout(()=>requestAnimationFrame(frame),240);return}requestAnimationFrame(frame);if(now-last<50)return;last=now;
       const r=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio,1.15);if(canvas.width!==Math.round(r.width*dpr)||canvas.height!==Math.round(r.height*dpr)){canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
       const w=r.width,h=r.height;ctx.clearRect(0,0,w,h);ctx.fillStyle='#0a1e37';ctx.fillRect(0,0,w,h);ctx.strokeStyle='rgba(255,255,255,.25)';ctx.lineWidth=2;ctx.setLineDash([18,18]);ctx.beginPath();ctx.moveTo(0,h*.67);ctx.lineTo(w,h*.67);ctx.stroke();ctx.setLineDash([]);const x=(t*.06)%(w+80)-40,y=h*.59;ctx.fillStyle='#e7edf5';ctx.fillRect(x-26,y-13,52,20);ctx.fillStyle='#55e8ff';ctx.fillRect(x-18,y-18,29,8);for(let i=1;i<4;i++){ctx.strokeStyle=`rgba(156,255,82,${.45/i})`;ctx.beginPath();ctx.arc(x,y,i*27+(t*.04)%20,-Math.PI*.85,-Math.PI*.15);ctx.stroke()}t+=40;
     }frame();
@@ -650,7 +650,7 @@ function __sakuraApproxCoordsForZone(zone) {
     ai:'Suyash built and presented LifeOS, a six-agent hackathon prototype using LangGraph, Redis Pub/Sub/Streams/vector memory, W&B Weave, FastAPI, Next.js/TypeScript, and CopilotKit. He took over unfinished backend work with only hours remaining, stabilized the system, and presented it solo.',
     research:'Suyash authored Improving Vehicle Safety with AI Audio-Object Detection. The prototype combines YOLO visual detection, AudioSet-focused transformer classification, and waveform-slope proximity categories. The paper reports about 7% overall improvement under its test conditions; real-world validation remains future work. He is the sole inventor on a provisional patent filing and presented at Polygence and Purdue Shreve Tank.',
     roboat:'Suyash joined RoBoat: Autonomous Maritime Maneuvers in September 2025 and became Vice President in April 2026. As Computer Vision Lead for a nearly 30-member team, he works with Python, YOLO, Roboflow, ROS, OAK cameras, thousands of images, dataset/model review, controls coordination, and member training.',
-    buildscale:'At Purdue Build@Scale / Industrial Engineering, Suyash develops a multi-view camera system to detect and timestamp manual wearable-sensor fabrication steps using an Arduino timing reference, YOLO, OpenCV, and MediaPipe. He evaluates event-detection rate, timestamp accuracy, and failure modes as a perception foundation for future AI-enabled bench robotics and Industry 4.0 manufacturing.',
+    buildscale:'At Purdue Build@Scale / Industrial Engineering, Suyash contributes to ongoing research using camera systems, sensors, Arduino-based instrumentation, and computer-vision tools to advance Industry 4.0. Project-specific methods, application details, and in-progress research results are intentionally not disclosed.',
     cybersecurity:'At FraudFront, Suyash develops Python Discord-bot/API workflows and a 657-microgame fraud-awareness platform with Supabase/PostgreSQL, SQL RPCs, realtime multiplayer/matchmaking, cloud persistence, security controls, analytics, and cross-browser testing, while contributing privacy, abuse-prevention, rate-limit, feature-flag, monitoring, and administrative-control recommendations.',
     platform:'Suyash personally developed and maintains Scam Sprint, a 657-microgame browser platform with Supabase-backed accounts, rooms, realtime scores/state, teams, rematches, reactions, mobile controls, and cross-browser debugging. AI tools assisted review, but he integrated, tested, and maintained the system.',
     ux:'As Purdue Honors CORE Lab Web Developer and UX Lead Researcher, Suyash leads community-centered web development and analyzes surveys, field notes, interviews, qualitative/quantitative codebooks, accessibility, privacy-conscious navigation, storytelling requirements, and teammate feedback.',
@@ -1244,8 +1244,15 @@ I understand this time is not confirmed until you reply. I am also creating a ca
   const fxCanvas=document.getElementById('v17-fx');
   if(!baseCanvas||!worldCanvas||!fxCanvas)return;
   const bctx=baseCanvas.getContext('2d',{alpha:false,desynchronized:true});
-  const ctx=worldCanvas.getContext('2d',{alpha:true,desynchronized:true});
+  let ctx=worldCanvas.getContext('2d',{alpha:true,desynchronized:true});
   const fctx=fxCanvas.getContext('2d',{alpha:true,desynchronized:true});
+  // Full-resolution caches for visually slow secondary motion. These preserve
+  // the exact canvas pixel density while avoiding expensive tree/city vector
+  // reconstruction on every world frame.
+  const cityMotionCanvas=document.createElement('canvas');
+  const cityMotionCtx=cityMotionCanvas.getContext('2d',{alpha:true,desynchronized:true});
+  const treeMotionCanvas=document.createElement('canvas');
+  const treeMotionCtx=treeMotionCanvas.getContext('2d',{alpha:true,desynchronized:true});
   // Cached transparent foreground: mountains, skyline and hill are painted only
   // when the slowly changing palette advances, then composited as one image.
   const occlusionCanvas=document.createElement('canvas');
@@ -1278,8 +1285,9 @@ I understand this time is not confirmed until you reply. I am also creating a ca
   function resize(){
     cssW=innerWidth;cssH=innerHeight;dpr=chooseDpr();currentRenderScale=dpr;
     for(const c of [baseCanvas,worldCanvas,fxCanvas]){c.width=Math.max(1,Math.round(cssW*dpr));c.height=Math.max(1,Math.round(cssH*dpr));c.style.width=cssW+'px';c.style.height=cssH+'px'}
+    for(const c of [cityMotionCanvas,treeMotionCanvas]){c.width=Math.max(1,Math.round(cssW*dpr));c.height=Math.max(1,Math.round(cssH*dpr))}
     occlusionCanvas.width=Math.max(1,Math.round(cssW*dpr));occlusionCanvas.height=Math.max(1,Math.round(cssH*dpr));
-    scale=Math.max(cssW/W,cssH/H);ox=(cssW-W*scale)/2;oy=(cssH-H*scale)/2;frameBudget=1/chooseTargetFps();baseDirty=true;broadcastRenderStatus();
+    scale=Math.max(cssW/W,cssH/H);ox=(cssW-W*scale)/2;oy=(cssH-H*scale)/2;frameBudget=1/chooseTargetFps();baseDirty=true;cityMotionDirty=true;treeMotionDirty=true;broadcastRenderStatus();
   }
   addEventListener('resize',resize,{passive:true});
   const begin=(c)=>c.setTransform(dpr*scale,0,0,dpr*scale,dpr*ox,dpr*oy);
@@ -1291,6 +1299,7 @@ I understand this time is not confirmed until you reply. I am also creating a ca
   const detailCount=(full,min)=>Math.max(min,Math.round(full*worldPerf.detail));
   const stars=Array.from({length:detailCount(190,90)},(_,i)=>({x:rng.range(30,W-30),y:rng.range(18,470),r:rng.range(.45,1.7),p:rng.range(0,TAU),tw:rng.range(.45,1.8),warm:rng.next()<.08}));
   const clouds=Array.from({length:detailCount(7,4)},(_,i)=>({x:rng.range(-300,W+300),y:rng.range(85,440),s:rng.range(.65,1.55),speed:rng.range(3.5,12),depth:rng.range(.25,1),seed:rng.range(0,999),alpha:rng.range(.12,.28),sprite:i%3}));
+  const sortedClouds=[...clouds].sort((a,b)=>a.depth-b.depth);
   const buildings=[];
   for(let i=0,x=120;x<1540;i++){
     const w=rng.range(13,38),h=rng.range(45,200)*(0.65+0.35*Math.sin((x/1540)*Math.PI));
@@ -1384,13 +1393,15 @@ I understand this time is not confirmed until you reply. I am also creating a ca
   let activeWorldTimeZone=sessionStorage.getItem('sd-sky-zone-v3')||Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC',lastZoneCheck=0;
   let displayFormatterZone='',displayFormatterClock='',displayTimeFormatter=null,displayDateFormatter=null;
   function getWorldFormatters(){if(displayFormatterZone!==activeWorldTimeZone||displayFormatterClock!==clockFormat||!displayTimeFormatter){displayFormatterZone=activeWorldTimeZone;displayFormatterClock=clockFormat;displayTimeFormatter=new Intl.DateTimeFormat(undefined,{timeZone:activeWorldTimeZone,hour:'numeric',minute:'2-digit',hour12:clockFormat!=='24'});displayDateFormatter=new Intl.DateTimeFormat(undefined,{timeZone:activeWorldTimeZone,weekday:'short',month:'short',day:'numeric',year:'numeric'})}return{time:displayTimeFormatter,date:displayDateFormatter}}
-  addEventListener('sakura:sky-location',event=>{const d=event.detail||{};if(Number.isFinite(d.lat)&&Number.isFinite(d.lng)){coords={lat:d.lat,lng:d.lng,precise:true};activeWorldTimeZone=d.timeZone||activeWorldTimeZone;displayFormatterZone='';wallClockCache.clear();cachedSunTimes=null;baseDirty=true}});
+  addEventListener('sakura:sky-location',event=>{const d=event.detail||{};if(Number.isFinite(d.lat)&&Number.isFinite(d.lng)){coords={lat:d.lat,lng:d.lng,precise:true};activeWorldTimeZone=d.timeZone||activeWorldTimeZone;displayFormatterZone='';wallClockCache.clear();cachedSunTimes=null;cachedLiveEnvironment=null;baseDirty=true;cityMotionDirty=true;treeMotionDirty=true}});
   addEventListener('sakura:clock-format',event=>{clockFormat=event.detail?.format==='24'?'24':'12';displayFormatterZone='';displayFormatterClock='';lastClock=0;baseDirty=true});
   addEventListener('sakura:render-preference',event=>{const detail=event.detail||{};sceneResolution=['auto','480','720','1080','1440','2160'].includes(String(detail.resolution))?String(detail.resolution):sceneResolution;fpsPreference=['auto','15','24','30'].includes(String(detail.fps))?String(detail.fps):fpsPreference;document.documentElement.dataset.sceneResolution=sceneResolution;document.documentElement.dataset.fpsPreference=fpsPreference;resize()});
   let mode=(new URLSearchParams(location.search).has('preview')||window.__V17_TEST__)?'preview':'live';
   let previewMinutes=Number.isFinite(window.__V17_TEST_MINUTE__)?Number(window.__V17_TEST_MINUTE__):new Date().getHours()*60+new Date().getMinutes();
-  let lastPerf=performance.now(),worldSeconds=0,lastClock=0,lastBaseDraw=-999,lastFxDraw=-999,baseDirty=true,lastBaseKey='',cachedSunTimes=null,cachedSunTimesKey='';
-  let interactionPauseUntil=0;const pauseForInteraction=()=>{interactionPauseUntil=performance.now()+180};addEventListener('wheel',pauseForInteraction,{passive:true});addEventListener('touchmove',pauseForInteraction,{passive:true});addEventListener('scroll',pauseForInteraction,{passive:true});
+  let lastPerf=performance.now(),worldSeconds=0,lastClock=0,lastBaseDraw=-999,lastFxDraw=-999,baseDirty=true,lastBaseKey='',cachedSunTimes=null,cachedSunTimesKey='',ecoFxMultiplier=1;
+  let cityMotionDirty=true,treeMotionDirty=true,lastCityMotionDraw=-999,lastTreeMotionDraw=-999;
+  let cachedLiveEnvironment=null,cachedLiveEnvironmentAt=-999,lastNightClass=null;
+  let interactionPauseUntil=0;const pauseForInteraction=()=>{interactionPauseUntil=performance.now()+300};addEventListener('wheel',pauseForInteraction,{passive:true});addEventListener('touchmove',pauseForInteraction,{passive:true});addEventListener('scroll',pauseForInteraction,{passive:true});
   let frameBudget=window.__V17_TEST__?0:1/24,frameAccumulator=0,fpsTime=0,fpsFrames=0,measuredFps=24;
 
   function getDate(dt){
@@ -1773,8 +1784,8 @@ I understand this time is not confirmed until you reply. I am also creating a ca
     ctx.restore();
   }
 
-  function drawTree(pal,t,light){
-    const wind=windValue(t);clusterPoints.length=0;ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+  function drawTree(pal,t,light,wind=windValue(t)){
+    clusterPoints.length=0;ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
     const pts=[P(1730,875),P(1710,765),P(1727,655),P(1705,560),P(1718,466),P(1700,372),P(1711,278)];
     ctx.strokeStyle='#211521';ctx.lineWidth=76;ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);for(let i=1;i<pts.length;i++){const p=pts[i],prev=pts[i-1];ctx.quadraticCurveTo(prev.x+wind*i*1.35,prev.y-36,p.x+wind*i*2.6,p.y)}ctx.stroke();
     const barkGrad=ctx.createLinearGradient(1670,0,1762,0);barkGrad.addColorStop(0,'#39202f');barkGrad.addColorStop(.43,'#754154');barkGrad.addColorStop(.7,'#4a283a');barkGrad.addColorStop(1,'#25151f');ctx.strokeStyle=barkGrad;ctx.lineWidth=59;ctx.beginPath();ctx.moveTo(pts[0].x-3,pts[0].y);for(let i=1;i<pts.length;i++){const p=pts[i],prev=pts[i-1];ctx.quadraticCurveTo(prev.x+wind*i*1.35-3,prev.y-36,p.x+wind*i*2.6-3,p.y)}ctx.stroke();
@@ -1889,22 +1900,48 @@ I understand this time is not confirmed until you reply. I am also creating a ca
   }
 
 
+  function compositePixelLayer(layer){
+    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(layer,0,0);ctx.restore();
+  }
+  function redrawCityMotionLayer(lights,light,t,force=false){
+    const now=performance.now()/1000;
+    const interval=quality==='high'?.055:quality==='eco'?(worldPerf.veryConstrained?.14:worldPerf.constrained?.105:.085):worldPerf.constrained?.085:.065;
+    if(!force&&!cityMotionDirty&&now-lastCityMotionDraw<interval)return;
+    lastCityMotionDraw=now;cityMotionDirty=false;
+    cityMotionCtx.setTransform(1,0,0,1,0,0);cityMotionCtx.clearRect(0,0,cityMotionCanvas.width,cityMotionCanvas.height);
+    const mainCtx=ctx;ctx=cityMotionCtx;begin(ctx);
+    drawBridge(lights,t);drawCityLights(lights,t);if(quality!=='eco')drawCityPolish(light,lights,t);
+    ctx=mainCtx;
+  }
+  function redrawTreeMotionLayer(pal,t,light,wind,force=false){
+    const now=performance.now()/1000;
+    // Tree sway is intentionally slow. Updating its full-resolution vector layer
+    // at ~12–18 fps looks continuous while freeing substantial main-thread time.
+    const interval=quality==='high'?.05:quality==='eco'?(worldPerf.veryConstrained?.12:worldPerf.constrained?.09:.072):worldPerf.constrained?.075:.058;
+    if(!force&&!treeMotionDirty&&now-lastTreeMotionDraw<interval)return;
+    lastTreeMotionDraw=now;treeMotionDirty=false;
+    treeMotionCtx.setTransform(1,0,0,1,0,0);treeMotionCtx.clearRect(0,0,treeMotionCanvas.width,treeMotionCanvas.height);
+    const mainCtx=ctx;ctx=treeMotionCtx;begin(ctx);drawTree(pal,t,light,wind);ctx=mainCtx;
+  }
+
   function drawWorld(date,pal,sun,moon,illum,sunAlt,moonAlt,light,night,lights,t,sleep,relax){
     clear(ctx);begin(ctx);
-    const eco=quality==='eco',ultra=worldPerf.veryConstrained;
-    // Preserve the core painted world on every device. The slowest hardware
-    // sheds only tiny transient effects that are expensive but not structural.
+    const eco=quality==='eco',ultra=worldPerf.veryConstrained,wind=windValue(t);
+    // Preserve the core painted world on every device. Slow secondary layers
+    // are cached at the SAME pixel resolution; only their redraw cadence changes.
     drawSkyVeil(sun,pal,sunAlt,night,t);drawStars(night,t);
     if(!ultra)drawAnimeAtmosphere(sun,sunAlt,night,light,t);
     if(!eco){drawShootingStars(night,t);drawCometRibbon(night,t)}
     drawCelestial(sun,moon,illum,sunAlt,moonAlt,t);
     const cloudStep=ultra?3:eco&&worldPerf.constrained?2:1;
-    const sortedClouds=clouds.slice().sort((a,b)=>a.depth-b.depth);for(let i=0;i<sortedClouds.length;i+=cloudStep)drawCloudShape(ctx,sortedClouds[i],pal,t);
-    // Water and reflections are drawn before land, city and hill occlusion.
+    for(let i=0;i<sortedClouds.length;i+=cloudStep)drawCloudShape(ctx,sortedClouds[i],pal,t);
     drawMovingWater(sun,moon,sunAlt,moonAlt,t);if(!ultra)drawCityReflections(lights,t);
-    drawForegroundOcclusion();drawBridge(lights,t);drawCityLights(lights,t);if(!eco)drawCityPolish(light,lights,t);if(!ultra)drawTraffic(lights,t);
-    drawShadows(sun,sunAlt,sleep);if(!eco)drawMovingGrass(t,light,windValue(t));drawTree(pal,t,light);
-    const character=drawCharacter(t,sleep,relax,windValue(t),light);
+    drawForegroundOcclusion();
+    redrawCityMotionLayer(lights,light,t);compositePixelLayer(cityMotionCanvas);
+    if(!ultra)drawTraffic(lights,t);
+    drawShadows(sun,sunAlt,sleep);if(!eco)drawMovingGrass(t,light,wind);
+    redrawTreeMotionLayer(pal,t,light,wind);compositePixelLayer(treeMotionCanvas);
+    const character=drawCharacter(t,sleep,relax,wind,light);
     return character;
   }
 
@@ -1917,16 +1954,24 @@ I understand this time is not confirmed until you reply. I am also creating a ca
     const rawDt=Math.min(.06,(perf-lastPerf)/1000||.016);lastPerf=perf;worldSeconds+=rawDt;frameAccumulator+=rawDt;fpsTime+=rawDt;
     if(document.hidden){lastPerf=perf;requestAnimationFrame(render);return}
     if(perf<interactionPauseUntil&&mode==='live'){requestAnimationFrame(render);return}
+    if(mode==='live'&&quality!=='high'&&navigator.scheduling?.isInputPending?.({includeContinuous:true})){requestAnimationFrame(render);return}
     if(quality==='auto'&&fpsPreference==='auto'){const desired=document.body.dataset.route==='home'?1/chooseTargetFps():1/12;if(Math.abs(frameBudget-desired)>.0005)frameBudget=desired}
     if(frameAccumulator<frameBudget){requestAnimationFrame(render);return}const dt=frameAccumulator;frameAccumulator=0;fpsFrames++;
     if(perf-lastZoneCheck>30000){lastZoneCheck=perf;const precise=Boolean(sessionStorage.getItem('sd-sky-coords-v3')),z=precise?(sessionStorage.getItem('sd-sky-zone-v3')||activeWorldTimeZone):(Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC');if(z!==activeWorldTimeZone){activeWorldTimeZone=z;displayFormatterZone='';coords=inferCoords();wallClockCache.clear();cachedSunTimes=null;baseDirty=true}}
-    const date=getDate(dt),sunP=Astro.getSunPosition(date,coords.lat,coords.lng),timesKey=`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${Math.floor(date.getMinutes()/5)}-${coords.lat.toFixed(2)}-${coords.lng.toFixed(2)}`;
-    if(!cachedSunTimes||cachedSunTimesKey!==timesKey){cachedSunTimes=Astro.getSunTimes(date,coords.lat,coords.lng);cachedSunTimesKey=timesKey}
-    const times=cachedSunTimes,illum=Astro.getMoonIllumination(date),sunAlt=sunP.altitude/RAD,levels=environmentLevels(date,times),pal=paletteForDate(date,times),night=levels.night,light=levels.light,lights=levels.lights,sun=sunScene(date,times,sunAlt),moon=moonScene(date,times),moonAlt=moon.altitude,sleep=sleepAmount(date),relax=relaxedAmount(date);
+    const date=getDate(dt);
+    let env=cachedLiveEnvironment;
+    if(mode==='preview'||!env||perf-cachedLiveEnvironmentAt>650||baseDirty){
+      const sunP=Astro.getSunPosition(date,coords.lat,coords.lng),timesKey=`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${Math.floor(date.getMinutes()/5)}-${coords.lat.toFixed(2)}-${coords.lng.toFixed(2)}`;
+      if(!cachedSunTimes||cachedSunTimesKey!==timesKey){cachedSunTimes=Astro.getSunTimes(date,coords.lat,coords.lng);cachedSunTimesKey=timesKey}
+      const times=cachedSunTimes,illum=Astro.getMoonIllumination(date),sunAlt=sunP.altitude/RAD,levels=environmentLevels(date,times),pal=paletteForDate(date,times),sun=sunScene(date,times,sunAlt),moon=moonScene(date,times);
+      env={times,illum,sunAlt,levels,pal,sun,moon};
+      if(mode==='live'){cachedLiveEnvironment=env;cachedLiveEnvironmentAt=perf}
+    }
+    const {times,illum,sunAlt,levels,pal,sun,moon}=env,night=levels.night,light=levels.light,lights=levels.lights,moonAlt=moon.altitude,sleep=sleepAmount(date),relax=relaxedAmount(date);
     if(perf-(render._lastSkyThemeDispatch||0)>360){render._lastSkyThemeDispatch=perf;window.dispatchEvent(new CustomEvent('sakura:world-clock',{detail:{now:date.getTime(),sunrise:times.sunrise?.getTime?.()||null,sunset:times.sunset?.getTime?.()||null,sunAlt,preview:mode==='preview'}}))}
     const redrawInterval=mode==='preview'?.28:(quality==='high'?5:18);if(baseDirty||performance.now()/1000-lastBaseDraw>redrawInterval){drawBase(pal,light,night,date);lastBaseKey='continuous'}
     const character=drawWorld(date,pal,sun,moon,illum,sunAlt,moonAlt,light,night,lights,worldSeconds,sleep,relax);
-    document.body.classList.toggle('v23-night',night>.44);
+    const isNight=night>.44;if(isNight!==lastNightClass){lastNightClass=isNight;document.body.classList.toggle('v23-night',isNight)};
     // These CSS values change astronomically slowly in LIVE mode. Writing them
     // every animation frame forces style recalculation for no visible benefit.
     const styleStamp=Math.floor(perf/500);
@@ -1939,17 +1984,22 @@ I understand this time is not confirmed until you reply. I am also creating a ca
       document.body.style.setProperty('--v24-warm-opacity',(v24Golden*.62).toFixed(3));
       document.body.style.setProperty('--v24-atmosphere-opacity',(night*.42+light*.08).toFixed(3));
     }
-    if(performance.now()/1000-lastFxDraw>(quality==='high'?.045:quality==='eco'?(worldPerf.veryConstrained?.24:worldPerf.constrained?.16:.12):worldPerf.constrained?.10:.065)){drawAtmosphere(worldSeconds,night,light,windValue(worldSeconds));lastFxDraw=performance.now()/1000}
+    if(performance.now()/1000-lastFxDraw>((quality==='high'?.045:quality==='eco'?(worldPerf.veryConstrained?.24:worldPerf.constrained?.16:.12):worldPerf.constrained?.10:.065)*ecoFxMultiplier)){drawAtmosphere(worldSeconds,night,light,windValue(worldSeconds));lastFxDraw=performance.now()/1000}
     updateUI(date,times,character);
     if(fpsTime>=2.5){
       measuredFps=fpsFrames/fpsTime;fpsFrames=0;fpsTime=0;
+      if(quality==='eco'){
+        const ecoTarget=worldPerf.ecoFps||18;
+        if(measuredFps<Math.max(13,ecoTarget*.72))ecoFxMultiplier=Math.min(1.8,ecoFxMultiplier+0.18);
+        else ecoFxMultiplier=Math.max(1,ecoFxMultiplier-.08);
+      }
       if(quality==='auto'){
         const onHome=document.body.dataset.route==='home';
         const target=onHome?worldPerf.worldFps:12;
         if(measuredFps<Math.max(16,target*.72)){
-          lowFpsStrikes++;adaptiveDetail=Math.max(.46,adaptiveDetail*.82);
+          lowFpsStrikes++;adaptiveDetail=Math.max(.46,adaptiveDetail*.82);ecoFxMultiplier=Math.min(1.65,ecoFxMultiplier+0.14);
           if(perf-lastAdaptiveResize>2200&&autoDprCap>.43){autoDprCap=Math.max(.43,autoDprCap*.84);lastAdaptiveResize=perf;resize()}
-        }else lowFpsStrikes=Math.max(0,lowFpsStrikes-1);
+        }else{lowFpsStrikes=Math.max(0,lowFpsStrikes-1);ecoFxMultiplier=Math.max(1,ecoFxMultiplier-.08)}
         frameBudget=1/target;
       }
     }
@@ -1957,7 +2007,7 @@ I understand this time is not confirmed until you reply. I am also creating a ca
   }
 
   function setupControls(){
-    const controls=document.querySelector('.sky-controls');if(controls){const timeBtn=document.createElement('button');timeBtn.id='v17-time-mode';timeBtn.className='v17-time-button';timeBtn.type='button';timeBtn.dataset.mode=mode;timeBtn.textContent=mode==='preview'?'24H':'LIVE';timeBtn.title='Toggle real local time or accelerated 24-hour preview';controls.prepend(timeBtn);timeBtn.addEventListener('click',()=>{mode=mode==='live'?'preview':'live';if(mode==='preview'){const n=new Date();previewMinutes=n.getHours()*60+n.getMinutes()}timeBtn.dataset.mode=mode;timeBtn.textContent=mode==='preview'?'24H':'LIVE';document.getElementById('v17-scrubber')?.classList.toggle('is-visible',mode==='preview');baseDirty=true});const q=document.createElement('button');q.id='v17-quality';q.className='v17-quality-button';q.type='button';q.dataset.quality=quality;q.textContent=quality.toUpperCase();q.title='Rendering quality: AUTO, HIGH, or ECO';controls.prepend(q);q.addEventListener('click',()=>{quality=quality==='eco'?'auto':quality==='auto'?'high':'eco';q.dataset.quality=quality;q.textContent=quality.toUpperCase();try{localStorage.setItem('sd-v24-quality',quality)}catch{}document.documentElement.dataset.renderQuality=quality;adaptiveDetail=quality==='eco'?Math.max(.26,worldPerf.detail):1;resize()})}
+    const controls=document.querySelector('.sky-controls');if(controls){const timeBtn=document.createElement('button');timeBtn.id='v17-time-mode';timeBtn.className='v17-time-button';timeBtn.type='button';timeBtn.dataset.mode=mode;timeBtn.textContent=mode==='preview'?'24H':'LIVE';timeBtn.title='Toggle real local time or accelerated 24-hour preview';controls.prepend(timeBtn);timeBtn.addEventListener('click',()=>{mode=mode==='live'?'preview':'live';if(mode==='preview'){const n=new Date();previewMinutes=n.getHours()*60+n.getMinutes()}timeBtn.dataset.mode=mode;timeBtn.textContent=mode==='preview'?'24H':'LIVE';document.getElementById('v17-scrubber')?.classList.toggle('is-visible',mode==='preview');baseDirty=true});const q=document.createElement('button');q.id='v17-quality';q.className='v17-quality-button';q.type='button';q.dataset.quality=quality;q.textContent=quality.toUpperCase();q.title='Rendering quality: AUTO, HIGH, or ECO';controls.prepend(q);q.addEventListener('click',()=>{quality=quality==='eco'?'auto':quality==='auto'?'high':'eco';q.dataset.quality=quality;q.textContent=quality.toUpperCase();try{localStorage.setItem('sd-v24-quality',quality)}catch{}document.documentElement.dataset.renderQuality=quality;adaptiveDetail=quality==='eco'?Math.max(.26,worldPerf.detail):1;cityMotionDirty=true;treeMotionDirty=true;cachedLiveEnvironment=null;resize()})}
     const wrap=document.createElement('div');wrap.id='v17-scrubber';wrap.className='v17-scrubber'+(mode==='preview'?' is-visible':'');wrap.innerHTML='<span>24-HOUR FRAME PREVIEW</span><input id="v17-scrub" type="range" min="0" max="1439" step="1" aria-label="Preview time of day"><output id="v17-scrub-output">--:--</output>';document.body.appendChild(wrap);const slider=document.getElementById('v17-scrub');slider.value=previewMinutes;slider.addEventListener('input',e=>{previewMinutes=Number(e.target.value);mode='preview';const b=document.getElementById('v17-time-mode');if(b){b.dataset.mode='preview';b.textContent='24H'}wrap.classList.add('is-visible');baseDirty=true});const loc=document.getElementById('location-sync');if(loc)loc.addEventListener('click',()=>setTimeout(()=>{coords=inferCoords();activeWorldTimeZone=sessionStorage.getItem('sd-sky-zone-v3')||activeWorldTimeZone;displayFormatterZone='';wallClockCache.clear();cachedSunTimes=null;baseDirty=true},1200));
   }
 
