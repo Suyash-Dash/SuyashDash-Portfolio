@@ -8,7 +8,7 @@
 /* =====================================================================
    SUYASH DASH — SAKURA SIGNAL
    Main visual system. Sections are grouped for easy editing.
-   ===================================================================== */  
+   ===================================================================== */
 :root{
   --bg:#050b18;
   --panel:rgba(5,16,39,.84);
@@ -6492,4 +6492,47 @@ html[data-reduced-motion="1"][data-edge-signal="flow"] .channel-card::after{disp
   html[data-edge-signal="flow"] .channel-card::after{display:none!important;animation:none!important}
   html[data-edge-signal="flow"] .sf-hero::after{animation-duration:10.5s!important}
   html[data-edge-signal="flow"] .sf-profile::after{animation-duration:12s!important}
+}
+\n\n/* =====================================================================\n   V19 — NON-VISUAL PERFORMANCE CONTAINMENT\n   Keeps the same artwork/pixel density. These rules reduce unnecessary\n   layout/paint propagation from the continuously animated background.\n   ===================================================================== */\n#v17-base,#v17-world,#v17-fx{contain:strict!important;pointer-events:none!important}\n.view:not(.is-active){content-visibility:hidden!important}\n@supports (contain:layout paint style){\n  .channel-shelf,.sf-signals,.sf-currently-building,.sf-profile,.sf-robot{contain:layout paint style}\n}\n
+
+/* ============================================================================
+   V22 — TOUCH-SAFE DISMISS CONTROLS
+   Keeps the existing visual design. This only strengthens the hit targets and
+   touch behavior for every X/close control on phones and tablets.
+   ============================================================================ */
+.modal-head button[data-close-modal],
+#theme-quick-close,
+#ai-agent-close,
+.mobile-sheet > button[data-close-sheet]{
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
+  z-index:80!important;
+}
+
+@media (max-width:900px), (pointer:coarse){
+  .modal-head button[data-close-modal],
+  #theme-quick-close,
+  #ai-agent-close,
+  .mobile-sheet > button[data-close-sheet]{
+    min-width:48px!important;
+    width:48px!important;
+    min-height:48px!important;
+    height:48px!important;
+    display:grid!important;
+    place-items:center!important;
+    line-height:1!important;
+  }
+
+  .modal-head button[data-close-modal]{
+    flex:0 0 48px!important;
+  }
+
+  .mobile-sheet > button[data-close-sheet]{
+    position:sticky!important;
+    top:max(2px, env(safe-area-inset-top))!important;
+    margin-left:auto!important;
+  }
 }
